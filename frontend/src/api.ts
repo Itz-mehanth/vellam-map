@@ -2,7 +2,11 @@ export interface Verdict {
   is_flood?: boolean
   is_outdoor_street?: boolean
   looks_staged_or_stock?: boolean
+  is_puddle_or_splash?: boolean
   water_depth_hint?: string
+  depth_cm_low?: number | null
+  depth_cm_high?: number | null
+  depth_reference?: string | null
   reason?: string
 }
 
@@ -36,6 +40,7 @@ export interface IntakeData {
 export interface WaterData {
   found: boolean
   instances: number
+  prompt?: string
   coverage_pct: number
   confidence: number | null
   overlay: string
@@ -74,10 +79,12 @@ export interface FusionData {
 export interface VerifyData {
   verdict: Verdict
   duplicate_of: number | null
+  cross_check: 'agree' | 'disagree' | 'unavailable'
 }
 
 export interface ResultData {
   id: number
+  verdict?: Verdict
   status: string
   depth_cm: number | null
   uncertainty_cm: number | null

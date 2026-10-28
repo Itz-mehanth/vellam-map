@@ -26,6 +26,9 @@ async def main(photos: list[Path]) -> None:
                     print(f"   wheel {w['type']}: {depth} ({w['reason']})")
             elif ev["stage"] == "fusion" and d["depth_cm"] is not None:
                 print(f"   FUSED {d['depth_cm']:.1f} ± {d['uncertainty_cm']:.1f} cm")
+            elif ev["stage"] == "verify":
+                v = d["verdict"]
+                print(f"   visual {v.get('depth_cm_low')}-{v.get('depth_cm_high')} cm, flood={v.get('is_flood')}, cross-check={d['cross_check']}")
             elif ev["stage"] == "result":
                 print(f"   -> {d['status']} in {d['total_ms']} ms")
 

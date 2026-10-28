@@ -67,7 +67,7 @@ def flood_map():
             },
         }
         for r in store.all_reports()
-        if r["status"] in ("verified", "flood_unmeasured")
+        if r["status"] in ("verified", "flood_unmeasured", "flood_visual_estimate", "flood_review")
     ]
     return {"type": "FeatureCollection", "features": features}
 

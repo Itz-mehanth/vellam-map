@@ -25,6 +25,7 @@ WHEELS = {k: v for k, v in REFERENCE.items() if v["shape"] == "circle"}
 
 WATER_RGB, WHEEL_RGB = (37, 99, 235), (249, 115, 22)
 MAX_RIM_POINTS_SENT = 80
+WATER_PROMPTS = ["water", "flood water", "flooded road"]
 
 
 def full_mask(obj: SegmentedObject, shape: tuple[int, int]) -> np.ndarray:
@@ -98,12 +99,27 @@ def analyse_wheel(wheel: np.ndarray, water: np.ndarray, name: str, ref: dict) ->
     return rec
 
 
+def cross_check(depth_cm: float | None, verdict: dict) -> str:
+    """Does the geometric depth roughly agree with Muse Spark's visual range?
+
+    Spray, reflections and mislabelled water can fool the waterline, so a
+    measurement far outside the visual range is sent for review, not published.
+    """
+    lo, hi = verdict.get("depth_cm_low"), verdict.get("depth_cm_high")
+    if depth_cm is None or lo is None or hi is None:
+        return "unavailable"
+    return "agree" if lo * 0.5 - 5 <= depth_cm <= hi * 1.6 + 10 else "disagree"
+
+
 def decide(duplicate_of, verdict: dict, depth_cm) -> str:
     if duplicate_of is not None:
         return "rejected_duplicate"
-    if verdict.get("is_flood") is False or verdict.get("looks_staged_or_stock"):
+    if verdict.get("is_flood") is False or verdict.get("is_puddle_or_splash") or verdict.get("looks_staged_or_stock"):
         return "rejected_not_flood"
-    return "flood_unmeasured" if depth_cm is None else "verified"
+    if depth_cm is not None:
+        return "flood_review" if cross_check(depth_cm, verdict) == "disagree" else "verified"
+    has_visual = verdict.get("depth_cm_low") is not None and verdict.get("depth_cm_high") is not None
+    return "flood_visual_estimate" if has_visual else "flood_unmeasured"
 
 
 async def analyse(image: bytes, lat: float, lng: float):
@@ -132,12 +148,16 @@ async def analyse(image: bytes, lat: float, lng: float):
 
     # Stage 2 — water
     water = np.zeros(shape, dtype=bool)
-    water_objs = await segment(image, "water")
+    water_objs, water_prompt = [], "water"
+    for water_prompt in WATER_PROMPTS:  # fall back to other phrasings if SAM finds nothing
+        water_objs = await segment(image, water_prompt)
+        if water_objs:
+            break
     confs = [o.confidence for o in water_objs if o.confidence is not None]
     for o in water_objs:
         water |= full_mask(o, shape)
     yield event("water", "SAM 3.1 finds the water surface", {
-        "found": bool(water.any()), "instances": len(water_objs),
+        "found": bool(water.any()), "instances": len(water_objs), "prompt": water_prompt,
         "coverage_pct": round(100 * float(water.mean()), 1),
         "confidence": max(confs) if confs else None,
         "overlay": overlay_data_url(image, [(water, WATER_RGB)]),
@@ -187,7 +207,10 @@ async def analyse(image: bytes, lat: float, lng: float):
 
     # Stage 6 — verification
     verdict = await judge_task
-    yield event("verify", "Muse Spark verifies the report", {"verdict": verdict, "duplicate_of": duplicate_of})
+    yield event("verify", "Muse Spark verifies the report", {
+        "verdict": verdict, "duplicate_of": duplicate_of,
+        "cross_check": cross_check(fused.depth_cm if fused else None, verdict),
+    })
 
     # Stage 7 — decision and storage
     depth_cm = fused.depth_cm if fused else None

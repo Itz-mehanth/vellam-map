@@ -10,6 +10,7 @@ import {
   type StageEvents,
   type StageId,
   type VerifyData,
+  type Verdict,
   type WaterData,
   type WheelRecord,
 } from '../api'
@@ -31,6 +32,16 @@ const STATUS: Record<string, { label: string; tone: Tone; text: string }> = {
     label: 'Flood confirmed',
     tone: 'amber',
     text: 'The flood is real, but no wheel was both visible and touching the water, so depth could not be measured.',
+  },
+  flood_visual_estimate: {
+    label: 'Flood confirmed, visual estimate only',
+    tone: 'amber',
+    text: 'No wheel was visible at the waterline, so there is no geometric measurement. Muse Spark estimated a depth range by eye, which is far less reliable.',
+  },
+  flood_review: {
+    label: 'Needs review',
+    tone: 'amber',
+    text: 'The measured depth is far from the visual range estimated by Muse Spark. Spray, reflections or a wrong waterline may have distorted the geometry, so this was not published as verified.',
   },
   rejected_duplicate: { label: 'Duplicate', tone: 'red', text: 'This photo matches an earlier report, so it was not added.' },
   rejected_not_flood: { label: 'Rejected', tone: 'red', text: 'This does not look like a real, original flood photo.' },
@@ -75,7 +86,7 @@ function WaterBody({ d }: { d: WaterData }) {
       <Overlay src={d.overlay} legend={[['Water surface', '#2563eb']]} />
       <div className="grid grid-cols-3 gap-2">
         <Stat label="Coverage" value={`${d.coverage_pct}%`} hint="of the frame" />
-        <Stat label="Regions" value={d.instances} />
+        <Stat label="Regions" value={d.instances} hint={d.prompt ? `prompt “${d.prompt}”` : undefined} />
         <Stat label="Confidence" value={d.confidence !== null ? `${Math.round(d.confidence * 100)}%` : '–'} />
       </div>
       {!d.found && <p className="text-sm text-amber-700">No water detected, so reference objects are skipped.</p>}
@@ -258,10 +269,11 @@ function FusionBody({ d }: { d: FusionData }) {
 function VerifyBody({ d }: { d: VerifyData }) {
   const v = d.verdict
   const rows: [string, boolean | undefined][] = [
-    ['Real flood', v.is_flood],
+    ['Real flood (not a puddle or splash)', v.is_flood === undefined ? undefined : v.is_flood && !v.is_puddle_or_splash],
     ['Outdoor street', v.is_outdoor_street],
     ['Original photo (not stock or staged)', v.looks_staged_or_stock === undefined ? undefined : !v.looks_staged_or_stock],
     ['Not a duplicate', d.duplicate_of === null],
+    ...(d.cross_check === 'unavailable' ? [] : ([['Geometry agrees with visual estimate', d.cross_check === 'agree']] as [string, boolean][])),
   ]
   return (
     <div>
@@ -274,9 +286,10 @@ function VerifyBody({ d }: { d: VerifyData }) {
         ))}
       </ul>
       {v.reason && <p className="mt-3 border-l-2 border-blue-200 pl-3 text-sm italic text-slate-600">“{v.reason}”</p>}
-      {v.water_depth_hint && (
+      {v.depth_cm_low != null && v.depth_cm_high != null && (
         <p className="mt-2 text-sm text-slate-600">
-          Muse Spark's own visual guess: <b className="capitalize">{v.water_depth_hint}-deep</b>
+          Muse Spark's visual guess: <b>{Math.round(v.depth_cm_low)}–{Math.round(v.depth_cm_high)} cm</b>
+          {v.depth_reference && <span className="text-slate-400"> (judged from {v.depth_reference})</span>}
         </p>
       )}
     </div>
@@ -311,7 +324,7 @@ function DepthRuler({ depth, unc }: { depth: number; unc: number }) {
   )
 }
 
-function ResultBody({ d, onViewMap }: { d: ResultData; onViewMap: () => void }) {
+function ResultBody({ d, verdict, onViewMap }: { d: ResultData; verdict?: Verdict; onViewMap: () => void }) {
   const s = STATUS[d.status] ?? { label: d.status, tone: 'slate' as Tone, text: '' }
   return (
     <div className="space-y-3">
@@ -323,7 +336,19 @@ function ResultBody({ d, onViewMap }: { d: ResultData; onViewMap: () => void }) 
             </span>
             <span className="text-lg text-slate-500">cm ± {Math.round(d.uncertainty_cm ?? 0)}</span>
           </p>
+          {d.status === 'flood_review' && <div className="mt-1"><Badge tone="amber">unconfirmed, needs review</Badge></div>}
           <DepthRuler depth={d.depth_cm} unc={d.uncertainty_cm ?? 0} />
+        </div>
+      ) : d.status === 'flood_visual_estimate' && verdict?.depth_cm_low != null && verdict.depth_cm_high != null ? (
+        <div className="rounded-lg border border-dashed border-amber-400 bg-amber-50/50 p-3">
+          <p className="flex items-baseline gap-2">
+            <span className="text-4xl font-bold tracking-tight text-amber-600">
+              {Math.round(verdict.depth_cm_low)}–{Math.round(verdict.depth_cm_high)}
+            </span>
+            <span className="text-lg text-slate-500">cm</span>
+            <Badge tone="amber">visual guess, low confidence</Badge>
+          </p>
+          <DepthRuler depth={(verdict.depth_cm_low + verdict.depth_cm_high) / 2} unc={(verdict.depth_cm_high - verdict.depth_cm_low) / 2} />
         </div>
       ) : (
         <p className="text-sm text-slate-600">No depth could be measured from this photo.</p>
@@ -333,7 +358,7 @@ function ResultBody({ d, onViewMap }: { d: ResultData; onViewMap: () => void }) 
       </div>
       <div className="flex items-center justify-between text-xs text-slate-400">
         <span>Report #{d.id} · analysed in {(d.total_ms / 1000).toFixed(1)} s</span>
-        {(d.status === 'verified' || d.status === 'flood_unmeasured') && (
+        {(d.status === 'verified' || d.status === 'flood_unmeasured' || d.status === 'flood_visual_estimate' || d.status === 'flood_review') && (
           <button onClick={onViewMap} className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-700">
             View on map
           </button>
@@ -401,7 +426,7 @@ export function Pipeline({
       case 'geometry': return photo ? <GeometryBody d={events.geometry!.data} photo={photo} size={size} /> : null
       case 'fusion': return <FusionBody d={events.fusion!.data} />
       case 'verify': return <VerifyBody d={events.verify!.data} />
-      case 'result': return <ResultBody d={events.result!.data} onViewMap={onViewMap} />
+      case 'result': return <ResultBody d={events.result!.data} verdict={events.verify?.data.verdict} onViewMap={onViewMap} />
     }
   }
   return (

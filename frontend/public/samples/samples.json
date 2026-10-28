@@ -137,10 +137,18 @@
  },
  {
   "file": "s18.jpg",
-  "label": "Control: splash, not a flood",
+  "label": "Heavy-rain street, shallow water",
   "license": "CC BY-SA 3.0",
   "author": "Ilya Plekhanov",
   "source": "https://commons.wikimedia.org/wiki/File:Hyundai_Solaris_water_splash.jpg",
+  "control": false
+ },
+ {
+  "file": "s19.jpg",
+  "label": "Control: dry road, Chennai",
+  "license": "CC BY-SA 3.0",
+  "author": "Binoy J S",
+  "source": "https://commons.wikimedia.org/wiki/File:Airport_Road_-_panoramio.jpg",
   "control": true
  }
 ]
