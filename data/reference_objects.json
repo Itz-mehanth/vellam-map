@@ -1,0 +1,11 @@
+{
+  "_note": "Real-world sizes used to turn pixels into centimetres. All values are approximate starting points; verify against spec sheets before relying on them.",
+  "objects": {
+    "car_wheel": { "shape": "circle", "diameter_cm": 60, "range_cm": [55, 66], "prompt": "car wheel" },
+    "auto_rickshaw_wheel": { "shape": "circle", "diameter_cm": 46, "range_cm": [42, 50], "prompt": "auto rickshaw wheel" },
+    "motorcycle_wheel": { "shape": "circle", "diameter_cm": 62, "range_cm": [56, 66], "prompt": "motorcycle wheel" },
+    "bus_wheel": { "shape": "circle", "diameter_cm": 100, "range_cm": [95, 105], "prompt": "bus wheel" },
+    "kerb": { "shape": "height", "height_cm": 15, "range_cm": [10, 20], "prompt": "road kerb" },
+    "adult_knee": { "shape": "height", "height_cm": 50, "range_cm": [44, 56], "prompt": "person standing in water" }
+  }
+}
