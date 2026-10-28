@@ -55,6 +55,8 @@ def depth_from_wheel(
     # Uncertainty from the real spread of wheel sizes for this vehicle class.
     lo, hi = diameter_range_cm
     spread = submerged_px * (hi - lo) / (2 * r) / 2
+    # Add waterline / rim localisation error (about 3 px) in quadrature.
+    spread = float(np.hypot(spread, 3 * cm_per_px))
     return DepthEstimate("wheel", float(depth), float(spread))
 
 

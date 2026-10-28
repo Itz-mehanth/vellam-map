@@ -4,9 +4,10 @@ import json
 from PIL import Image
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 
 from services import store, verify
-from services.pipeline import measure
+from services.pipeline import analyse
 
 app = FastAPI(title="Vellam Map API")
 
@@ -23,38 +24,30 @@ def health():
     return {"ok": True}
 
 
-@app.post("/api/reports")
-async def create_report(
-    photo: UploadFile = File(...),
-    lat: float = Form(...),
-    lng: float = Form(...),
-):
-    """Photo + location -> verified depth estimate added to the map."""
+async def _read_image(photo: UploadFile) -> bytes:
     image = await photo.read()
     try:
-        w, h = Image.open(io.BytesIO(image)).size
+        Image.open(io.BytesIO(image)).verify()
     except Exception:
         raise HTTPException(400, "not a valid image")
+    return image
 
-    phash = verify.photo_hash(image)
-    duplicate_of = verify.find_duplicate(phash)
-    verdict = await verify.judge(image)
-    result = await measure(image, (h, w))
 
-    if duplicate_of is not None:
-        status = "rejected_duplicate"
-    elif verdict.get("is_flood") is False or verdict.get("looks_staged_or_stock"):
-        status = "rejected_not_flood"
-    elif result["depth_cm"] is None:
-        status = "flood_unmeasured"  # real flood, but no usable reference object
-    else:
-        status = "verified"
+@app.post("/api/reports/stream")
+async def create_report_stream(
+    photo: UploadFile = File(...), lat: float = Form(...), lng: float = Form(...)
+):
+    """Photo + location -> newline-delimited JSON, one event per pipeline stage."""
+    image = await _read_image(photo)
 
-    report_id = store.add_report(
-        lat, lng, str(phash), result["depth_cm"], result["uncertainty_cm"], status, verdict
-    )
-    return {"id": report_id, "status": status, "duplicate_of": duplicate_of,
-            "verdict": verdict, "measurement": result}
+    async def events():
+        try:
+            async for ev in analyse(image, lat, lng):
+                yield json.dumps(ev) + "\n"
+        except Exception as e:  # surface failures in the stream instead of a dropped connection
+            yield json.dumps({"stage": "error", "title": "Pipeline failed", "ms": 0, "data": {"message": str(e)}}) + "\n"
+
+    return StreamingResponse(events(), media_type="application/x-ndjson")
 
 
 @app.get("/api/map")

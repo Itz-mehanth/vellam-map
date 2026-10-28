@@ -1,2 +1,30 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fade-in {
+  animation: fadein 0.45s ease-out both;
+}
+
+@keyframes scan {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.scan-line {
+  animation: scan 1.6s linear infinite;
+}

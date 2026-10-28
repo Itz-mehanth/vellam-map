@@ -1,0 +1,141 @@
+s01.jpg water objects=0
+s02.jpg water objects=0
+s03.jpg no water objects=0
+s04.jpg no water objects=0
+s05.jpg water objects=6
+   car_wheel conf=0.7037037014961243 -> no fit (no circle fit / wheel not in water)
+   car_wheel conf=0.6012461185455322 -> no fit (no circle fit / wheel not in water)
+   car_wheel conf=0.7538461089134216 -> no fit (no circle fit / wheel not in water)
+   car_wheel conf=0.8160918951034546 -> 28.7 cm (ok)
+   car_wheel conf=0.8241757750511169 -> 41.6 cm (ok)
+   car_wheel conf=0.5747508406639099 -> no fit (no circle fit / wheel not in water)
+   FUSED: 32.9 ± 2.2 cm
+s06.jpg water objects=0
+s07.jpg water objects=1
+   car_wheel conf=0.6289855241775513 -> no fit (no circle fit / wheel not in water)
+Traceback (most recent call last):
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+             ^^^^^^^^^^^^
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
+    value = callback(transferred, key, ov)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
+    return ov.getresult()
+           ^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 1236] The network connection was aborted by the local system
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpcore2\_exceptions.py", line 13, in map_exceptions
+    yield
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpcore2\_backends\anyio.py", line 37, in read
+    return await self._stream.receive(max_bytes=max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\anyio\streams\tls.py", line 254, in receive
+    data = await self._call_sslobject_method(self._ssl_object.read, max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\anyio\streams\tls.py", line 194, in _call_sslobject_method
+    data = await self.transport_stream.receive()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1418, in receive
+    raise BrokenResourceError from self._protocol.exception
+anyio.BrokenResourceError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpx2\_transports\default.py", line 98, in map_httpcore_exceptions
+    yield
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpx2\_transports\default.py", line 266, in __aiter__
+    async for part in self._httpcore_stream:
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpcore2\_async\connection_pool.py", line 426, in __aiter__
+    async for chunk in iterator:
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpcore2\_async\http11.py", line 320, in __aiter__
+    raise exc
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpcore2\_async\http11.py", line 312, in __aiter__
+    async for chunk in iterator:
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpcore2\_async\http11.py", line 188, in _receive_response_body
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpcore2\_async\http11.py", line 200, in _receive_event
+    data = await self._network_stream.read(self.READ_NUM_BYTES, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpcore2\_backends\anyio.py", line 34, in read
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpcore2\_exceptions.py", line 17, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore2.ReadError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\openai\_streaming.py", line 171, in _iter_events
+    async for sse in self._decoder.aiter_bytes(self.response.aiter_bytes()):
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\openai\_streaming.py", line 381, in aiter_bytes
+    async for chunk in iterator:
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpx2\_models.py", line 994, in aiter_bytes
+    async for raw_bytes in raw_stream:
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpx2\_models.py", line 1050, in aiter_raw
+    async for raw_stream_bytes in stream:
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpx2\_client.py", line 165, in __aiter__
+    async for chunk in stream:
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpx2\_transports\default.py", line 265, in __aiter__
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\httpx2\_transports\default.py", line 115, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx2.ReadError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\meta_sam_parser\_stream.py", line 581, in _read_source
+    event = reading.result()
+            ^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\openai\_streaming.py", line 166, in __aiter__
+    async for item in self._iterator:
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\openai\_streaming.py", line 185, in __stream__
+    async for sse in iterator:
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\openai\_streaming.py", line 176, in _iter_events
+    raise APIConnectionError(request=self.response.request) from err
+openai.APIConnectionError: Connection error.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\mehan\vellam-map\eval\measure.py", line 30, in <module>
+    asyncio.run(main([Path(a) for a in sys.argv[1:]]))
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\eval\measure.py", line 20, in main
+    r = await measure(p.read_bytes(), (h, w))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\services\pipeline.py", line 81, in measure
+    water_objs = await segment(image, "water")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\services\meta_client.py", line 64, in segment
+    result = await parse_responses_stream(stream, image_segmentation_format()).final_result()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\meta_sam_parser\_stream.py", line 156, in _await_result
+    return await asyncio.shield(result)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\meta_sam_parser\_stream.py", line 235, in _drain_final
+    done, event = await self._read_source()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\backend\.venv\Lib\site-packages\meta_sam_parser\_stream.py", line 587, in _read_source
+    raise ResponsesStreamSourceError("next", error) from error
+meta_sam_parser._errors.ResponsesStreamSourceError: The Responses event source failed during next.

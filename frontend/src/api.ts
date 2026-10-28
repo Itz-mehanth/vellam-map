@@ -21,28 +21,83 @@ export interface ReportFeature {
   properties: ReportProperties
 }
 
-export interface DetectedObject {
-  type: string
-  confidence: number | null
-  depth_cm: number | null
-  reason: string
+// ---- Pipeline stage events (streamed from POST /api/reports/stream) ----
+
+export interface IntakeData {
+  width: number
+  height: number
+  kb: number
+  phash: string
+  duplicate_of: number | null
+  lat: number
+  lng: number
 }
 
-export interface Measurement {
+export interface WaterData {
+  found: boolean
+  instances: number
+  coverage_pct: number
+  confidence: number | null
   overlay: string
-  water_found: boolean
-  objects: DetectedObject[]
+}
+
+export interface ObjectsData {
+  prompts: { type: string; prompt: string; count: number }[]
+  objects: { type: string; box: number[]; confidence: number | null }[]
+  overlay: string
+}
+
+export interface WheelRecord {
+  type: string
+  box: number[]
+  confidence: number | null
+  depth_cm: number | null
+  uncertainty_cm: number | null
+  reason: string
+  waterline_y?: number
+  rim_points?: number
+  rim_sample?: [number, number][]
+  circle?: { cx: number; cy: number; r: number }
+  cm_per_px?: number
+}
+
+export interface GeometryData {
+  wheels: WheelRecord[]
+}
+
+export interface FusionData {
+  inputs: { type: string; depth_cm: number; uncertainty_cm: number; weight: number }[]
   depth_cm: number | null
   uncertainty_cm: number | null
 }
 
-export interface ReportResult {
+export interface VerifyData {
+  verdict: Verdict
+  duplicate_of: number | null
+}
+
+export interface ResultData {
   id: number
   status: string
-  duplicate_of: number | null
-  verdict: Verdict
-  measurement: Measurement
+  depth_cm: number | null
+  uncertainty_cm: number | null
+  total_ms: number
 }
+
+export interface StageDataMap {
+  intake: IntakeData
+  water: WaterData
+  objects: ObjectsData
+  geometry: GeometryData
+  fusion: FusionData
+  verify: VerifyData
+  result: ResultData
+}
+
+export type StageId = keyof StageDataMap
+export const STAGE_ORDER: StageId[] = ['intake', 'water', 'objects', 'geometry', 'fusion', 'verify', 'result']
+
+export type StageEvents = { [K in StageId]?: { ms: number; data: StageDataMap[K] } }
 
 export async function fetchMap(): Promise<ReportFeature[]> {
   const res = await fetch('/api/map')
@@ -50,14 +105,36 @@ export async function fetchMap(): Promise<ReportFeature[]> {
   return (await res.json()).features
 }
 
-export async function submitReport(photo: File, lat: number, lng: number): Promise<ReportResult> {
+/** Posts a photo and calls onEvent for every pipeline stage as the server finishes it. */
+export async function streamReport(
+  photo: File,
+  lat: number,
+  lng: number,
+  onEvent: <K extends StageId>(stage: K, ms: number, data: StageDataMap[K]) => void,
+): Promise<void> {
   const body = new FormData()
   body.append('photo', photo)
   body.append('lat', String(lat))
   body.append('lng', String(lng))
-  const res = await fetch('/api/reports', { method: 'POST', body })
-  if (!res.ok) throw new Error('Report failed')
-  return res.json()
+  const res = await fetch('/api/reports/stream', { method: 'POST', body })
+  if (!res.ok || !res.body) throw new Error(res.status === 400 ? 'That file is not a valid image' : 'Report failed')
+
+  const reader = res.body.getReader()
+  const decoder = new TextDecoder()
+  let buffer = ''
+  for (;;) {
+    const { done, value } = await reader.read()
+    if (done) break
+    buffer += decoder.decode(value, { stream: true })
+    const lines = buffer.split('\n')
+    buffer = lines.pop() ?? ''
+    for (const line of lines) {
+      if (!line.trim()) continue
+      const ev = JSON.parse(line)
+      if (ev.stage === 'error') throw new Error(ev.data.message)
+      onEvent(ev.stage, ev.ms, ev.data)
+    }
+  }
 }
 
 // Colour by danger. Unmeasured floods are grey: we know there is water, not how deep.

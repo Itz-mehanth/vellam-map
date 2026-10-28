@@ -1,29 +1,33 @@
-"""Run the depth pipeline on photos.
+"""Run the full pipeline on photos and print each stage.
 
-    backend/.venv/Scripts/python eval/measure.py eval/photos/*.jpg
+    backend/.venv/Scripts/python -u eval/measure.py frontend/public/samples/*.jpg
 """
 
 import asyncio
 import sys
 from pathlib import Path
 
-from PIL import Image
-
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
 
-from services.pipeline import measure  # noqa: E402
+from services import store  # noqa: E402
+from services.pipeline import analyse  # noqa: E402
 
 
 async def main(photos: list[Path]) -> None:
+    store.DB_PATH = Path(__file__).resolve().parent / "eval.db"  # keep eval runs out of the real map
+    store.DB_PATH.unlink(missing_ok=True)
     for p in photos:
-        w, h = Image.open(p).size
-        r = await measure(p.read_bytes(), (h, w))
-        print(p.name, "water" if r["water_found"] else "no water", f"objects={len(r['objects'])}")
-        for o in r["objects"]:
-            d = f"{o['depth_cm']:.1f} cm" if o["depth_cm"] is not None else "no fit"
-            print(f"   {o['type']} conf={o['confidence']} -> {d} ({o['reason']})")
-        if r["depth_cm"] is not None:
-            print(f"   FUSED: {r['depth_cm']:.1f} ± {r['uncertainty_cm']:.1f} cm")
+        print(p.name)
+        async for ev in analyse(p.read_bytes(), 0.0, 0.0):
+            d = ev["data"]
+            if ev["stage"] == "geometry":
+                for w in d["wheels"]:
+                    depth = f"{w['depth_cm']:.1f} cm" if w["depth_cm"] is not None else "-"
+                    print(f"   wheel {w['type']}: {depth} ({w['reason']})")
+            elif ev["stage"] == "fusion" and d["depth_cm"] is not None:
+                print(f"   FUSED {d['depth_cm']:.1f} ± {d['uncertainty_cm']:.1f} cm")
+            elif ev["stage"] == "result":
+                print(f"   -> {d['status']} in {d['total_ms']} ms")
 
 
 if __name__ == "__main__":

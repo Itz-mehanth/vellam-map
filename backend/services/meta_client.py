@@ -5,6 +5,7 @@ output is a streamed special-token grammar, decoded with Meta's official
 `meta_sam_parser`.
 """
 
+import asyncio
 import base64
 import os
 from dataclasses import dataclass
@@ -45,7 +46,17 @@ def image_data_url(image: bytes, mime: str = "image/jpeg") -> str:
 
 
 async def segment(image: bytes, concept: str, mime: str = "image/jpeg") -> list[SegmentedObject]:
-    """SAM 3.1: every instance of one noun phrase (e.g. "water", "car wheel")."""
+    """SAM 3.1: every instance of one noun phrase, retried on transient network errors."""
+    for attempt in range(3):
+        try:
+            return await _segment_once(image, concept, mime)
+        except Exception:
+            if attempt == 2:
+                raise
+            await asyncio.sleep(1.5 * (attempt + 1))
+
+
+async def _segment_once(image: bytes, concept: str, mime: str) -> list[SegmentedObject]:
     stream = await client.responses.create(
         model=SAM_MODEL,
         input=[

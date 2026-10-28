@@ -1,13 +1,20 @@
-"""Photo -> fused depth estimate: SAM 3.1 masks fed through depth.py."""
+"""Photo -> fused depth estimate, as a stream of stage events.
 
+Each stage yields {"stage", "title", "ms", "data"} when it finishes, so the UI
+can show the real pipeline filling in rather than a fake progress bar.
+"""
+
+import asyncio
 import base64
 import io
 import json
+import time
 from pathlib import Path
 
 import numpy as np
 from PIL import Image
 
+from . import store, verify
 from .depth import DepthEstimate, depth_from_wheel, fit_circle, fuse
 from .meta_client import SegmentedObject, segment
 
@@ -15,6 +22,9 @@ REFERENCE = json.loads(
     (Path(__file__).resolve().parents[2] / "data" / "reference_objects.json").read_text()
 )["objects"]
 WHEELS = {k: v for k, v in REFERENCE.items() if v["shape"] == "circle"}
+
+WATER_RGB, WHEEL_RGB = (37, 99, 235), (249, 115, 22)
+MAX_RIM_POINTS_SENT = 80
 
 
 def full_mask(obj: SegmentedObject, shape: tuple[int, int]) -> np.ndarray:
@@ -46,65 +56,145 @@ def waterline_y(wheel: np.ndarray, water: np.ndarray) -> float | None:
     return float(np.median(tops)) if tops else None
 
 
-def _wheel_estimate(wheel: np.ndarray, water: np.ndarray, ref: dict) -> tuple[DepthEstimate | None, str]:
-    ys, xs = np.nonzero(wheel)
-    if len(ys) == 0:
-        return None, "empty mask"
-    wl = waterline_y(wheel, water)
-    if wl is None:
-        return None, "no water under wheel"
-    pts = rim_points(wheel, water)
-    est = depth_from_wheel(pts, wl, ref["diameter_cm"], tuple(ref["range_cm"]))
-    if est is None:
-        return None, "no circle fit / wheel not in water"
-    _, _, r = fit_circle(pts)
-    h, w = ys.max() - ys.min() + 1, xs.max() - xs.min() + 1
-    if wl - ys.max() > 0.35 * r:
-        return None, "water does not touch wheel"
-    if not (0.45 * h <= r <= 1.6 * max(h, w)):
-        return None, "implausible circle fit"
-    return est, "ok"
-
-
-def overlay_data_url(image: bytes, water: np.ndarray, wheels: list[np.ndarray]) -> str:
-    """Photo with water (blue) and wheel (orange) masks tinted on, as a JPEG data URL."""
+def overlay_data_url(image: bytes, layers: list[tuple[np.ndarray, tuple[int, int, int]]]) -> str:
+    """Photo with each (mask, colour) layer tinted on, as a JPEG data URL."""
     canvas = np.asarray(Image.open(io.BytesIO(image)).convert("RGB")).astype(float)
-    for mask, colour in [(water, (37, 99, 235))] + [(w, (249, 115, 22)) for w in wheels]:
+    for mask, colour in layers:
         canvas[mask] = canvas[mask] * 0.5 + np.array(colour) * 0.5
     buf = io.BytesIO()
-    Image.fromarray(canvas.astype(np.uint8)).save(buf, "JPEG", quality=82)
+    Image.fromarray(canvas.astype(np.uint8)).save(buf, "JPEG", quality=80)
     return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
-async def measure(image: bytes, shape: tuple[int, int]) -> dict:
-    """Run SAM 3.1 on one photo. shape = (height, width) of the decoded image."""
-    water_objs = await segment(image, "water")
+def analyse_wheel(wheel: np.ndarray, water: np.ndarray, name: str, ref: dict) -> dict:
+    """Geometry for one wheel: circle fit, waterline, depth. Always returns a record."""
+    rec: dict = {"type": name, "depth_cm": None, "uncertainty_cm": None, "reason": "ok"}
+    ys, xs = np.nonzero(wheel)
+    if len(ys) == 0:
+        return rec | {"reason": "empty mask"}
+    rec["visible_px"] = [int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())]
+    wl = waterline_y(wheel, water)
+    if wl is None:
+        return rec | {"reason": "no water under wheel"}
+    pts = rim_points(wheel, water)
+    rec["waterline_y"] = wl
+    rec["rim_points"] = len(pts)
+    if len(pts) < 10:
+        return rec | {"reason": "too little visible rim to fit a circle"}
+    step = max(1, len(pts) // MAX_RIM_POINTS_SENT)
+    rec["rim_sample"] = pts[::step].astype(int).tolist()
+    cx, cy, r = fit_circle(pts)
+    rec["circle"] = {"cx": float(cx), "cy": float(cy), "r": float(r)}
+    est = depth_from_wheel(pts, wl, ref["diameter_cm"], tuple(ref["range_cm"]))
+    if est is None:
+        return rec | {"reason": "wheel not in water"}
+    h, w = ys.max() - ys.min() + 1, xs.max() - xs.min() + 1
+    if wl - ys.max() > 0.35 * r:
+        return rec | {"reason": "water does not touch wheel"}
+    if not (0.45 * h <= r <= 1.6 * max(h, w)):
+        return rec | {"reason": "implausible circle fit"}
+    rec["cm_per_px"] = ref["diameter_cm"] / (2 * r)
+    rec["depth_cm"], rec["uncertainty_cm"] = est.depth_cm, est.uncertainty_cm
+    return rec
+
+
+def decide(duplicate_of, verdict: dict, depth_cm) -> str:
+    if duplicate_of is not None:
+        return "rejected_duplicate"
+    if verdict.get("is_flood") is False or verdict.get("looks_staged_or_stock"):
+        return "rejected_not_flood"
+    return "flood_unmeasured" if depth_cm is None else "verified"
+
+
+async def analyse(image: bytes, lat: float, lng: float):
+    """Async generator of stage events; the last one has stage == "result"."""
+    t0 = time.perf_counter()
+    mark = t0
+
+    def event(stage: str, title: str, data: dict) -> dict:
+        nonlocal mark
+        now = time.perf_counter()
+        ev = {"stage": stage, "title": title, "ms": round((now - mark) * 1000), "data": data}
+        mark = now
+        return ev
+
+    # Stage 1 — intake
+    pil = Image.open(io.BytesIO(image))
+    w, h = pil.size
+    shape = (h, w)
+    phash = verify.photo_hash(image)
+    duplicate_of = verify.find_duplicate(phash)
+    judge_task = asyncio.create_task(verify.judge(image))  # runs alongside segmentation
+    yield event("intake", "Photo received", {
+        "width": w, "height": h, "kb": round(len(image) / 1024), "phash": str(phash),
+        "duplicate_of": duplicate_of, "lat": lat, "lng": lng,
+    })
+
+    # Stage 2 — water
     water = np.zeros(shape, dtype=bool)
+    water_objs = await segment(image, "water")
+    confs = [o.confidence for o in water_objs if o.confidence is not None]
     for o in water_objs:
         water |= full_mask(o, shape)
+    yield event("water", "SAM 3.1 finds the water surface", {
+        "found": bool(water.any()), "instances": len(water_objs),
+        "coverage_pct": round(100 * float(water.mean()), 1),
+        "confidence": max(confs) if confs else None,
+        "overlay": overlay_data_url(image, [(water, WATER_RGB)]),
+    })
 
-    estimates: list[DepthEstimate] = []
-    objects = []
-    wheel_masks: list[np.ndarray] = []
+    # Stage 3 — reference objects (all wheel prompts at once)
+    found: list[tuple[str, dict, SegmentedObject]] = []
+    prompt_counts: dict[str, int] = {}
     if water.any():
-        for name, ref in WHEELS.items():
-            for o in await segment(image, ref["prompt"]):
-                wheel = full_mask(o, shape)
-                wheel_masks.append(wheel)
-                est, reason = _wheel_estimate(wheel, water, ref)
-                objects.append(
-                    {"type": name, "box": o.box, "confidence": o.confidence,
-                     "depth_cm": est.depth_cm if est else None, "reason": reason}
-                )
-                if est:
-                    estimates.append(est)
+        sem = asyncio.Semaphore(3)
 
+        async def run(name: str, ref: dict):
+            async with sem:
+                return name, ref, await segment(image, ref["prompt"])
+
+        for name, ref, objs in await asyncio.gather(*(run(n, r) for n, r in WHEELS.items())):
+            prompt_counts[name] = len(objs)
+            found += [(name, ref, o) for o in objs]
+    wheel_masks = [full_mask(o, shape) for _, _, o in found]
+    yield event("objects", "SAM 3.1 looks for reference objects", {
+        "prompts": [{"type": n, "prompt": WHEELS[n]["prompt"], "count": c} for n, c in prompt_counts.items()],
+        "objects": [
+            {"type": n, "box": list(o.box), "confidence": o.confidence} for n, _, o in found
+        ],
+        "overlay": overlay_data_url(image, [(water, WATER_RGB)] + [(m, WHEEL_RGB) for m in wheel_masks]),
+    })
+
+    # Stage 4 — geometry
+    records = []
+    for (name, ref, o), mask in zip(found, wheel_masks):
+        records.append(analyse_wheel(mask, water, name, ref) | {"box": list(o.box), "confidence": o.confidence})
+    yield event("geometry", "Circle fit recovers each wheel's hidden part", {"wheels": records})
+
+    # Stage 5 — fusion
+    estimates = [DepthEstimate(r["type"], r["depth_cm"], r["uncertainty_cm"]) for r in records if r["depth_cm"] is not None]
     fused = fuse(estimates)
-    return {
-        "overlay": overlay_data_url(image, water, wheel_masks),
-        "image_size": [shape[1], shape[0]],
-        "water_found": bool(water.any()),
-        "objects": objects,
+    weights = [1 / e.uncertainty_cm**2 for e in estimates]
+    total = sum(weights)
+    yield event("fusion", "Inverse-variance fusion", {
+        "inputs": [
+            {"type": e.object_type, "depth_cm": e.depth_cm, "uncertainty_cm": e.uncertainty_cm, "weight": wt / total}
+            for e, wt in zip(estimates, weights)
+        ],
         "depth_cm": fused.depth_cm if fused else None,
         "uncertainty_cm": fused.uncertainty_cm if fused else None,
-    }
+    })
+
+    # Stage 6 — verification
+    verdict = await judge_task
+    yield event("verify", "Muse Spark verifies the report", {"verdict": verdict, "duplicate_of": duplicate_of})
+
+    # Stage 7 — decision and storage
+    depth_cm = fused.depth_cm if fused else None
+    unc = fused.uncertainty_cm if fused else None
+    status = decide(duplicate_of, verdict, depth_cm)
+    report_id = store.add_report(lat, lng, str(phash), depth_cm, unc, status, verdict)
+    yield event("result", "Decision", {
+        "id": report_id, "status": status, "depth_cm": depth_cm, "uncertainty_cm": unc,
+        "total_ms": round((time.perf_counter() - t0) * 1000),
+    })
