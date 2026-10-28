@@ -1,9 +1,12 @@
 """Photo -> fused depth estimate: SAM 3.1 masks fed through depth.py."""
 
+import base64
+import io
 import json
 from pathlib import Path
 
 import numpy as np
+from PIL import Image
 
 from .depth import DepthEstimate, depth_from_wheel, fit_circle, fuse
 from .meta_client import SegmentedObject, segment
@@ -63,6 +66,16 @@ def _wheel_estimate(wheel: np.ndarray, water: np.ndarray, ref: dict) -> tuple[De
     return est, "ok"
 
 
+def overlay_data_url(image: bytes, water: np.ndarray, wheels: list[np.ndarray]) -> str:
+    """Photo with water (blue) and wheel (orange) masks tinted on, as a JPEG data URL."""
+    canvas = np.asarray(Image.open(io.BytesIO(image)).convert("RGB")).astype(float)
+    for mask, colour in [(water, (37, 99, 235))] + [(w, (249, 115, 22)) for w in wheels]:
+        canvas[mask] = canvas[mask] * 0.5 + np.array(colour) * 0.5
+    buf = io.BytesIO()
+    Image.fromarray(canvas.astype(np.uint8)).save(buf, "JPEG", quality=82)
+    return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
+
+
 async def measure(image: bytes, shape: tuple[int, int]) -> dict:
     """Run SAM 3.1 on one photo. shape = (height, width) of the decoded image."""
     water_objs = await segment(image, "water")
@@ -72,10 +85,12 @@ async def measure(image: bytes, shape: tuple[int, int]) -> dict:
 
     estimates: list[DepthEstimate] = []
     objects = []
+    wheel_masks: list[np.ndarray] = []
     if water.any():
         for name, ref in WHEELS.items():
             for o in await segment(image, ref["prompt"]):
                 wheel = full_mask(o, shape)
+                wheel_masks.append(wheel)
                 est, reason = _wheel_estimate(wheel, water, ref)
                 objects.append(
                     {"type": name, "box": o.box, "confidence": o.confidence,
@@ -86,6 +101,8 @@ async def measure(image: bytes, shape: tuple[int, int]) -> dict:
 
     fused = fuse(estimates)
     return {
+        "overlay": overlay_data_url(image, water, wheel_masks),
+        "image_size": [shape[1], shape[0]],
         "water_found": bool(water.any()),
         "objects": objects,
         "depth_cm": fused.depth_cm if fused else None,

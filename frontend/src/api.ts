@@ -1,10 +1,18 @@
+export interface Verdict {
+  is_flood?: boolean
+  is_outdoor_street?: boolean
+  looks_staged_or_stock?: boolean
+  water_depth_hint?: string
+  reason?: string
+}
+
 export interface ReportProperties {
   id: number
   created_at: number
   status: string
   depth_cm: number | null
   uncertainty_cm: number | null
-  verdict: { reason?: string; water_depth_hint?: string }
+  verdict: Verdict
 }
 
 export interface ReportFeature {
@@ -13,12 +21,27 @@ export interface ReportFeature {
   properties: ReportProperties
 }
 
+export interface DetectedObject {
+  type: string
+  confidence: number | null
+  depth_cm: number | null
+  reason: string
+}
+
+export interface Measurement {
+  overlay: string
+  water_found: boolean
+  objects: DetectedObject[]
+  depth_cm: number | null
+  uncertainty_cm: number | null
+}
+
 export interface ReportResult {
   id: number
   status: string
   duplicate_of: number | null
-  verdict: ReportProperties['verdict']
-  measurement: { depth_cm: number | null; uncertainty_cm: number | null }
+  verdict: Verdict
+  measurement: Measurement
 }
 
 export async function fetchMap(): Promise<ReportFeature[]> {
