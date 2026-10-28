@@ -11,6 +11,23 @@ function visualMid(p: ReportFeature['properties']): number | null {
   return p.status === 'flood_visual_estimate' && lo != null && hi != null ? (lo + hi) / 2 : null
 }
 
+/** Reports fade as they age, so a stale one is never mistaken for a current reading. */
+function freshness(createdAt: number): number {
+  const hours = (Date.now() / 1000 - createdAt) / 3600
+  return hours < 6 ? 1 : hours < 24 ? 0.7 : 0.4
+}
+
+function ageLabel(createdAt: number): string {
+  const min = Math.max(0, Math.round((Date.now() / 1000 - createdAt) / 60))
+  return min < 60 ? `${min} min ago` : min < 1440 ? `${Math.round(min / 60)} h ago` : `${Math.round(min / 1440)} d ago`
+}
+
+function shareAlert(a: Alert) {
+  const text = `${a.message}\nVia Vellam Map. Estimates only, follow official flood warnings.`
+  if (navigator.share) navigator.share({ title: 'Flood alert', text }).catch(() => {})
+  else window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank', 'noopener')
+}
+
 function Legend() {
   const items: [string, string][] = [
     ['< 20 cm', '#22c55e'],
@@ -58,13 +75,9 @@ export function AlertsPanel({ alerts, onPick }: { alerts: Alert[]; onPick: (at: 
         </p>
       )}
       {alerts.map((a, i) => (
-        <button
-          key={i}
-          onClick={() => onPick([a.lat, a.lng])}
-          className="flex w-full overflow-hidden rounded-xl border border-slate-200 bg-white text-left shadow-sm transition hover:border-slate-300"
-        >
+        <div key={i} className="flex w-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:border-slate-300">
           <span className={`w-1.5 shrink-0 ${LEVEL[a.level].bar}`} />
-          <span className="min-w-0 flex-1 p-3">
+          <button onClick={() => onPick([a.lat, a.lng])} className="min-w-0 flex-1 p-3 text-left">
             <span className="flex items-center justify-between gap-2">
               <span className="truncate text-sm font-semibold text-slate-900">{a.title}</span>
               <Badge tone={LEVEL[a.level].tone}>{LEVEL[a.level].label}</Badge>
@@ -76,8 +89,16 @@ export function AlertsPanel({ alerts, onPick }: { alerts: Alert[]; onPick: (at: 
               {a.corroborated && ' · corroborated'}
               {a.demo && ' · demo data'}
             </span>
-          </span>
-        </button>
+          </button>
+          <button
+            onClick={() => shareAlert(a)}
+            title="Share this alert"
+            aria-label="Share this alert"
+            className="shrink-0 border-l border-slate-100 px-3 text-slate-400 hover:bg-slate-50 hover:text-blue-600"
+          >
+            ↗
+          </button>
+        </div>
       ))}
     </aside>
   )
@@ -100,8 +121,8 @@ export function FloodMap({ reports, center }: { reports: ReportFeature[]; center
               radius={13}
               pathOptions={
                 mid !== null
-                  ? { color: depthColour(mid), weight: 3, dashArray: '4 3', fillColor: depthColour(mid), fillOpacity: 0.25 }
-                  : { color: '#fff', weight: 2, fillColor: depthColour(p.depth_cm), fillOpacity: 0.9 }
+                  ? { color: depthColour(mid), weight: 3, dashArray: '4 3', fillColor: depthColour(mid), fillOpacity: 0.25 * freshness(p.created_at), opacity: freshness(p.created_at) }
+                  : { color: '#fff', weight: 2, fillColor: depthColour(p.depth_cm), fillOpacity: 0.9 * freshness(p.created_at), opacity: freshness(p.created_at) }
               }
             >
               <Popup>
@@ -119,7 +140,7 @@ export function FloodMap({ reports, center }: { reports: ReportFeature[]; center
                   </>
                 )}
                 <br />
-                {new Date(p.created_at * 1000).toLocaleString()}
+                {ageLabel(p.created_at)} · {new Date(p.created_at * 1000).toLocaleString()}
                 {p.demo && (
                   <>
                     <br />

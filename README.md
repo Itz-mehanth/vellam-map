@@ -19,7 +19,7 @@ Project plan and status: [PLAN.md](PLAN.md)
 
 1. **Report**: anyone photographs a flooded street; location is attached.
 2. **Measure**: **SAM 3.1** segments the water and the wheels of vehicles. Geometry code recovers each wheel's hidden lower part and converts the waterline to **centimetres** (see §4).
-3. **Verify**: **Muse Spark** checks every report (real flood, not a puddle or splash, original photo) and gives an independent by-eye depth range. The geometric depth is cross-checked against it; a big disagreement sends the report to review instead of publishing it. Duplicate photos are caught by perceptual hash.
+3. **Verify**: **Muse Spark** checks every report (real flood, not a puddle or splash, original photo) and gives an independent by-eye depth range. The geometric depth is cross-checked against it; a big disagreement sends the report to review instead of publishing it. Duplicate photos are caught by perceptual hash, and photo metadata is checked: a photo taken more than 3 days ago is rejected, and one geotagged far from the reported location goes to review (missing metadata counts as unknown, never as a failure).
 4. **Map and alerts**: reports appear on a live map colour-coded by depth, and nearby reports are grouped into **area alerts**.
 5. **Ask by voice**: residents ask in **Tamil or English** (**Muse Voice Transcribe**), for example *"Is Velachery main road passable by bike?"*, and the agent answers from the live reports, in the same language, citing the reports it used.
 
@@ -137,16 +137,28 @@ Optional: `python seed_demo.py` (from `backend/`) fills the map with demo report
 
 Microphone capture needs HTTPS, which both hosts provide.
 
-## 10. Accuracy test
+## 10. Tests and quality
+
+```bash
+cd backend && python -m pytest -q     # 25 tests, no network or API key needed
+```
+
+- **Depth maths is validated on synthetic wheels** with known depth (recovered within 0.5 cm, and within a few cm under 1 px of noise).
+- Also covered: fusion weighting, decision rules, EXIF checks, rate limiting, alert clustering, and that rejected reports never reach alerts or answers.
+- CI (`.github/workflows/ci.yml`) runs the backend tests and the frontend build on every push.
+- Production guards: 12 MB upload limit, pixel cap, per-client rate limits on reports and questions (they cost API calls), input validation, reports expire from the map after 72 h and fade as they age, and `DELETE /api/reports/{id}` for moderation (needs `ADMIN_TOKEN`).
+- The app is installable as a PWA and opens offline; live depths are never cached.
+
+## 11. Accuracy test
 
 ```bash
 # put photos in eval/photos/ and list true depths (see eval/depths.example.csv)
 backend/.venv/Scripts/python -u eval/accuracy.py
 ```
 
-Prints geometric and visual error per photo, the mean absolute error of each, and GO / NO-GO against 15 cm. Record the result here once measured: **not yet measured**.
+Prints geometric and visual error per photo, the mean absolute error of each, and GO / NO-GO against 15 cm. Record the result here once measured: **not yet measured**. (The synthetic tests in §10 validate the maths; they do not validate SAM's masks on real photos.)
 
-## 11. Demo script (3 min)
+## 12. Demo script (3 min)
 
 1. **Hook (15 s):** Chennai 2015 / 2023. "Everyone had photos. Nobody had depths."
 2. **Report (60 s):** Analyse tab, pick a sample with a visible wheel (the Brisbane car, `s05`). Narrate the stages: water mask, wheel mask, circle fit and waterline, fusion, verification, result with uncertainty.
@@ -158,19 +170,19 @@ Prints geometric and visual error per photo, the mean absolute error of each, an
 
 Say clearly in the video that demo-map reports are seeded placeholders.
 
-## 12. Safety and responsibility
+## 13. Safety and responsibility
 
 - Depths are shown **with uncertainty** and labelled as estimates; by-eye guesses and review cases are marked, not hidden.
 - The app never says a road is "safe", and neither does the Q&A agent. Always follow official flood warnings.
 - Photos are not stored or shared; only a perceptual hash, the depth and the verification result are kept. Face and plate blurring is not implemented.
 
-## 13. Submission checklist
+## 14. Submission checklist
 
 - [ ] Public GitHub repo
 - [ ] Live deployed URL
 - [ ] 3-minute demo video showing only work built during the hackathon
 - [ ] Team members listed
-- [ ] Measured accuracy added to §10
+- [ ] Measured accuracy added to §11
 - [ ] Submitted at https://cerebralvalley.ai/e/meta-ai-developer-hackathon/hackathon/submit by **Nov 4, 9:00 PM ET**
 
 ---

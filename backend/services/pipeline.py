@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-from . import geo, store, verify
+from . import exif, geo, store, verify
 from .depth import DepthEstimate, depth_from_wheel, fit_circle, fuse
 from .meta_client import SegmentedObject, segment
 
@@ -111,11 +111,16 @@ def cross_check(depth_cm: float | None, verdict: dict) -> str:
     return "agree" if lo * 0.5 - 5 <= depth_cm <= hi * 1.6 + 10 else "disagree"
 
 
-def decide(duplicate_of, verdict: dict, depth_cm) -> str:
+def decide(duplicate_of, verdict: dict, depth_cm, meta: dict | None = None) -> str:
+    meta = meta or {}
     if duplicate_of is not None:
         return "rejected_duplicate"
+    if meta.get("stale"):
+        return "rejected_stale"
     if verdict.get("is_flood") is False or verdict.get("is_puddle_or_splash") or verdict.get("looks_staged_or_stock"):
         return "rejected_not_flood"
+    if meta.get("mismatch"):
+        return "flood_review"
     if depth_cm is not None:
         return "flood_review" if cross_check(depth_cm, verdict) == "disagree" else "verified"
     has_visual = verdict.get("depth_cm_low") is not None and verdict.get("depth_cm_high") is not None
@@ -140,10 +145,11 @@ async def analyse(image: bytes, lat: float, lng: float):
     shape = (h, w)
     phash = verify.photo_hash(image)
     duplicate_of = verify.find_duplicate(phash)
+    meta = exif.inspect(image, lat, lng)
     judge_task = asyncio.create_task(verify.judge(image))  # runs alongside segmentation
     yield event("intake", "Photo received", {
         "width": w, "height": h, "kb": round(len(image) / 1024), "phash": str(phash),
-        "duplicate_of": duplicate_of, "lat": lat, "lng": lng,
+        "duplicate_of": duplicate_of, "lat": lat, "lng": lng, "exif": meta,
     })
 
     # Stage 2 — water
@@ -208,14 +214,14 @@ async def analyse(image: bytes, lat: float, lng: float):
     # Stage 6 — verification
     verdict = await judge_task
     yield event("verify", "Muse Spark verifies the report", {
-        "verdict": verdict, "duplicate_of": duplicate_of,
+        "verdict": verdict, "duplicate_of": duplicate_of, "exif": meta,
         "cross_check": cross_check(fused.depth_cm if fused else None, verdict),
     })
 
     # Stage 7 — decision and storage
     depth_cm = fused.depth_cm if fused else None
     unc = fused.uncertainty_cm if fused else None
-    status = decide(duplicate_of, verdict, depth_cm)
+    status = decide(duplicate_of, verdict, depth_cm, meta)
     place = await geo.place_name(lat, lng) if status in store.PUBLISHED else None
     report_id = store.add_report(lat, lng, str(phash), depth_cm, unc, status, verdict, place=place)
     yield event("result", "Decision", {

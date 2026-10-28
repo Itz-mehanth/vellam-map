@@ -31,7 +31,17 @@ export interface ReportFeature {
 
 // ---- Pipeline stage events (streamed from POST /api/reports/stream) ----
 
+export interface ExifInfo {
+  has_taken_at: boolean
+  age_hours: number | null
+  stale: boolean
+  has_gps: boolean
+  distance_km: number | null
+  mismatch: boolean
+}
+
 export interface IntakeData {
+  exif: ExifInfo
   width: number
   height: number
   kb: number
@@ -81,6 +91,7 @@ export interface FusionData {
 }
 
 export interface VerifyData {
+  exif: ExifInfo
   verdict: Verdict
   duplicate_of: number | null
   cross_check: 'agree' | 'disagree' | 'unavailable'

@@ -43,6 +43,7 @@ const STATUS: Record<string, { label: string; tone: Tone; text: string }> = {
     tone: 'amber',
     text: 'The measured depth is far from the visual range estimated by Muse Spark. Spray, reflections or a wrong waterline may have distorted the geometry, so this was not published as verified.',
   },
+  rejected_stale: { label: 'Too old', tone: 'red', text: 'The photo was taken more than 3 days ago, so it cannot be a current flood report.' },
   rejected_duplicate: { label: 'Duplicate', tone: 'red', text: 'This photo matches an earlier report, so it was not added.' },
   rejected_not_flood: { label: 'Rejected', tone: 'red', text: 'This does not look like a real, original flood photo.' },
 }
@@ -76,6 +77,11 @@ function IntakeBody({ d }: { d: IntakeData }) {
       <Stat label="Fingerprint" value={<code className="text-xs">{d.phash.slice(0, 8)}…</code>} hint="perceptual hash" />
       <Stat label="Duplicate" value={d.duplicate_of === null ? 'None found' : `Matches #${d.duplicate_of}`} />
       <Stat label="Location" value={`${d.lat.toFixed(3)}, ${d.lng.toFixed(3)}`} />
+      <Stat
+        label="Photo metadata"
+        value={d.exif.has_taken_at || d.exif.has_gps ? 'Present' : 'None'}
+        hint={d.exif.has_taken_at || d.exif.has_gps ? 'timestamp and GPS checked' : 'many apps strip it'}
+      />
     </div>
   )
 }
@@ -273,6 +279,8 @@ function VerifyBody({ d }: { d: VerifyData }) {
     ['Outdoor street', v.is_outdoor_street],
     ['Original photo (not stock or staged)', v.looks_staged_or_stock === undefined ? undefined : !v.looks_staged_or_stock],
     ['Not a duplicate', d.duplicate_of === null],
+    ...(d.exif.has_taken_at ? ([['Photo taken recently', !d.exif.stale]] as [string, boolean][]) : []),
+    ...(d.exif.has_gps ? ([['Taken where it was reported', !d.exif.mismatch]] as [string, boolean][]) : []),
     ...(d.cross_check === 'unavailable' ? [] : ([['Geometry agrees with visual estimate', d.cross_check === 'agree']] as [string, boolean][])),
   ]
   return (

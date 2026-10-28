@@ -3,13 +3,15 @@ import json
 import os
 
 from PIL import Image
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, Header, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
-from services import agent, alerts, store, verify
+from services import agent, alerts, limits, store, verify
 from services.meta_client import transcribe
 from services.pipeline import analyse
+
+MAP_MAX_AGE_HOURS = float(os.getenv("MAP_MAX_AGE_HOURS", "72"))
 
 app = FastAPI(title="Vellam Map API")
 
@@ -23,13 +25,24 @@ app.add_middleware(
 
 @app.get("/api/health")
 def health():
-    return {"ok": True}
+    try:
+        store.published_reports(1)
+        db = True
+    except Exception:
+        db = False
+    return {"ok": db, "db": db, "meta_key_set": bool(os.getenv("META_API_KEY"))}
 
 
 async def _read_image(photo: UploadFile) -> bytes:
     image = await photo.read()
+    limits.check_size(image, "photo")
     try:
-        Image.open(io.BytesIO(image)).verify()
+        img = Image.open(io.BytesIO(image))
+        img.verify()
+        if img.width * img.height > limits.MAX_PIXELS:
+            raise HTTPException(413, "That photo has too many pixels. Please use a smaller one.")
+    except HTTPException:
+        raise
     except Exception:
         raise HTTPException(400, "not a valid image")
     return image
@@ -37,9 +50,12 @@ async def _read_image(photo: UploadFile) -> bytes:
 
 @app.post("/api/reports/stream")
 async def create_report_stream(
-    photo: UploadFile = File(...), lat: float = Form(...), lng: float = Form(...)
+    request: Request, photo: UploadFile = File(...), lat: float = Form(...), lng: float = Form(...)
 ):
     """Photo + location -> newline-delimited JSON, one event per pipeline stage."""
+    if not (-90 <= lat <= 90 and -180 <= lng <= 180):
+        raise HTTPException(400, "invalid location")
+    limits.report_limiter.check(limits.client_id(request))
     image = await _read_image(photo)
 
     async def events():
@@ -70,7 +86,7 @@ def flood_map():
                 "demo": bool(r["is_demo"]),
             },
         }
-        for r in store.published_reports()
+        for r in store.published_reports(MAP_MAX_AGE_HOURS)
     ]
     return {"type": "FeatureCollection", "features": features}
 
@@ -83,19 +99,36 @@ def get_alerts():
 
 @app.post("/api/ask")
 async def ask(
+    request: Request,
     audio: UploadFile | None = File(None),
     question: str | None = Form(None),
     language: str | None = Form(None),
 ):
     """A flood question, spoken (WAV) or typed -> answer grounded in the live map."""
+    limits.ask_limiter.check(limits.client_id(request))
     transcript = None
     if audio is not None:
+        data = await audio.read()
+        limits.check_size(data, "recording")
         try:
-            transcript = await transcribe(await audio.read(), language)
+            transcript = await transcribe(data, language)
         except Exception as e:
             raise HTTPException(502, f"Transcription failed: {e}")
         question = transcript
     if not question or not question.strip():
         raise HTTPException(400, "No question heard. Try again or type it.")
+    if len(question) > 500:
+        raise HTTPException(400, "Question is too long (500 characters max).")
     result = await agent.answer(question.strip())
     return {"question": question.strip(), "transcribed": transcript is not None, **result}
+
+
+@app.delete("/api/reports/{report_id}")
+def delete_report(report_id: int, x_admin_token: str | None = Header(None)):
+    """Moderation: remove a report. Disabled unless ADMIN_TOKEN is set."""
+    token = os.getenv("ADMIN_TOKEN")
+    if not token or x_admin_token != token:
+        raise HTTPException(403, "Not allowed")
+    if not store.delete_report(report_id):
+        raise HTTPException(404, "No such report")
+    return {"deleted": report_id}

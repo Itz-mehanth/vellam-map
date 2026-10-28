@@ -24,6 +24,11 @@ Deadline: **Nov 4, 2026, 9 PM ET**. Status as of Oct 28.
 | 16 | Safer-route suggestion (OSM routing) | P2 | Cut: the Q&A agent suggests nearby lower-depth reports instead |
 | 17 | Video report (rising waterline) | P2 | Cut |
 | 18 | Open-weights path | P2 | Cut |
+| 20 | Photo EXIF checks (stale, geotag mismatch) | Trust | Done |
+| 21 | Upload limits, rate limits, input validation, moderation endpoint | Production | Done |
+| 22 | Automated tests (25) incl. synthetic-wheel depth validation, CI | Production | Done |
+| 23 | Report expiry and age fading on the map; WhatsApp/share button on alerts | Production | Done |
+| 24 | Installable PWA, offline shell | Production | Done |
 | 19 | Face and plate blurring | Safety | Not built. Photos are not stored, only hashes and results |
 
 ## Remaining for you
@@ -36,3 +41,14 @@ Deadline: **Nov 4, 2026, 9 PM ET**. Status as of Oct 28.
 ## Cut rule
 
 If time runs short, never cut the deployment, the accuracy number or the demo video.
+
+## Ideas not built (roadmap)
+
+- **Offline report queue:** store photos in IndexedDB when there is no signal and send when it returns. Floods break connectivity.
+- **WhatsApp or SMS bot:** most flood photos already circulate on WhatsApp; a bot would meet people there.
+- **Authority view:** a read-only dashboard and CSV/GeoJSON export for municipal control rooms and rescue teams.
+- **Rainfall and gauge data** fused with depth reports to predict which streets will flood next.
+- **Calibration set:** crowdsourced photos with a person of known height, to learn the real error per object type.
+- **Face and plate blurring** with SAM 3.1 prompts ("face", "license plate") before any photo is shown to others.
+- **Video reports:** track the waterline rising over time.
+- **Tamil UI strings**, not only Tamil voice.

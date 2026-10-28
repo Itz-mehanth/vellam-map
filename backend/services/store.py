@@ -62,6 +62,11 @@ def published_reports(max_age_hours: float | None = None) -> list[sqlite3.Row]:
         ).fetchall()
 
 
+def delete_report(report_id: int) -> bool:
+    with _conn() as c:
+        return c.execute("DELETE FROM reports WHERE id = ?", (report_id,)).rowcount > 0
+
+
 def clear_demo() -> int:
     with _conn() as c:
         return c.execute("DELETE FROM reports WHERE is_demo = 1").rowcount
