@@ -1,19 +1,21 @@
 import io
 import json
+import os
 
 from PIL import Image
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
-from services import store, verify
+from services import agent, alerts, store, verify
+from services.meta_client import transcribe
 from services.pipeline import analyse
 
 app = FastAPI(title="Vellam Map API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:5173").split(","),
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -64,15 +66,36 @@ def flood_map():
                 "depth_cm": r["depth_cm"],
                 "uncertainty_cm": r["uncertainty_cm"],
                 "verdict": json.loads(r["verdict"]),
+                "place": r["place"],
+                "demo": bool(r["is_demo"]),
             },
         }
-        for r in store.all_reports()
-        if r["status"] in ("verified", "flood_unmeasured", "flood_visual_estimate", "flood_review")
+        for r in store.published_reports()
     ]
     return {"type": "FeatureCollection", "features": features}
 
 
+@app.get("/api/alerts")
+def get_alerts():
+    """One warning per area, from clusters of recent reports."""
+    return {"alerts": alerts.build_alerts()}
+
+
 @app.post("/api/ask")
-async def ask(audio: UploadFile = File(...)):
-    """Voice question in Tamil/English -> agent answer grounded in the map."""
-    return {"status": "not_implemented"}
+async def ask(
+    audio: UploadFile | None = File(None),
+    question: str | None = Form(None),
+    language: str | None = Form(None),
+):
+    """A flood question, spoken (WAV) or typed -> answer grounded in the live map."""
+    transcript = None
+    if audio is not None:
+        try:
+            transcript = await transcribe(await audio.read(), language)
+        except Exception as e:
+            raise HTTPException(502, f"Transcription failed: {e}")
+        question = transcript
+    if not question or not question.strip():
+        raise HTTPException(400, "No question heard. Try again or type it.")
+    result = await agent.answer(question.strip())
+    return {"question": question.strip(), "transcribed": transcript is not None, **result}

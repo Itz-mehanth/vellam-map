@@ -109,6 +109,24 @@ async def ask_muse_spark(prompt: str, image: bytes | None = None, mime: str = "i
     return response.output_text
 
 
-async def transcribe(audio: bytes) -> str:
-    """Muse Voice Transcribe: Tamil / English speech to text."""
-    raise NotImplementedError("Wire up Voice Transcribe on Nov 1 (see docs/speech-to-text)")
+async def transcribe(wav: bytes, language: str | None = None) -> str:
+    """Muse Voice Transcribe: speech to text. wav must be mono 16-bit PCM at 16 or 24 kHz."""
+    import json
+
+    import httpx
+
+    settings = {"mode": "PUSH_TO_TALK", "model": VOICE_TRANSCRIBE_MODEL, "audioEncoding": "WAV"}
+    if language:
+        settings["languageBias"] = [language]  # a hint only; omitted lets the model detect the language
+    base = str(client.base_url).rstrip("/")
+    async with httpx.AsyncClient(timeout=60) as http:
+        r = await http.post(
+            f"{base}/asr/transcribe",
+            headers={"Authorization": f"Bearer {client.api_key}"},
+            files={
+                "request": (None, json.dumps(settings), "application/json"),
+                "audio": ("question.wav", wav, "audio/wav"),
+            },
+        )
+    r.raise_for_status()
+    return r.json().get("transcript", "").strip()

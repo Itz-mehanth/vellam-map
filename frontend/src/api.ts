@@ -10,6 +10,8 @@ export interface Verdict {
   reason?: string
 }
 
+export const API = import.meta.env.VITE_API_BASE ?? ''
+
 export interface ReportProperties {
   id: number
   created_at: number
@@ -17,6 +19,8 @@ export interface ReportProperties {
   depth_cm: number | null
   uncertainty_cm: number | null
   verdict: Verdict
+  place?: string | null
+  demo?: boolean
 }
 
 export interface ReportFeature {
@@ -84,6 +88,7 @@ export interface VerifyData {
 
 export interface ResultData {
   id: number
+  place?: string | null
   verdict?: Verdict
   status: string
   depth_cm: number | null
@@ -107,7 +112,7 @@ export const STAGE_ORDER: StageId[] = ['intake', 'water', 'objects', 'geometry',
 export type StageEvents = { [K in StageId]?: { ms: number; data: StageDataMap[K] } }
 
 export async function fetchMap(): Promise<ReportFeature[]> {
-  const res = await fetch('/api/map')
+  const res = await fetch(`${API}/api/map`)
   if (!res.ok) throw new Error('Could not load the map')
   return (await res.json()).features
 }
@@ -123,7 +128,7 @@ export async function streamReport(
   body.append('photo', photo)
   body.append('lat', String(lat))
   body.append('lng', String(lng))
-  const res = await fetch('/api/reports/stream', { method: 'POST', body })
+  const res = await fetch(`${API}/api/reports/stream`, { method: 'POST', body })
   if (!res.ok || !res.body) throw new Error(res.status === 400 ? 'That file is not a valid image' : 'Report failed')
 
   const reader = res.body.getReader()
@@ -151,4 +156,44 @@ export function depthColour(depthCm: number | null): string {
   if (depthCm < 50) return '#eab308'
   if (depthCm < 90) return '#f97316'
   return '#dc2626'
+}
+
+// ---- Alerts and Q&A ----
+
+export interface Alert {
+  level: 'danger' | 'high' | 'caution' | 'low' | 'info'
+  title: string
+  place: string
+  lat: number
+  lng: number
+  reports: number
+  corroborated: boolean
+  max_depth_cm: number | null
+  latest_age_min: number
+  message: string
+  demo: boolean
+}
+
+export async function fetchAlerts(): Promise<Alert[]> {
+  const res = await fetch(`${API}/api/alerts`)
+  if (!res.ok) throw new Error('Could not load alerts')
+  return (await res.json()).alerts
+}
+
+export interface AskResult {
+  question: string
+  transcribed: boolean
+  answer: string
+  sources: { id: number; place: string; depth_cm: number | null; source: string; age_min: number; lat: number; lng: number }[]
+  reports_considered: number
+}
+
+export async function ask(input: { audio?: Blob; question?: string; language?: string }): Promise<AskResult> {
+  const body = new FormData()
+  if (input.audio) body.append('audio', input.audio, 'question.wav')
+  if (input.question) body.append('question', input.question)
+  if (input.language) body.append('language', input.language)
+  const res = await fetch(`${API}/api/ask`, { method: 'POST', body })
+  if (!res.ok) throw new Error((await res.json().catch(() => null))?.detail ?? 'Could not answer')
+  return res.json()
 }

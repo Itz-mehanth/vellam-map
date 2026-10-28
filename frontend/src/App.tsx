@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { STAGE_ORDER, fetchMap, streamReport, type StageEvents } from './api'
-import { FloodMap } from './components/MapView'
+import { STAGE_ORDER, fetchAlerts, fetchMap, streamReport, type StageEvents } from './api'
+import { Ask } from './components/Ask'
+import { AlertsPanel, FloodMap } from './components/MapView'
 import { Pipeline } from './components/Stages'
 import { Badge } from './components/ui'
 
@@ -99,6 +100,7 @@ function Analyse({ onViewMap }: { onViewMap: (at: [number, number]) => void }) {
         setEvents((prev) => ({ ...prev, [stage]: { ms, data } })),
       )
       queryClient.invalidateQueries({ queryKey: ['map'] })
+      queryClient.invalidateQueries({ queryKey: ['alerts'] })
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Something went wrong')
     } finally {
@@ -170,45 +172,62 @@ function Analyse({ onViewMap }: { onViewMap: (at: [number, number]) => void }) {
   )
 }
 
+type Tab = 'analyse' | 'ask' | 'map'
+
 export default function App() {
   const { data: reports = [], isError } = useQuery({ queryKey: ['map'], queryFn: fetchMap, refetchInterval: 30000 })
-  const [tab, setTab] = useState<'analyse' | 'map'>('analyse')
+  const { data: alerts = [] } = useQuery({ queryKey: ['alerts'], queryFn: fetchAlerts, refetchInterval: 30000 })
+  const [tab, setTab] = useState<Tab>('analyse')
   const [focus, setFocus] = useState<[number, number] | undefined>()
   const measured = reports.filter((r) => r.properties.depth_cm !== null).length
-  const tabClass = (t: string) =>
-    `rounded-md px-3 py-1.5 text-sm font-medium transition ${tab === t ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100'}`
+  const showOnMap = (at: [number, number]) => {
+    setFocus([...at])
+    setTab('map')
+  }
+  const tabs: [Tab, string][] = [['analyse', 'Analyse'], ['ask', 'Ask'], ['map', 'Live map']]
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-[1100] border-b border-slate-200 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-lg text-white">🌊</div>
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2.5 sm:px-4">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-lg text-white">🌊</div>
             <div>
               <h1 className="text-base font-bold leading-tight">Vellam Map</h1>
-              <p className="hidden text-xs text-slate-500 sm:block">Photo-measured flood depth, mapped live</p>
+              <p className="hidden text-xs text-slate-500 md:block">Photo-measured flood depth, mapped live</p>
             </div>
           </div>
-          <nav className="flex gap-1 rounded-lg bg-slate-100 p-1">
-            <button className={tabClass('analyse')} onClick={() => setTab('analyse')}>Analyse</button>
-            <button className={tabClass('map')} onClick={() => setTab('map')}>Live map</button>
+          <nav className="flex gap-0.5 rounded-lg bg-slate-100 p-1">
+            {tabs.map(([id, label]) => (
+              <button
+                key={id}
+                onClick={() => setTab(id)}
+                className={`rounded-md px-2.5 py-1.5 text-sm font-medium transition sm:px-3 ${tab === id ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-200'}`}
+              >
+                {label}
+                {id === 'map' && alerts.length > 0 && (
+                  <span className="ml-1.5 rounded-full bg-red-500 px-1.5 text-[10px] text-white">{alerts.length}</span>
+                )}
+              </button>
+            ))}
           </nav>
-          <div className="hidden gap-2 md:flex">
+          <div className="hidden gap-2 lg:flex">
             <Badge tone="blue">{reports.length} reports</Badge>
             <Badge tone="green">{measured} measured</Badge>
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl p-4">
+      <main className="mx-auto max-w-7xl p-3 sm:p-4">
         {isError && <p className="mb-2 text-sm text-red-600">Could not reach the API.</p>}
         <div className={tab === 'analyse' ? '' : 'hidden'}>
-          <Analyse
-            onViewMap={(at) => {
-              setFocus(at)
-              setTab('map')
-            }}
-          />
+          <Analyse onViewMap={showOnMap} />
         </div>
-        {tab === 'map' && <FloodMap key={focus?.join() ?? 'default'} reports={reports} center={focus} />}
+        {tab === 'ask' && <Ask onShowOnMap={showOnMap} />}
+        {tab === 'map' && (
+          <div className="grid gap-4 lg:grid-cols-[340px_1fr]">
+            <AlertsPanel alerts={alerts} onPick={showOnMap} />
+            <FloodMap reports={reports} center={focus} />
+          </div>
+        )}
       </main>
       <footer className="px-4 pb-6 text-center text-xs text-slate-400">
         Depths are estimates with uncertainty. The app never says a road is safe. Always follow official flood warnings.

@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-from . import store, verify
+from . import geo, store, verify
 from .depth import DepthEstimate, depth_from_wheel, fit_circle, fuse
 from .meta_client import SegmentedObject, segment
 
@@ -216,8 +216,9 @@ async def analyse(image: bytes, lat: float, lng: float):
     depth_cm = fused.depth_cm if fused else None
     unc = fused.uncertainty_cm if fused else None
     status = decide(duplicate_of, verdict, depth_cm)
-    report_id = store.add_report(lat, lng, str(phash), depth_cm, unc, status, verdict)
+    place = await geo.place_name(lat, lng) if status in store.PUBLISHED else None
+    report_id = store.add_report(lat, lng, str(phash), depth_cm, unc, status, verdict, place=place)
     yield event("result", "Decision", {
-        "id": report_id, "status": status, "depth_cm": depth_cm, "uncertainty_cm": unc,
+        "id": report_id, "status": status, "place": place, "depth_cm": depth_cm, "uncertainty_cm": unc,
         "total_ms": round((time.perf_counter() - t0) * 1000),
     })

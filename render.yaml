@@ -1,0 +1,19 @@
+# Render blueprint for the API. The frontend goes on Vercel (see frontend/vercel.json).
+services:
+  - type: web
+    name: vellam-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: META_API_KEY
+        sync: false            # paste in the Render dashboard; never commit it
+      - key: CORS_ORIGINS
+        sync: false            # your Vercel URL, e.g. https://vellam-map.vercel.app
+      - key: DB_PATH
+        value: /data/vellam.db
+    disk:                      # SQLite needs a persistent disk (paid plan); without it reports reset on redeploy
+      name: vellam-data
+      mountPath: /data
+      sizeGB: 1

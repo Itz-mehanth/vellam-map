@@ -1,5 +1,7 @@
-import { CircleMarker, MapContainer, Popup, TileLayer } from 'react-leaflet'
-import { depthColour, type ReportFeature } from '../api'
+import { useEffect } from 'react'
+import { CircleMarker, MapContainer, Popup, TileLayer, useMap } from 'react-leaflet'
+import { depthColour, type Alert, type ReportFeature } from '../api'
+import { Badge, type Tone } from './ui'
 
 const CHENNAI: [number, number] = [13.0827, 80.2707]
 
@@ -19,7 +21,7 @@ function Legend() {
     ['Dashed = visual guess', '#94a3b8'],
   ]
   return (
-    <div className="absolute bottom-4 left-4 z-[1000] flex flex-wrap gap-x-3 gap-y-1 rounded-lg bg-white/95 px-3 py-2 text-xs shadow ring-1 ring-slate-200">
+    <div className="absolute bottom-4 left-4 right-4 z-[1000] flex flex-wrap gap-x-3 gap-y-1 rounded-lg bg-white/95 px-3 py-2 text-xs shadow ring-1 ring-slate-200 sm:right-auto">
       {items.map(([label, colour]) => (
         <span key={label} className="flex items-center gap-1.5">
           <i className="h-2.5 w-2.5 rounded-full" style={{ background: colour }} />
@@ -30,35 +32,100 @@ function Legend() {
   )
 }
 
+function FlyTo({ center }: { center?: [number, number] }) {
+  const map = useMap()
+  useEffect(() => {
+    if (center) map.flyTo(center, 15, { duration: 0.8 })
+  }, [center, map])
+  return null
+}
+
+const LEVEL: Record<Alert['level'], { tone: Tone; bar: string; label: string }> = {
+  danger: { tone: 'red', bar: 'bg-red-600', label: 'Danger' },
+  high: { tone: 'amber', bar: 'bg-orange-500', label: 'High' },
+  caution: { tone: 'amber', bar: 'bg-yellow-400', label: 'Caution' },
+  low: { tone: 'green', bar: 'bg-green-500', label: 'Low' },
+  info: { tone: 'slate', bar: 'bg-slate-400', label: 'Info' },
+}
+
+export function AlertsPanel({ alerts, onPick }: { alerts: Alert[]; onPick: (at: [number, number]) => void }) {
+  return (
+    <aside className="space-y-2 lg:max-h-[calc(100vh-9rem)] lg:overflow-y-auto">
+      <h2 className="text-sm font-semibold">Area alerts</h2>
+      {alerts.length === 0 && (
+        <p className="rounded-lg border border-dashed border-slate-300 bg-white/60 p-4 text-sm text-slate-500">
+          No active alerts. Reports from the last 6 hours appear here, grouped by area.
+        </p>
+      )}
+      {alerts.map((a, i) => (
+        <button
+          key={i}
+          onClick={() => onPick([a.lat, a.lng])}
+          className="flex w-full overflow-hidden rounded-xl border border-slate-200 bg-white text-left shadow-sm transition hover:border-slate-300"
+        >
+          <span className={`w-1.5 shrink-0 ${LEVEL[a.level].bar}`} />
+          <span className="min-w-0 flex-1 p-3">
+            <span className="flex items-center justify-between gap-2">
+              <span className="truncate text-sm font-semibold text-slate-900">{a.title}</span>
+              <Badge tone={LEVEL[a.level].tone}>{LEVEL[a.level].label}</Badge>
+            </span>
+            <span className="mt-0.5 block truncate text-sm text-slate-600">{a.place}</span>
+            <span className="mt-1 block text-xs text-slate-400">
+              {a.max_depth_cm !== null && `up to ~${Math.round(a.max_depth_cm)} cm · `}
+              {a.reports} report{a.reports !== 1 && 's'} · {a.latest_age_min} min ago
+              {a.corroborated && ' · corroborated'}
+              {a.demo && ' · demo data'}
+            </span>
+          </span>
+        </button>
+      ))}
+    </aside>
+  )
+}
+
 export function FloodMap({ reports, center }: { reports: ReportFeature[]; center?: [number, number] }) {
   return (
-    <div className="relative h-[calc(100vh-9rem)] min-h-[440px] overflow-hidden rounded-xl border border-slate-200 shadow-sm">
-      <MapContainer center={center ?? CHENNAI} zoom={center ? 14 : 12} className="h-full w-full">
+    <div className="relative h-[60vh] min-h-[420px] overflow-hidden rounded-xl border border-slate-200 shadow-sm lg:h-[calc(100vh-9rem)]">
+      <MapContainer center={CHENNAI} zoom={12} className="h-full w-full">
         <TileLayer attribution="&copy; OpenStreetMap contributors" url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <FlyTo center={center} />
         {reports.map((f) => {
           const p = f.properties
           const [lng, lat] = f.geometry.coordinates
+          const mid = visualMid(p)
           return (
             <CircleMarker
               key={p.id}
               center={[lat, lng]}
               radius={13}
               pathOptions={
-                visualMid(p) !== null
-                  ? { color: depthColour(visualMid(p)), weight: 3, dashArray: '4 3', fillColor: depthColour(visualMid(p)), fillOpacity: 0.25 }
+                mid !== null
+                  ? { color: depthColour(mid), weight: 3, dashArray: '4 3', fillColor: depthColour(mid), fillOpacity: 0.25 }
                   : { color: '#fff', weight: 2, fillColor: depthColour(p.depth_cm), fillOpacity: 0.9 }
               }
             >
               <Popup>
                 <b>
-                  {visualMid(p) !== null
+                  {mid !== null
                     ? `Visual guess ${Math.round(p.verdict.depth_cm_low ?? 0)}–${Math.round(p.verdict.depth_cm_high ?? 0)} cm`
                     : p.depth_cm === null
-                    ? 'Flooded, depth unknown'
-                    : `~${Math.round(p.depth_cm)} ± ${Math.round(p.uncertainty_cm ?? 0)} cm`}
+                      ? 'Flooded, depth unknown'
+                      : `~${Math.round(p.depth_cm)} ± ${Math.round(p.uncertainty_cm ?? 0)} cm`}
                 </b>
+                {p.place && (
+                  <>
+                    <br />
+                    {p.place}
+                  </>
+                )}
                 <br />
                 {new Date(p.created_at * 1000).toLocaleString()}
+                {p.demo && (
+                  <>
+                    <br />
+                    <b style={{ color: '#b45309' }}>Demo data</b>
+                  </>
+                )}
                 <br />
                 <span className="text-xs text-slate-500">Estimate only. Follow official warnings.</span>
               </Popup>
