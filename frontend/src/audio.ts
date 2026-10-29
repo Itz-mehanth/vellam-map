@@ -4,6 +4,7 @@ const TARGET_RATE = 16000
 export const MAX_RECORD_SECONDS = 20
 
 export interface Recorder {
+  stream: MediaStream
   stop: () => Promise<Blob>
 }
 
@@ -15,6 +16,7 @@ export async function startRecording(onAutoStop: () => void): Promise<Recorder> 
   recorder.start()
   const timer = window.setTimeout(onAutoStop, MAX_RECORD_SECONDS * 1000)
   return {
+    stream,
     stop: () =>
       new Promise((resolve) => {
         window.clearTimeout(timer)

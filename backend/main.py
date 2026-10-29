@@ -23,6 +23,18 @@ app.add_middleware(
 )
 
 
+@app.on_event("startup")
+def warm_up():
+    """Hashing pulls in heavy imports on first use; pay that at boot, not on the first report."""
+    verify.photo_hash(_tiny_jpeg())
+
+
+def _tiny_jpeg() -> bytes:
+    buf = io.BytesIO()
+    Image.new("RGB", (8, 8)).save(buf, "JPEG")
+    return buf.getvalue()
+
+
 @app.get("/api/health")
 def health():
     try:

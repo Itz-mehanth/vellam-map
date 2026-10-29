@@ -160,14 +160,7 @@ export async function streamReport(
   }
 }
 
-// Colour by danger. Unmeasured floods are grey: we know there is water, not how deep.
-export function depthColour(depthCm: number | null): string {
-  if (depthCm === null) return '#64748b'
-  if (depthCm < 20) return '#22c55e'
-  if (depthCm < 50) return '#eab308'
-  if (depthCm < 90) return '#f97316'
-  return '#dc2626'
-}
+export { depthColour } from './lib/depth'
 
 // ---- Alerts and Q&A ----
 

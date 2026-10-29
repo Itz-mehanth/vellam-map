@@ -1,7 +1,80 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
 
-@keyframes fadein {
+@theme {
+  --font-sans: "IBM Plex Sans", "Noto Sans Tamil", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --color-paper: #f5f4ef;
+  --color-surface: #ffffff;
+  --color-sunken: #f9f8f4;
+  --color-ink: #0d1b26;
+  --color-ink-2: #3b4853;
+  --color-ink-3: #6c7782;
+  --color-ink-4: #a2aab1;
+  --color-line: #e4e1d8;
+  --color-line-2: #efede6;
+  --color-gauge: #d3263a;
+  --color-signal: #1e5bd6;
+  --color-signal-soft: #e8eefb;
+
+  --color-ankle: #3fa79a;
+  --color-knee: #d9a62e;
+  --color-thigh: #e2703a;
+  --color-waist: #c42f3b;
+  --color-unknown: #8c959d;
+
+  --color-ok: #2f7d5b;
+  --color-ok-soft: #e7f2ec;
+  --color-warn: #a86312;
+  --color-warn-soft: #fbf1e2;
+  --color-bad: #b42334;
+  --color-bad-soft: #fbe9eb;
+
+  --shadow-float: 0 1px 2px rgb(13 27 38 / 0.05), 0 12px 32px -8px rgb(13 27 38 / 0.18);
+  --shadow-pin: 0 1px 2px rgb(13 27 38 / 0.25);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.font-mono,
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--color-signal-soft);
+}
+
+/* Thin, quiet scrollbars inside panels */
+.scroll-quiet {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+.hatch {
+  background-image: repeating-linear-gradient(135deg, currentColor 0 1px, transparent 1px 5px);
+}
+
+/* Tab content and new results enter softly; display:none -> block restarts the animation */
+@keyframes enter {
   from {
     opacity: 0;
     transform: translateY(6px);
@@ -11,9 +84,20 @@
     transform: none;
   }
 }
+.enter {
+  animation: enter 0.28s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
 
-.fade-in {
-  animation: fadein 0.45s ease-out both;
+@keyframes sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(250%);
+  }
+}
+.sweep {
+  animation: sweep 1.3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes scan {
@@ -21,10 +105,118 @@
     transform: translateY(-100%);
   }
   to {
-    transform: translateY(100%);
+    transform: translateY(300%);
+  }
+}
+.scan {
+  animation: scan 2.2s linear infinite;
+}
+
+@keyframes live {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.live-dot {
+  animation: live 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter,
+  .sweep,
+  .scan,
+  .live-dot {
+    animation: none !important;
   }
 }
 
-.scan-line {
-  animation: scan 1.6s linear infinite;
+/* ---------- Leaflet, restyled to match ---------- */
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: #eceae3;
+}
+
+/* OpenStreetMap tiles, quietened to a chart-paper base so the depth pins carry all the colour */
+.leaflet-tile-pane {
+  filter: saturate(0.14) brightness(1.05) contrast(0.88) sepia(0.06);
+}
+
+.leaflet-control-zoom.leaflet-bar {
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-float);
+}
+.leaflet-control-zoom a {
+  width: 34px !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  color: var(--color-ink) !important;
+  font-weight: 400;
+  border-bottom-color: var(--color-line) !important;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+  background: rgb(255 255 255 / 0.75) !important;
+  color: var(--color-ink-3);
+}
+.leaflet-control-attribution a {
+  color: var(--color-ink-2);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px;
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-float);
+  padding: 0;
+}
+.leaflet-popup-content {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.leaflet-popup-tip {
+  box-shadow: none;
+  border: 1px solid var(--color-line);
+}
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--color-ink-3);
+  top: 6px;
+  right: 6px;
+}
+
+/* Depth pins: the number itself is the marker */
+.pin {
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font: 600 11px/1.35 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: #fff;
+  background: var(--c);
+  border: 1.5px solid #fff;
+  box-shadow: var(--shadow-pin);
+  transition: transform 0.15s ease;
+}
+.pin-visual {
+  color: var(--c);
+  background: #fff;
+  border: 1.5px dashed var(--c);
+}
+.pin-selected {
+  transform: translate(-50%, -50%) scale(1.25);
+  box-shadow: 0 0 0 4px rgb(13 27 38 / 0.12), var(--shadow-pin);
+}
+.leaflet-marker-icon:hover .pin {
+  transform: translate(-50%, -50%) scale(1.12);
 }
