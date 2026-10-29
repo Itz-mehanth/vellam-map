@@ -1,7 +1,8 @@
-"""Day-1 smoke test: one Muse Spark call and SAM 3.1 calls on a flood photo.
+"""API smoke test: one Muse Spark call and SAM 3.1 calls on a flood photo.
 
-Run from the repo root:
-    backend/.venv/Scripts/python eval/smoke_test.py eval/photos/lower_earley.jpg
+Checks that your Meta API key and the model IDs work. From the repo root, with the backend
+virtualenv active:
+    python eval/smoke_test.py frontend/public/samples/s05.jpg
 """
 
 import asyncio

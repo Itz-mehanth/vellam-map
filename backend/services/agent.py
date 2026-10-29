@@ -1,6 +1,5 @@
 """Q&A agent: answers flood questions from the live report map, in the user's language."""
 
-import json
 import time
 
 from . import store

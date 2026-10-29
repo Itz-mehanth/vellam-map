@@ -13,6 +13,10 @@ import { sinceLabel } from './lib/depth'
 
 type Tab = 'live' | 'report' | 'ask'
 
+// Each fly-to request needs a new identity so asking for the same place twice still moves the map.
+let nonce = 0
+const nextNonce = () => ++nonce
+
 function LiveStatus({ count, updatedAt, error }: { count: number; updatedAt: number; error: boolean }) {
   return (
     <div className="flex items-center gap-2 font-mono text-[11px] text-ink-3">
@@ -44,9 +48,14 @@ export default function App() {
   const panelRef = useRef<HTMLDivElement>(null)
 
   const fly = (lat: number, lng: number, id?: number) => {
-    setTarget({ lat, lng, id, nonce: Date.now() })
+    setTarget({ lat, lng, id, nonce: nextNonce() })
     if (id !== undefined) openReport(id)
     if (window.innerWidth < 1024) window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const showNewReport = (lat: number, lng: number, id: number) => {
+    setTarget({ lat, lng, id, nonce: nextNonce() })
+    setSelectedId(id)
   }
 
   // Selecting a report from the map, the feed or an answer opens its evidence in the Live tab.
@@ -89,7 +98,7 @@ export default function App() {
               <LivePanel reports={reports} alerts={alerts} onFly={fly} selectedId={selectedId} />
             </div>
             <div className={tab === 'report' ? 'enter' : 'hidden'}>
-              <ReportPanel onDone={(lat, lng, id) => { setTarget({ lat, lng, id, nonce: Date.now() }); setSelectedId(id) }} onShow={fly} />
+              <ReportPanel onDone={showNewReport} onShow={fly} />
             </div>
             <div className={tab === 'ask' ? 'enter' : 'hidden'}>
               <AskPanel onFly={fly} />

@@ -3,7 +3,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Circle, MapContainer, Marker, Popup, ZoomControl, useMap } from 'react-leaflet'
 import type { Alert, ReportFeature } from '../api'
 import { BANDS, UNKNOWN_COLOUR, depthColour, freshness, reportDepth, sinceLabel } from '../lib/depth'
-import { LayerControl, MapLayers, loadLayers, type LayerState } from './LayerControl'
+import { type LayerState, loadLayers } from '../lib/layers'
+import { LayerControl, MapLayers } from './LayerControl'
 import { Label } from './ui'
 
 const CHENNAI: [number, number] = [13.0, 80.21]

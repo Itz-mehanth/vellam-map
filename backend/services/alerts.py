@@ -1,6 +1,5 @@
 """Area alerts: nearby recent reports are clustered into one warning per area."""
 
-import json
 import time
 from dataclasses import dataclass, field
 

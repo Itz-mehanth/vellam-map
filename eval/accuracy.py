@@ -2,7 +2,7 @@
 
 1. Put photos in eval/photos/
 2. List them in eval/photos/depths.csv:   file,true_depth_cm
-3. Run:  backend/.venv/Scripts/python -u eval/accuracy.py
+3. Run:  python -u eval/accuracy.py   (backend virtualenv active)
 
 Reports, for each photo, the geometric depth (wheel circle fit) and Muse Spark's visual
 midpoint, then the mean absolute error of each. The bar is a geometric error under 15 cm.

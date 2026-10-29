@@ -2,15 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import { Check, Layers } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { TileLayer } from 'react-leaflet'
+import { type BaseId, type LayerState, type OverlayId, saveLayers } from '../lib/layers'
 import { Label } from './ui'
-
-export type BaseId = 'standard' | 'satellite' | 'terrain'
-export type OverlayId = 'rain' | 'traffic' | 'zones'
-
-export interface LayerState {
-  base: BaseId
-  overlays: Record<OverlayId, boolean>
-}
 
 const TOMTOM_KEY = import.meta.env.VITE_TOMTOM_KEY as string | undefined
 
@@ -19,27 +12,6 @@ const BASES: { id: BaseId; label: string; hint: string; swatch: string }[] = [
   { id: 'satellite', label: 'Satellite', hint: 'See what is under the water', swatch: 'linear-gradient(135deg,#3b4a36,#6b7a52 45%,#8d8467)' },
   { id: 'terrain', label: 'Terrain', hint: 'Contours: where water collects', swatch: 'linear-gradient(135deg,#dfe8cf,#c6d6a9 40%,#e5dcc0)' },
 ]
-
-const STORAGE_KEY = 'vellam-layers'
-const DEFAULTS: LayerState = { base: 'standard', overlays: { rain: false, traffic: false, zones: true } }
-
-export function loadLayers(): LayerState {
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null')
-    if (saved?.base && saved?.overlays) return { base: saved.base, overlays: { ...DEFAULTS.overlays, ...saved.overlays } }
-  } catch {
-    /* private mode or corrupt value: fall back */
-  }
-  return DEFAULTS
-}
-
-function saveLayers(s: LayerState) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(s))
-  } catch {
-    /* ignore */
-  }
-}
 
 /** The tile layers for the chosen base map and overlays. Rendered inside the MapContainer. */
 export function MapLayers({ state }: { state: LayerState }) {

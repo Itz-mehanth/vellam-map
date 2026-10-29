@@ -1,27 +1,14 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import type { ReportDepth } from '../lib/depth'
 import { depthColour } from '../lib/depth'
-
-export type Tone = 'ok' | 'warn' | 'bad' | 'neutral' | 'signal'
-
-const TONE: Record<Tone, string> = {
-  ok: 'bg-ok-soft text-ok',
-  warn: 'bg-warn-soft text-warn',
-  bad: 'bg-bad-soft text-bad',
-  neutral: 'bg-line-2 text-ink-2',
-  signal: 'bg-signal-soft text-signal',
-}
+import { toneClasses, type Tone } from '../lib/tone'
 
 export function Tag({ tone = 'neutral', children }: { tone?: Tone; children: ReactNode }) {
   return (
-    <span className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[10.5px] font-medium uppercase tracking-wide ${TONE[tone]}`}>
+    <span className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[10.5px] font-medium uppercase tracking-wide ${toneClasses(tone)}`}>
       {children}
     </span>
   )
-}
-
-export function toneClasses(tone: Tone) {
-  return TONE[tone]
 }
 
 /** Small caps-style label used for every section and readout. */

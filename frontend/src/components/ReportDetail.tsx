@@ -4,8 +4,10 @@ import { useState } from 'react'
 import { fetchEvidence, imageUrl, type Evidence } from '../api'
 import { bandFor, depthColour, reportDepth, sinceLabel } from '../lib/depth'
 import { StaffGauge } from './StaffGauge'
-import { STATUS, WheelZoom } from './SurveyLog'
-import { Label, Readouts, Spinner, Tag, toneClasses, type Tone } from './ui'
+import { STATUS } from '../lib/status'
+import { toneClasses, type Tone } from '../lib/tone'
+import { WheelZoom } from './SurveyLog'
+import { Label, Readouts, Spinner, Tag } from './ui'
 
 function Figure({ src, caption, onOpen }: { src: string; caption: string; onOpen: () => void }) {
   return (
@@ -134,7 +136,7 @@ export function ReportDetail({ id, onClose }: { id: number; onClose: () => void 
       <div className="mb-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <Label>Report #{id}</Label>
-          <p className="mt-0.5 truncate text-[15px] font-semibold text-ink">{q.data?.place ?? (q.isLoading ? 'Loading…' : 'Unnamed location')}</p>
+          <p className="mt-0.5 truncate text-[15px] font-semibold text-ink">{q.data?.place ?? (q.data ? `${q.data.lat.toFixed(4)}, ${q.data.lng.toFixed(4)}` : 'Loading…')}</p>
           {q.data && (
             <p className="flex items-center gap-2 font-mono text-[11px] text-ink-3">
               {sinceLabel(q.data.created_at)}

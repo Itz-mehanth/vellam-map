@@ -1,6 +1,6 @@
 """Draw SAM 3.1 masks over a photo for visual checking.
 
-    backend/.venv/Scripts/python eval/overlay.py PHOTO OUT.png "water" "car wheel"
+    python eval/overlay.py PHOTO OUT.png "water" "car wheel"
 """
 
 import asyncio

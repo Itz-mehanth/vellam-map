@@ -2,7 +2,8 @@ import { ChevronDown, Share2 } from 'lucide-react'
 import { useState } from 'react'
 import type { Alert, ReportFeature } from '../api'
 import { BANDS, ageLabel, bandFor, reportDepth, sinceLabel } from '../lib/depth'
-import { DepthPill, Label, Tag, type Tone } from './ui'
+import type { Tone } from '../lib/tone'
+import { DepthPill, Label, Tag } from './ui'
 
 const LEVEL: Record<Alert['level'], { tone: Tone; label: string; bar: string }> = {
   danger: { tone: 'bad', label: 'Danger', bar: BANDS[3].colour },

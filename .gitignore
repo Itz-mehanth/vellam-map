@@ -12,3 +12,6 @@ model/*.tflite
 eval/photos/
 .env.local
 *.local
+
+# Stored evidence images (written next to the database)
+media/

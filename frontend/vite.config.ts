@@ -14,7 +14,15 @@ function siteUrl(mode: string): Plugin {
     name: 'site-url',
     // 'pre' so the placeholder is replaced before Vite resolves relative URLs against the request path
     // (otherwise /?tab=ask turns "__SITE_URL__/og.png" into "//og.png").
-    transformIndexHtml: { order: 'pre', handler: (html) => html.replaceAll('__SITE_URL__', url) },
+    transformIndexHtml: {
+      order: 'pre',
+      handler: (html) => {
+        // Without a known address there is nothing true to say in a canonical link, and an
+        // href of "/" would make Vite try to bundle the site root, so drop it.
+        const page = url ? html : html.replace(/\s*<link rel="canonical"[^>]*>/, '')
+        return page.replaceAll('__SITE_URL__', url)
+      },
+    },
   }
 }
 

@@ -1,6 +1,6 @@
 """How many instances does each SAM prompt find per photo?
 
-    backend/.venv/Scripts/python -u eval/prompt_probe.py frontend/public/samples/s01.jpg ...
+    python -u eval/prompt_probe.py frontend/public/samples/s01.jpg ...
 """
 
 import asyncio

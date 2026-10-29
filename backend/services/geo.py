@@ -6,21 +6,26 @@ import httpx
 
 NOMINATIM = "https://nominatim.openstreetmap.org/reverse"
 # Nominatim's usage policy requires an identifying User-Agent.
-HEADERS = {"User-Agent": "VellamMap-hackathon/0.1 (flood depth reporting)"}
+HEADERS = {"User-Agent": "VellamMap/0.1 (+https://github.com/Itz-mehanth/vellam-map)"}
 
 
 async def place_name(lat: float, lng: float) -> str | None:
     """Short street/area label like 'Velachery Main Road, Velachery', or None if unavailable."""
-    try:
-        async with httpx.AsyncClient(timeout=4) as http:
-            r = await http.get(
-                NOMINATIM,
-                params={"lat": lat, "lon": lng, "format": "jsonv2", "zoom": 17, "accept-language": "en"},
-                headers=HEADERS,
-            )
-            r.raise_for_status()
-            a = r.json().get("address", {})
-    except Exception:
+    a = None
+    for _ in range(2):  # the public Nominatim server is slow now and then, so try twice
+        try:
+            async with httpx.AsyncClient(timeout=8) as http:
+                r = await http.get(
+                    NOMINATIM,
+                    params={"lat": lat, "lon": lng, "format": "jsonv2", "zoom": 17, "accept-language": "en"},
+                    headers=HEADERS,
+                )
+                r.raise_for_status()
+                a = r.json().get("address", {})
+            break
+        except Exception:
+            continue
+    if a is None:
         return None
     road = a.get("road") or a.get("pedestrian") or a.get("neighbourhood")
     area = a.get("suburb") or a.get("neighbourhood") or a.get("city_district") or a.get("city") or a.get("town")

@@ -1,6 +1,6 @@
 """Run the full pipeline on photos and print each stage.
 
-    backend/.venv/Scripts/python -u eval/measure.py frontend/public/samples/*.jpg
+    python -u eval/measure.py frontend/public/samples/*.jpg
 """
 
 import asyncio

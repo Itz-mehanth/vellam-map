@@ -230,7 +230,7 @@ async def analyse(image: bytes, lat: float, lng: float):
 
     # Stage 4 — geometry
     records = []
-    for (name, ref, o), mask in zip(found, wheel_masks):
+    for (name, ref, o), mask in zip(found, wheel_masks, strict=True):
         records.append(analyse_wheel(mask, water, name, ref) | {"box": list(o.box), "confidence": o.confidence})
     yield event("geometry", "Circle fit recovers each wheel's hidden part", {"wheels": records})
 
@@ -242,7 +242,7 @@ async def analyse(image: bytes, lat: float, lng: float):
     yield event("fusion", "Inverse-variance fusion", {
         "inputs": [
             {"type": e.object_type, "depth_cm": e.depth_cm, "uncertainty_cm": e.uncertainty_cm, "weight": wt / total}
-            for e, wt in zip(estimates, weights)
+            for e, wt in zip(estimates, weights, strict=True)
         ],
         "depth_cm": fused.depth_cm if fused else None,
         "uncertainty_cm": fused.uncertainty_cm if fused else None,
@@ -265,7 +265,7 @@ async def analyse(image: bytes, lat: float, lng: float):
         "water": {"coverage_pct": round(100 * float(water.mean()), 1), "prompt": water_prompt},
         "wheels": records,
         "fusion": [{"depth_cm": e.depth_cm, "uncertainty_cm": e.uncertainty_cm, "weight": wt / total}
-                   for e, wt in zip(estimates, weights)] if estimates else [],
+                   for e, wt in zip(estimates, weights, strict=True)] if estimates else [],
         "cross_check": cross_check(depth_cm, verdict),
         "exif": meta,
     }

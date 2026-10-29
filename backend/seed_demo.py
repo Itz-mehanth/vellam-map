@@ -42,7 +42,7 @@ def seed() -> tuple[int, int]:
         if visual:
             verdict |= {"depth_cm_low": visual[0], "depth_cm_high": visual[1]}
         status = "verified" if depth is not None else "flood_visual_estimate"
-        store.add_report(lat, lng, "%016x" % rng.getrandbits(64), depth, unc, status, verdict,
+        store.add_report(lat, lng, f"{rng.getrandbits(64):016x}", depth, unc, status, verdict,
                          place=place, is_demo=True, created_at=now - minutes * 60)
     return removed, len(DEMO)
 

@@ -1,11 +1,12 @@
 import io
 import json
 import os
+from contextlib import asynccontextmanager
 
-from PIL import Image
 from fastapi import FastAPI, File, Form, Header, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
+from PIL import Image
 
 from services import agent, alerts, limits, store, verify
 from services.meta_client import transcribe
@@ -13,18 +14,8 @@ from services.pipeline import analyse
 
 MAP_MAX_AGE_HOURS = float(os.getenv("MAP_MAX_AGE_HOURS", "72"))
 
-app = FastAPI(title="Vellam Map API")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:5173").split(","),
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-@app.on_event("startup")
-def warm_up():
+@asynccontextmanager
+async def lifespan(_: FastAPI):
     """Hashing pulls in heavy imports on first use; pay that at boot, not on the first report."""
     verify.photo_hash(_tiny_jpeg())
     # Free hosts have no persistent disk, so the map would open empty after every restart.
@@ -33,6 +24,17 @@ def warm_up():
         import seed_demo
 
         seed_demo.seed()
+    yield
+
+
+app = FastAPI(title="Vellam Map API", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:5173").split(","),
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def _tiny_jpeg() -> bytes:
@@ -62,7 +64,7 @@ async def _read_image(photo: UploadFile) -> bytes:
     except HTTPException:
         raise
     except Exception:
-        raise HTTPException(400, "not a valid image")
+        raise HTTPException(400, "not a valid image") from None
     return image
 
 
@@ -160,7 +162,7 @@ async def ask(
         try:
             transcript = await transcribe(data, language)
         except Exception as e:
-            raise HTTPException(502, f"Transcription failed: {e}")
+            raise HTTPException(502, f"Transcription failed: {e}") from e
         question = transcript
     if not question or not question.strip():
         raise HTTPException(400, "No question heard. Try again or type it.")
