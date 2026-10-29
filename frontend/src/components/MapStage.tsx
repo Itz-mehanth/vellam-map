@@ -38,7 +38,12 @@ function FitOnce({ reports }: { reports: ReportFeature[] }) {
     if (done.current || reports.length === 0) return
     done.current = true
     const desktop = window.innerWidth >= 1024
-    const bounds = L.latLngBounds(reports.map((r) => [r.geometry.coordinates[1], r.geometry.coordinates[0]] as [number, number]))
+    // Frame the main cluster: one stray report on another continent must not zoom the view out to the world.
+    const pts = reports.map((r) => [r.geometry.coordinates[1], r.geometry.coordinates[0]] as [number, number])
+    const med = (v: number[]) => [...v].sort((a, b) => a - b)[Math.floor(v.length / 2)]
+    const centre = L.latLng(med(pts.map((q) => q[0])), med(pts.map((q) => q[1])))
+    const near = pts.filter((q) => centre.distanceTo(q) < 100_000)
+    const bounds = L.latLngBounds(near.length ? near : pts)
     map.fitBounds(bounds, {
       paddingTopLeft: [desktop ? 500 : 28, 48],
       paddingBottomRight: [desktop ? 240 : 28, 48],

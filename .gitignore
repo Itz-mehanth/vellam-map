@@ -10,3 +10,5 @@ model/*.tflite
 .DS_Store
 *.db
 eval/photos/
+.env.local
+*.local
