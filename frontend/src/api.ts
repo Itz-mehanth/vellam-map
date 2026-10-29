@@ -193,11 +193,15 @@ export interface AskResult {
   reports_considered: number
 }
 
-export async function ask(input: { audio?: Blob; question?: string; language?: string }): Promise<AskResult> {
+export async function ask(input: { audio?: Blob; question?: string; language?: string; lat?: number; lng?: number }): Promise<AskResult> {
   const body = new FormData()
   if (input.audio) body.append('audio', input.audio, 'question.wav')
   if (input.question) body.append('question', input.question)
   if (input.language) body.append('language', input.language)
+  if (input.lat !== undefined && input.lng !== undefined) {
+    body.append('lat', String(input.lat))
+    body.append('lng', String(input.lng))
+  }
   const res = await fetch(`${API}/api/ask`, { method: 'POST', body })
   if (!res.ok) throw new Error((await res.json().catch(() => null))?.detail ?? 'Could not answer')
   return res.json()

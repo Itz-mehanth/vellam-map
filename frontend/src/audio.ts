@@ -60,11 +60,25 @@ async function toWav(blob: Blob): Promise<Blob> {
   return new Blob([view], { type: 'audio/wav' })
 }
 
-/** Reads text aloud with the browser's voice, if it has one for the language. */
-export function speak(text: string, lang: string): boolean {
+function loadVoices(): Promise<SpeechSynthesisVoice[]> {
+  const synth = window.speechSynthesis
+  const now = synth.getVoices()
+  if (now.length) return Promise.resolve(now)
+  // Browsers fill the voice list asynchronously, so the first call is usually empty.
+  return new Promise((resolve) => {
+    const timer = window.setTimeout(() => resolve(synth.getVoices()), 1500)
+    synth.addEventListener('voiceschanged', () => { window.clearTimeout(timer); resolve(synth.getVoices()) }, { once: true })
+  })
+}
+
+/** Reads text aloud with the browser's voice for the language. Resolves false if the device has none. */
+export async function speak(text: string, lang: string): Promise<boolean> {
   if (!('speechSynthesis' in window)) return false
-  const voices = window.speechSynthesis.getVoices()
-  const voice = voices.find((v) => v.lang.toLowerCase().startsWith(lang.toLowerCase().slice(0, 2)))
+  const prefix = lang.toLowerCase().slice(0, 2)
+  const voices = await loadVoices()
+  const voice =
+    voices.find((v) => v.lang.toLowerCase().replace('_', '-') === lang.toLowerCase()) ??
+    voices.find((v) => v.lang.toLowerCase().startsWith(prefix))
   if (!voice) return false
   window.speechSynthesis.cancel()
   const u = new SpeechSynthesisUtterance(text)

@@ -3,9 +3,8 @@ import { ArrowRight, Camera, ImageUp, LocateFixed, RotateCcw, X } from 'lucide-r
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { STAGE_ORDER, streamReport, type StageEvents } from '../api'
 import { SurveyLog } from './SurveyLog'
+import { CHENNAI, useCurrentPosition } from '../lib/useLocation'
 import { Button, Label } from './ui'
-
-const CHENNAI = { lat: 13.0827, lng: 80.2707 }
 
 interface Sample {
   file: string
@@ -14,19 +13,6 @@ interface Sample {
   author: string
   source: string
   control: boolean
-}
-
-function useCurrentPosition() {
-  const [pos, setPos] = useState<{ lat: number; lng: number } | null>(null)
-  const [denied, setDenied] = useState(false)
-  useEffect(() => {
-    navigator.geolocation?.getCurrentPosition(
-      (p) => setPos({ lat: p.coords.latitude, lng: p.coords.longitude }),
-      () => setDenied(true),
-      { timeout: 10000 },
-    )
-  }, [])
-  return { pos, denied }
 }
 
 function Samples({ onPick, selected }: { onPick: (f: File) => void; selected: string | null }) {

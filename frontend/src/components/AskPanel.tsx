@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { MAX_RECORD_SECONDS, speak, startRecording, type Recorder } from '../audio'
 import { ask, type AskResult } from '../api'
 import { ageLabel } from '../lib/depth'
+import { useCurrentPosition } from '../lib/useLocation'
 import { DepthPill, Label, Segmented, Spinner } from './ui'
 
 type Lang = 'auto' | 'English' | 'Tamil'
@@ -73,7 +74,9 @@ function Waveform({ stream }: { stream: MediaStream | null }) {
 }
 
 export function AskPanel({ onFly }: { onFly: (lat: number, lng: number, id?: number) => void }) {
+  const { pos } = useCurrentPosition()
   const [lang, setLang] = useState<Lang>('auto')
+  const [notice, setNotice] = useState<string | null>(null)
   const [recording, setRecording] = useState<Recorder | null>(null)
   const [thinking, setThinking] = useState(false)
   const [elapsed, setElapsed] = useState(0)
@@ -93,7 +96,7 @@ export function AskPanel({ onFly }: { onFly: (lat: number, lng: number, id?: num
     setThinking(true)
     setError(null)
     try {
-      setResult(await ask({ ...input, language: lang === 'auto' ? undefined : lang }))
+      setResult(await ask({ ...input, language: lang === 'auto' ? undefined : lang, lat: pos?.lat, lng: pos?.lng }))
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Could not answer')
     } finally {
@@ -195,6 +198,7 @@ export function AskPanel({ onFly }: { onFly: (lat: number, lng: number, id?: num
       </section>
 
       {error && <p className="rounded-lg bg-bad-soft px-3 py-2 text-[13px] text-bad">{error}</p>}
+      {notice && <p className="rounded-lg bg-warn-soft px-3 py-2 text-[12.5px] leading-snug text-warn">{notice}</p>}
 
       {result ? (
         <article className="enter space-y-4">
@@ -205,7 +209,16 @@ export function AskPanel({ onFly }: { onFly: (lat: number, lng: number, id?: num
           <div className="border-l-2 border-ink pl-4">
             <p className={`whitespace-pre-line text-[16px] text-ink ${tamil(result.answer) ? 'leading-[1.75]' : 'leading-relaxed'}`}>{result.answer}</p>
             <button
-              onClick={() => speak(result.answer, tamil(result.answer) ? 'ta-IN' : 'en-IN') || setError('This device has no voice for that language.')}
+              onClick={async () => {
+                const isTamil = tamil(result.answer)
+                setNotice(null)
+                if (!(await speak(result.answer, isTamil ? 'ta-IN' : 'en-IN')))
+                  setNotice(
+                    isTamil
+                      ? 'No Tamil voice is installed on this device. Tamil 99 is only a keyboard layout. On Windows: Settings → Time & language → Speech → Manage voices → Add voices → Tamil (India). Microsoft Edge also has a built-in natural Tamil voice.'
+                      : 'No English voice is available on this device.',
+                  )
+              }}
               className="mt-2 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide text-ink-3 hover:text-ink"
             >
               <Volume2 size={13} /> Read aloud

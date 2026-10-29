@@ -142,6 +142,8 @@ async def ask(
     audio: UploadFile | None = File(None),
     question: str | None = Form(None),
     language: str | None = Form(None),
+    lat: float | None = Form(None),
+    lng: float | None = Form(None),
 ):
     """A flood question, spoken (WAV) or typed -> answer grounded in the live map."""
     limits.ask_limiter.check(limits.client_id(request))
@@ -158,7 +160,8 @@ async def ask(
         raise HTTPException(400, "No question heard. Try again or type it.")
     if len(question) > 500:
         raise HTTPException(400, "Question is too long (500 characters max).")
-    result = await agent.answer(question.strip())
+    near = (lat, lng) if lat is not None and lng is not None and -90 <= lat <= 90 and -180 <= lng <= 180 else None
+    result = await agent.answer(question.strip(), near)
     return {"question": question.strip(), "transcribed": transcript is not None, **result}
 
 
