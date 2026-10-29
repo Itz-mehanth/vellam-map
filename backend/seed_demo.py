@@ -31,11 +31,9 @@ DEMO = [
 ]
 
 
-def main() -> None:
+def seed() -> tuple[int, int]:
+    """Replace any earlier demo rows with fresh ones. Returns (removed, added)."""
     removed = store.clear_demo()
-    if "--clear" in sys.argv:
-        print(f"removed {removed} demo reports")
-        return
     now = time.time()
     rng = random.Random(7)
     for place, lat, lng, depth, unc, visual, minutes in DEMO:
@@ -46,7 +44,15 @@ def main() -> None:
         status = "verified" if depth is not None else "flood_visual_estimate"
         store.add_report(lat, lng, "%016x" % rng.getrandbits(64), depth, unc, status, verdict,
                          place=place, is_demo=True, created_at=now - minutes * 60)
-    print(f"seeded {len(DEMO)} demo reports (replaced {removed})")
+    return removed, len(DEMO)
+
+
+def main() -> None:
+    if "--clear" in sys.argv:
+        print(f"removed {store.clear_demo()} demo reports")
+        return
+    removed, added = seed()
+    print(f"seeded {added} demo reports (replaced {removed})")
 
 
 if __name__ == "__main__":

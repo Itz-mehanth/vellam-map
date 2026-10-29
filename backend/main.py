@@ -27,6 +27,12 @@ app.add_middleware(
 def warm_up():
     """Hashing pulls in heavy imports on first use; pay that at boot, not on the first report."""
     verify.photo_hash(_tiny_jpeg())
+    # Free hosts have no persistent disk, so the map would open empty after every restart.
+    # SEED_DEMO=1 fills an empty database with the labelled demo reports (never over real ones).
+    if os.getenv("SEED_DEMO") and not store.all_reports():
+        import seed_demo
+
+        seed_demo.seed()
 
 
 def _tiny_jpeg() -> bytes:

@@ -1,8 +1,13 @@
 # Render blueprint for the API. The frontend goes on Vercel (see frontend/vercel.json).
+#
+# Free tier: no persistent disk, so reports and stored photos reset whenever the service
+# restarts or sleeps. SEED_DEMO refills an empty map with clearly-labelled demo reports.
+# For real use, set the plan to "starter" and uncomment the disk block so data survives.
 services:
   - type: web
     name: vellam-api
     runtime: docker
+    plan: free
     dockerfilePath: ./backend/Dockerfile
     dockerContext: .
     healthCheckPath: /api/health
@@ -11,9 +16,13 @@ services:
         sync: false            # paste in the Render dashboard; never commit it
       - key: CORS_ORIGINS
         sync: false            # your Vercel URL, e.g. https://vellam-map.vercel.app
+      - key: SEED_DEMO
+        value: "1"
       - key: DB_PATH
-        value: /data/vellam.db
-    disk:                      # SQLite needs a persistent disk (paid plan); without it reports reset on redeploy
-      name: vellam-data
-      mountPath: /data
-      sizeGB: 1
+        value: /app/storage/vellam.db
+      # - key: ADMIN_TOKEN     # enables DELETE /api/reports/{id} for moderation
+      #   sync: false
+    # disk:                    # paid plans only
+    #   name: vellam-data
+    #   mountPath: /app/storage
+    #   sizeGB: 1
