@@ -34,7 +34,11 @@ export default function App() {
   const alertsQ = useQuery({ queryKey: ['alerts'], queryFn: fetchAlerts, refetchInterval: 30000 })
   const reports = map.data ?? []
   const alerts = alertsQ.data ?? []
-  const [tab, setTab] = useState<Tab>('live')
+  // Home-screen shortcuts open straight into /?tab=report or /?tab=ask.
+  const [tab, setTab] = useState<Tab>(() => {
+    const t = new URLSearchParams(window.location.search).get('tab')
+    return t === 'report' || t === 'ask' ? t : 'live'
+  })
   const [target, setTarget] = useState<FlyTarget | null>(null)
   const [selectedId, setSelectedId] = useState<number | null>(null)
   const panelRef = useRef<HTMLDivElement>(null)

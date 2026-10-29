@@ -137,6 +137,8 @@ Optional: `python seed_demo.py` (from `backend/`) fills the map with demo report
 
 Microphone capture needs HTTPS, which both hosts provide.
 
+**Link previews:** pasting the URL into WhatsApp, Telegram, Slack, X or LinkedIn shows a card (`frontend/public/og.png`, 1200×630) with the headline and a sample reading. These cards need absolute URLs, so on Vercel the production domain is used automatically; elsewhere set `VITE_SITE_URL`. Chat apps cache previews, so a changed card can take a while to refresh.
+
 ## 10. Tests and quality
 
 ```bash

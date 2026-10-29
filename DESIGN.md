@@ -30,6 +30,10 @@ Ankle `<20 cm` `#3FA79A` · Knee `20–50` `#E3B23C` · Thigh `50–90` `#E2703A
 
 **Motion:** quick and physical (150–300 ms, spring for sheets). Water rises in the gauge, steps of the survey log slide in as the server finishes them. Nothing loops for decoration; respect `prefers-reduced-motion`.
 
+## Brand mark
+
+A wheel standing in water: a tyre ring, hub and lug nuts with the waterline crossing it, the submerged part turning blue. It is literally how the app measures depth (a wheel of known size, partly under water), and it stays legible down to a 16 px tab icon. `public/logo.svg` is the source; the app icon is the same mark on ink with the light tyre. Icons, the 1200×630 link-preview card and the manifest shortcuts (`/?tab=report`, `/?tab=ask`) all derive from it.
+
 ## Layout
 
 - **Map-first.** A full-bleed map is always the stage: OpenStreetMap tiles quietened with a CSS filter to a chart-paper tone, so only the depth pins carry colour (CARTO's free basemap now needs an API key). The work happens in a floating side panel on desktop and a bottom sheet on phones.

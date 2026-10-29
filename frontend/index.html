@@ -2,15 +2,107 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vellam Map</title>
-      <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#2563eb" />
-    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>Vellam Map: flood depth from a photo</title>
+    <meta
+      name="description"
+      content="Photograph a flooded street and get the water depth in centimetres, mapped live. Ask about any road in Tamil or English. Built for Chennai, works anywhere it floods."
+    />
+    <meta name="application-name" content="Vellam Map" />
+    <meta name="robots" content="index, follow" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href="__SITE_URL__/" />
+
+    <!-- Icons: SVG for modern browsers, PNG fallbacks, and the home-screen icon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Installed on a phone, it opens full screen like an app -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Vellam" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Link preview card: WhatsApp, Telegram, Slack, iMessage, LinkedIn, Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Vellam Map" />
+    <meta property="og:title" content="Know how deep the water is" />
+    <meta
+      property="og:description"
+      content="Photograph a flooded street, get the depth in centimetres, and see it on a live map. Ask in Tamil or English."
+    />
+    <meta property="og:url" content="__SITE_URL__/" />
+    <meta property="og:image" content="__SITE_URL__/og.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Vellam Map: a flood depth reading of 34 centimetres on a staff gauge, with the headline 'Know how deep the water is'." />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:locale:alternate" content="ta_IN" />
+
+    <!-- Link preview card: X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Know how deep the water is" />
+    <meta
+      name="twitter:description"
+      content="Photograph a flooded street, get the depth in centimetres, and see it on a live map. Ask in Tamil or English."
+    />
+    <meta name="twitter:image" content="__SITE_URL__/og.png" />
+    <meta name="twitter:image:alt" content="Vellam Map: a flood depth reading of 34 centimetres on a staff gauge." />
+
+    <!-- What a search engine or a link unfurler reads without running the app -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Vellam Map",
+        "description": "Measures flood water depth from a photo using the known size of a vehicle's wheel, maps reports live, and answers questions by voice in Tamil and English.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": ["en", "ta"],
+        "image": "__SITE_URL__/og.png",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+      }
+    </script>
+
+    <style>
+      /* Shown for a moment while the app loads, so the page is never blank */
+      html, body { margin: 0; background: #f5f4ef; }
+      #boot { position: fixed; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px;
+              font: 600 17px/1 "IBM Plex Sans", system-ui, sans-serif; letter-spacing: -0.015em; color: #0d1b26; }
+      #boot svg { animation: boot-bob 1.8s ease-in-out infinite; }
+      @keyframes boot-bob { 50% { transform: translateY(3px); } }
+      @media (prefers-reduced-motion: reduce) { #boot svg { animation: none; } }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="boot" role="status" aria-live="polite">
+        <svg width="56" height="56" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <clipPath id="bb"><path d="M0 37.5C5 34.5 9 34.5 13 37.5S21 40.5 25 37.5 33 34.5 37 37.5 45 40.5 49 37.5 57 34.5 64 37.5V64H0Z" /></clipPath>
+            <clipPath id="bh"><circle cx="32" cy="32" r="21" /></clipPath>
+          </defs>
+          <g clip-path="url(#bb)"><circle cx="32" cy="32" r="21" fill="#a9c4f7" /></g>
+          <circle cx="32" cy="32" r="24.5" fill="none" stroke="#0d1b26" stroke-width="7" />
+          <g clip-path="url(#bb)"><circle cx="32" cy="32" r="24.5" fill="none" stroke="#1e5bd6" stroke-width="7" /></g>
+          <g clip-path="url(#bh)"><path d="M0 37.5C5 34.5 9 34.5 13 37.5S21 40.5 25 37.5 33 34.5 37 37.5 45 40.5 49 37.5 57 34.5 64 37.5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" /></g>
+          <circle cx="32" cy="32" r="5.4" fill="#0d1b26" />
+        </svg>
+        Vellam
+      </div>
+    </div>
+    <noscript>
+      <p style="position:fixed;inset:0;display:grid;place-content:center;margin:0;padding:24px;text-align:center;font:16px/1.5 system-ui,sans-serif;color:#0d1b26;background:#f5f4ef">
+        Vellam Map needs JavaScript to show the flood map and measure depths.<br />
+        Please turn it on and reload. If water is rising, follow your local flood warnings.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

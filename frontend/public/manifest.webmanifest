@@ -1,13 +1,22 @@
 {
+  "id": "/",
   "name": "Vellam Map",
   "short_name": "Vellam",
-  "description": "Photograph a flooded street, get the water depth, warn your neighbours.",
+  "description": "Photograph a flooded street, get the water depth, and warn your neighbours. Ask in Tamil or English.",
+  "lang": "en",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#2563eb",
+  "background_color": "#f5f4ef",
+  "theme_color": "#ffffff",
+  "categories": ["utilities", "weather", "navigation"],
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Report a flood", "short_name": "Report", "url": "/?tab=report", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Ask about a street", "short_name": "Ask", "url": "/?tab=ask", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] }
   ]
 }

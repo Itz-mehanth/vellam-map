@@ -1,6 +1,6 @@
 // Minimal service worker: lets the app install and open offline. Live data is never cached,
 // because a stale flood depth is worse than none.
-const CACHE = 'vellam-shell-v1'
+const CACHE = 'vellam-shell-v2'
 
 self.addEventListener('install', () => self.skipWaiting())
 

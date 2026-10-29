@@ -1,13 +1,44 @@
-/** Brand mark: a flood staff gauge (the E-marked board on bridges) with the waterline across it. */
-export function GaugeMark({ size = 28 }: { size?: number }) {
+import { useId } from 'react'
+
+const WAVE = 'M0 37.5C5 34.5 9 34.5 13 37.5S21 40.5 25 37.5 33 34.5 37 37.5 45 40.5 49 37.5 57 34.5 64 37.5'
+const LUGS = [-90, -18, 54, 126, 198].map((deg) => {
+  const a = (deg * Math.PI) / 180
+  return [32 + 12.2 * Math.cos(a), 32 + 12.2 * Math.sin(a)] as const
+})
+
+/**
+ * The mark: a wheel standing in water. A tyre ring, hub and lug nuts with the waterline
+ * across it, the submerged part turning blue. It is how Vellam measures depth.
+ */
+export function Mark({ size = 28, onDark = false }: { size?: number; onDark?: boolean }) {
+  const id = useId().replace(/:/g, '')
+  const c = onDark
+    ? { ring: '#f5f4ef', waterRing: '#5b92f5', waterIn: '#2c58b8' }
+    : { ring: '#0d1b26', waterRing: '#1e5bd6', waterIn: '#a9c4f7' }
   return (
-    <svg width={size} height={size} viewBox="0 0 28 28" aria-hidden="true">
-      <rect width="28" height="28" rx="7" fill="#0d1b26" />
-      <rect x="9" y="5" width="2.4" height="13" fill="#fff" />
-      <rect x="11.4" y="5" width="7.6" height="2.2" fill="#fff" />
-      <rect x="11.4" y="10.4" width="5" height="2.2" fill="#fff" />
-      <rect x="11.4" y="15.8" width="7.6" height="2.2" fill="#d3263a" />
-      <path d="M5 22c1.9-1.4 3.8-1.4 5.7 0s3.8 1.4 5.7 0 3.8-1.4 5.7 0" fill="none" stroke="#6aa8ff" strokeWidth="1.9" strokeLinecap="round" />
+    <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
+      <defs>
+        <clipPath id={`${id}b`}>
+          <path d={`${WAVE}V64H0Z`} />
+        </clipPath>
+        <clipPath id={`${id}h`}>
+          <circle cx="32" cy="32" r="21" />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${id}b)`}>
+        <circle cx="32" cy="32" r="21" fill={c.waterIn} />
+      </g>
+      <circle cx="32" cy="32" r="24.5" fill="none" stroke={c.ring} strokeWidth="7" />
+      <g clipPath={`url(#${id}b)`}>
+        <circle cx="32" cy="32" r="24.5" fill="none" stroke={c.waterRing} strokeWidth="7" />
+      </g>
+      <g clipPath={`url(#${id}h)`}>
+        <path d={WAVE} fill="none" stroke="#fff" strokeWidth="1.7" strokeLinecap="round" />
+      </g>
+      <circle cx="32" cy="32" r="5.4" fill={c.ring} />
+      {LUGS.map(([x, y], i) => (
+        <circle key={i} cx={x} cy={y} r="1.55" fill={c.ring} />
+      ))}
     </svg>
   )
 }
@@ -15,8 +46,8 @@ export function GaugeMark({ size = 28 }: { size?: number }) {
 export function Wordmark() {
   return (
     <span className="flex items-center gap-2.5">
-      <GaugeMark />
-      <span className="text-[15px] font-semibold tracking-[-0.01em] text-ink">Vellam</span>
+      <Mark size={30} />
+      <span className="text-[16px] font-semibold tracking-[-0.015em] text-ink">Vellam</span>
     </span>
   )
 }
