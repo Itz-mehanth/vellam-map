@@ -1,8 +1,9 @@
 import L from 'leaflet'
-import { useEffect, useMemo, useRef } from 'react'
-import { Circle, MapContainer, Marker, Popup, TileLayer, ZoomControl, useMap } from 'react-leaflet'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Circle, MapContainer, Marker, Popup, ZoomControl, useMap } from 'react-leaflet'
 import type { Alert, ReportFeature } from '../api'
 import { BANDS, UNKNOWN_COLOUR, depthColour, freshness, reportDepth, sinceLabel } from '../lib/depth'
+import { LayerControl, MapLayers, loadLayers, type LayerState } from './LayerControl'
 import { Label } from './ui'
 
 const CHENNAI: [number, number] = [13.0, 80.21]
@@ -20,10 +21,11 @@ function FlyTo({ target }: { target: FlyTarget | null }) {
   const map = useMap()
   useEffect(() => {
     if (!target) return
-    const zoom = target.zoom ?? 14
+    // Slide to the place and keep the zoom the person chose: tapping a report should never jump the view.
+    const zoom = target.zoom ?? map.getZoom()
     const offset = window.innerWidth >= 1024 ? PANEL_OFFSET_PX : 0
     const point = map.project([target.lat, target.lng], zoom).subtract([offset, 0])
-    map.flyTo(map.unproject(point, zoom), zoom, { duration: 0.9 })
+    map.panTo(map.unproject(point, zoom), { duration: 0.5, easeLinearity: 0.4 })
   }, [target, map])
   return null
 }
@@ -63,7 +65,7 @@ function ReportPopup({ f }: { f: ReportFeature }) {
   const p = f.properties
   const d = reportDepth(p)
   return (
-    <div className="w-56 p-3">
+    <div className="w-52 p-3">
       <Label>{d.kind === 'visual' ? 'Visual estimate' : d.kind === 'measured' ? 'Measured depth' : 'Flooding reported'}</Label>
       <p className="mt-1 font-mono text-[22px] font-semibold leading-none" style={{ color: depthColour(d.value) }}>
         {d.value === null
@@ -125,20 +127,17 @@ export function MapStage({
   selectedId: number | null
   onSelect: (id: number) => void
 }) {
+  const [layers, setLayers] = useState<LayerState>(loadLayers)
   // Older first, so the newest pins draw on top.
   const ordered = useMemo(() => [...reports].sort((a, b) => a.properties.created_at - b.properties.created_at), [reports])
   return (
     <div className="relative h-full w-full">
       <MapContainer center={CHENNAI} zoom={12} zoomControl={false} className="h-full w-full" attributionControl>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-          maxZoom={19}
-        />
+        <MapLayers state={layers} />
         <ZoomControl position="bottomright" />
         <FlyTo target={target} />
         <FitOnce reports={reports} />
-        {alerts.map((a, i) => (
+        {layers.overlays.zones && alerts.map((a, i) => (
           <Circle
             key={`a${i}`}
             center={[a.lat, a.lng]}
@@ -161,6 +160,9 @@ export function MapStage({
           </Marker>
         ))}
       </MapContainer>
+      <div className="absolute right-3 top-3 z-[500]">
+        <LayerControl state={layers} onChange={setLayers} />
+      </div>
       <div className="pointer-events-none absolute bottom-6 right-[60px] z-[500] hidden sm:block">
         <Legend />
       </div>

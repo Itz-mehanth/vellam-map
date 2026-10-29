@@ -142,7 +142,7 @@ body {
 }
 
 /* OpenStreetMap tiles, quietened to a chart-paper base so the depth pins carry all the colour */
-.leaflet-tile-pane {
+.tiles-muted {
   filter: saturate(0.14) brightness(1.05) contrast(0.88) sepia(0.06);
 }
 

@@ -20,7 +20,7 @@ Project plan and status: [PLAN.md](PLAN.md)
 1. **Report**: anyone photographs a flooded street; location is attached.
 2. **Measure**: **SAM 3.1** segments the water and the wheels of vehicles. Geometry code recovers each wheel's hidden lower part and converts the waterline to **centimetres** (see §4).
 3. **Verify**: **Muse Spark** checks every report (real flood, not a puddle or splash, original photo) and gives an independent by-eye depth range. The geometric depth is cross-checked against it; a big disagreement sends the report to review instead of publishing it. Duplicate photos are caught by perceptual hash, and photo metadata is checked: a photo taken more than 3 days ago is rejected, and one geotagged far from the reported location goes to review (missing metadata counts as unknown, never as a failure).
-4. **Map and alerts**: reports appear on a live map colour-coded by depth, and nearby reports are grouped into **area alerts**.
+4. **Map and alerts**: reports appear on a live map colour-coded by depth, with the photos and wheel geometry behind each reading shown beside it. Base maps: streets, satellite, terrain; overlays: live rain radar, traffic (needs a TomTom key), alert zones. Nearby reports are grouped into **area alerts**.
 5. **Ask by voice**: residents ask in **Tamil or English** (**Muse Voice Transcribe**), for example *"Is Velachery main road passable by bike?"*, and the agent answers from the live reports, in the same language, citing the reports it used.
 
 The Analyse tab shows the whole pipeline live, stage by stage, with the real intermediate results: masks, the fitted wheel circle and waterline, the fusion of estimates, and the verification checks.
@@ -60,7 +60,7 @@ depth_cm = (wheel_bottom_y − waterline_y) × (wheel_diameter_cm / wheel_diamet
 - **Spray and reflections can fool the waterline.** The cross-check against the visual range catches large disagreements; it can't catch every error.
 - **Accuracy has not been measured yet.** It needs photos with independently measured depths. `eval/accuracy.py` runs the go/no-go test (bar: mean error under 15 cm) as soon as such photos exist. Until then, treat depths as unvalidated estimates.
 - **Speech-to-text garbles place names**; the agent matches them phonetically to known places and says which one it assumed.
-- Faces and number plates are not blurred. Photos are not stored: only a perceptual hash, the depth and the verification result are kept.
+- **Photos are stored as evidence, with faces and number plates blurred first.** SAM 3.1 finds them (prompts "face" and "license plate") before anything is saved. If that detection fails, no image is kept at all. Only published reports serve images, and an admin can delete a report together with its images. Blurring depends on SAM finding every face and plate, so small or partly hidden ones can be missed.
 
 ## 5. Architecture
 
@@ -174,7 +174,7 @@ Say clearly in the video that demo-map reports are seeded placeholders.
 
 - Depths are shown **with uncertainty** and labelled as estimates; by-eye guesses and review cases are marked, not hidden.
 - The app never says a road is "safe", and neither does the Q&A agent. Always follow official flood warnings.
-- Photos are not stored or shared; only a perceptual hash, the depth and the verification result are kept. Face and plate blurring is not implemented.
+- Evidence photos are stored and shown next to each result, with faces and number plates blurred first (fail-closed). Detection is not perfect; delete a report with `DELETE /api/reports/{id}` if one slips through.
 
 ## 14. Submission checklist
 

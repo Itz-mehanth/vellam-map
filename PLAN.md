@@ -29,7 +29,9 @@ Deadline: **Nov 4, 2026, 9 PM ET**. Status as of Oct 28.
 | 22 | Automated tests (25) incl. synthetic-wheel depth validation, CI | Production | Done |
 | 23 | Report expiry and age fading on the map; WhatsApp/share button on alerts | Production | Done |
 | 24 | Installable PWA, offline shell | Production | Done |
-| 19 | Face and plate blurring | Safety | Not built. Photos are not stored, only hashes and results |
+| 19 | Face and plate blurring (SAM 3.1), fail-closed | Safety | Done |
+| 25 | Evidence images and wheel geometry shown beside each report | Product | Done |
+| 26 | Map layers: satellite, terrain, rain radar, traffic (needs key) | Product | Done |
 
 ## Remaining for you
 
@@ -49,6 +51,5 @@ If time runs short, never cut the deployment, the accuracy number or the demo vi
 - **Authority view:** a read-only dashboard and CSV/GeoJSON export for municipal control rooms and rescue teams.
 - **Rainfall and gauge data** fused with depth reports to predict which streets will flood next.
 - **Calibration set:** crowdsourced photos with a person of known height, to learn the real error per object type.
-- **Face and plate blurring** with SAM 3.1 prompts ("face", "license plate") before any photo is shown to others.
 - **Video reports:** track the waterline rising over time.
 - **Tamil UI strings**, not only Tamil voice.

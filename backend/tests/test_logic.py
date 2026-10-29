@@ -78,3 +78,28 @@ def test_rate_limiter_blocks_then_recovers():
     assert e.value.status_code == 429
     rl.check("b", now=2)  # other clients are unaffected
     rl.check("a", now=62)  # window has passed
+
+
+def test_redaction_blurs_only_the_masked_region():
+    import numpy as np
+
+    from services.pipeline import redact
+
+    img = Image.new("RGB", (200, 200), "white")
+    for x in range(200):  # a hard black/white stripe pattern: easy to tell blurred from sharp
+        for y in range(200):
+            if (x // 4) % 2 == 0:
+                img.putpixel((x, y), (0, 0, 0))
+    mask = np.zeros((200, 200), dtype=bool)
+    mask[60:120, 60:120] = True
+    out = np.asarray(redact(img, mask)).astype(int)
+    src = np.asarray(img).astype(int)
+    assert out[80:100, 80:100].std() < src[80:100, 80:100].std() / 3  # inside: stripes smoothed away
+    assert np.array_equal(out[:30, :30], src[:30, :30])  # far outside: untouched
+
+
+def test_redaction_without_a_mask_is_a_no_op():
+    from services.pipeline import redact
+
+    img = Image.new("RGB", (20, 20), "red")
+    assert redact(img, None) is img

@@ -12,7 +12,7 @@ import time
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageFilter
 
 from . import exif, geo, store, verify
 from .depth import DepthEstimate, depth_from_wheel, fit_circle, fuse
@@ -57,14 +57,49 @@ def waterline_y(wheel: np.ndarray, water: np.ndarray) -> float | None:
     return float(np.median(tops)) if tops else None
 
 
-def overlay_data_url(image: bytes, layers: list[tuple[np.ndarray, tuple[int, int, int]]]) -> str:
-    """Photo with each (mask, colour) layer tinted on, as a JPEG data URL."""
-    canvas = np.asarray(Image.open(io.BytesIO(image)).convert("RGB")).astype(float)
+PRIVATE_PROMPTS = ["face", "license plate"]
+
+
+def redact(img: Image.Image, mask: np.ndarray | None) -> Image.Image:
+    """Heavily blur the masked regions (faces, number plates) so they are unrecognisable."""
+    if mask is None or not mask.any():
+        return img
+    soft = Image.fromarray((mask * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(15)).filter(ImageFilter.GaussianBlur(3))
+    blurred = img.filter(ImageFilter.GaussianBlur(max(14, min(img.size) // 22)))
+    return Image.composite(blurred, img, soft)
+
+
+async def private_regions(image: bytes, shape: tuple[int, int]) -> np.ndarray:
+    """Union of every face and licence plate SAM 3.1 finds. Raises if detection fails."""
+    found = await asyncio.gather(*(segment(image, q) for q in PRIVATE_PROMPTS))
+    mask = np.zeros(shape, dtype=bool)
+    for objs in found:
+        for o in objs:
+            mask |= full_mask(o, shape)
+    return mask
+
+
+def overlay_jpeg(image: bytes, layers: list[tuple[np.ndarray, tuple[int, int, int]]], hide: np.ndarray | None = None) -> bytes:
+    """Photo with each (mask, colour) layer tinted on, and private regions blurred."""
+    canvas = np.asarray(redact(Image.open(io.BytesIO(image)).convert("RGB"), hide)).astype(float)
     for mask, colour in layers:
         canvas[mask] = canvas[mask] * 0.5 + np.array(colour) * 0.5
     buf = io.BytesIO()
     Image.fromarray(canvas.astype(np.uint8)).save(buf, "JPEG", quality=80)
-    return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
+    return buf.getvalue()
+
+
+def overlay_data_url(image: bytes, layers: list[tuple[np.ndarray, tuple[int, int, int]]]) -> str:
+    return "data:image/jpeg;base64," + base64.b64encode(overlay_jpeg(image, layers)).decode()
+
+
+def evidence_photo(image: bytes, hide: np.ndarray | None = None, max_side: int = 1280) -> bytes:
+    """The submitted photo with faces and plates blurred, shrunk for storage. Evidence coordinates refer to the original size."""
+    img = redact(Image.open(io.BytesIO(image)).convert("RGB"), hide)
+    img.thumbnail((max_side, max_side))
+    buf = io.BytesIO()
+    img.save(buf, "JPEG", quality=82)
+    return buf.getvalue()
 
 
 def analyse_wheel(wheel: np.ndarray, water: np.ndarray, name: str, ref: dict) -> dict:
@@ -147,6 +182,7 @@ async def analyse(image: bytes, lat: float, lng: float):
     duplicate_of = verify.find_duplicate(phash)
     meta = exif.inspect(image, lat, lng)
     judge_task = asyncio.create_task(verify.judge(image))  # runs alongside segmentation
+    privacy_task = asyncio.create_task(private_regions(image, shape))  # faces and plates, blurred before any image is kept
     yield event("intake", "Photo received", {
         "width": w, "height": h, "kb": round(len(image) / 1024), "phash": str(phash),
         "duplicate_of": duplicate_of, "lat": lat, "lng": lng, "exif": meta,
@@ -190,6 +226,7 @@ async def analyse(image: bytes, lat: float, lng: float):
         ],
         "overlay": overlay_data_url(image, [(water, WATER_RGB)] + [(m, WHEEL_RGB) for m in wheel_masks]),
     })
+    masks_layers = [(water, WATER_RGB)] + [(m, WHEEL_RGB) for m in wheel_masks]
 
     # Stage 4 — geometry
     records = []
@@ -223,7 +260,23 @@ async def analyse(image: bytes, lat: float, lng: float):
     unc = fused.uncertainty_cm if fused else None
     status = decide(duplicate_of, verdict, depth_cm, meta)
     place = await geo.place_name(lat, lng) if status in store.PUBLISHED else None
-    report_id = store.add_report(lat, lng, str(phash), depth_cm, unc, status, verdict, place=place)
+    evidence = {
+        "width": w, "height": h,
+        "water": {"coverage_pct": round(100 * float(water.mean()), 1), "prompt": water_prompt},
+        "wheels": records,
+        "fusion": [{"depth_cm": e.depth_cm, "uncertainty_cm": e.uncertainty_cm, "weight": wt / total}
+                   for e, wt in zip(estimates, weights)] if estimates else [],
+        "cross_check": cross_check(depth_cm, verdict),
+        "exif": meta,
+    }
+    report_id = store.add_report(lat, lng, str(phash), depth_cm, unc, status, verdict, place=place, evidence=evidence)
+    try:
+        hide = await privacy_task
+    except Exception:
+        hide = None  # fail closed: if faces and plates cannot be located, no image is kept
+    if status != "rejected_duplicate" and hide is not None:
+        store.save_media(report_id, "photo", evidence_photo(image, hide))
+        store.save_media(report_id, "overlay", overlay_jpeg(image, masks_layers, hide))
     yield event("result", "Decision", {
         "id": report_id, "status": status, "place": place, "depth_cm": depth_cm, "uncertainty_cm": unc,
         "total_ms": round((time.perf_counter() - t0) * 1000),

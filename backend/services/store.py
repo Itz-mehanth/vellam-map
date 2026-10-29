@@ -29,22 +29,44 @@ def _conn() -> sqlite3.Connection:
         )"""
     )
     existing = {r["name"] for r in conn.execute("PRAGMA table_info(reports)")}
-    for column, ddl in [("place", "TEXT"), ("is_demo", "INTEGER NOT NULL DEFAULT 0")]:
+    for column, ddl in [("place", "TEXT"), ("is_demo", "INTEGER NOT NULL DEFAULT 0"), ("evidence", "TEXT")]:
         if column not in existing:
             conn.execute(f"ALTER TABLE reports ADD COLUMN {column} {ddl}")
     return conn
 
 
 def add_report(lat, lng, phash, depth_cm, uncertainty_cm, status, verdict: dict,
-               place: str | None = None, is_demo: bool = False, created_at: float | None = None) -> int:
+               place: str | None = None, is_demo: bool = False, created_at: float | None = None,
+               evidence: dict | None = None) -> int:
     with _conn() as c:
         cur = c.execute(
-            "INSERT INTO reports (created_at, lat, lng, phash, depth_cm, uncertainty_cm, status, verdict, place, is_demo)"
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO reports (created_at, lat, lng, phash, depth_cm, uncertainty_cm, status, verdict, place, is_demo, evidence)"
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (created_at or time.time(), lat, lng, phash, depth_cm, uncertainty_cm, status,
-             json.dumps(verdict), place, int(is_demo)),
+             json.dumps(verdict), place, int(is_demo), json.dumps(evidence) if evidence else None),
         )
         return cur.lastrowid
+
+
+def media_dir() -> Path:
+    """Evidence images live beside the database, so one persistent disk holds both."""
+    d = DB_PATH.parent / "media"
+    d.mkdir(parents=True, exist_ok=True)
+    return d
+
+
+def save_media(report_id: int, kind: str, data: bytes) -> None:
+    (media_dir() / f"{report_id}-{kind}.jpg").write_bytes(data)
+
+
+def media_path(report_id: int, kind: str) -> Path | None:
+    p = media_dir() / f"{report_id}-{kind}.jpg"
+    return p if p.exists() else None
+
+
+def get_report(report_id: int):
+    with _conn() as c:
+        return c.execute("SELECT * FROM reports WHERE id = ?", (report_id,)).fetchone()
 
 
 def all_reports() -> list[sqlite3.Row]:
@@ -63,6 +85,10 @@ def published_reports(max_age_hours: float | None = None) -> list[sqlite3.Row]:
 
 
 def delete_report(report_id: int) -> bool:
+    for kind in ("photo", "overlay"):
+        p = media_path(report_id, kind)
+        if p:
+            p.unlink(missing_ok=True)
     with _conn() as c:
         return c.execute("DELETE FROM reports WHERE id = ?", (report_id,)).rowcount > 0
 

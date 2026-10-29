@@ -5,7 +5,7 @@ import os
 from PIL import Image
 from fastapi import FastAPI, File, Form, Header, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse
 
 from services import agent, alerts, limits, store, verify
 from services.meta_client import transcribe
@@ -96,11 +96,38 @@ def flood_map():
                 "verdict": json.loads(r["verdict"]),
                 "place": r["place"],
                 "demo": bool(r["is_demo"]),
+                "has_evidence": r["evidence"] is not None,
             },
         }
         for r in store.published_reports(MAP_MAX_AGE_HOURS)
     ]
     return {"type": "FeatureCollection", "features": features}
+
+
+@app.get("/api/reports/{report_id}/evidence")
+def report_evidence(report_id: int):
+    """The result with the data behind it: wheel geometry, fusion inputs, checks, and image links."""
+    r = store.get_report(report_id)
+    if r is None or r["status"] not in store.PUBLISHED:
+        raise HTTPException(404, "No such report")
+    ev = json.loads(r["evidence"]) if r["evidence"] else None
+    return {
+        "id": r["id"], "created_at": r["created_at"], "status": r["status"], "place": r["place"],
+        "lat": r["lat"], "lng": r["lng"], "depth_cm": r["depth_cm"], "uncertainty_cm": r["uncertainty_cm"],
+        "verdict": json.loads(r["verdict"]), "demo": bool(r["is_demo"]), "evidence": ev,
+        "has_photo": store.media_path(report_id, "photo") is not None,
+        "has_overlay": store.media_path(report_id, "overlay") is not None,
+    }
+
+
+@app.get("/api/reports/{report_id}/{kind}.jpg")
+def report_image(report_id: int, kind: str):
+    """Evidence image for a published report: the submitted photo, or the photo with the masks drawn on."""
+    r = store.get_report(report_id)
+    path = store.media_path(report_id, kind) if kind in ("photo", "overlay") else None
+    if r is None or r["status"] not in store.PUBLISHED or path is None:
+        raise HTTPException(404, "No such image")
+    return FileResponse(path, media_type="image/jpeg", headers={"Cache-Control": "public, max-age=86400"})
 
 
 @app.get("/api/alerts")

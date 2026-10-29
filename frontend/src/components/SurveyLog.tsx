@@ -117,7 +117,7 @@ function ObjectsBody({ d }: { d: ObjectsData }) {
 }
 
 /** Zoomed view of one wheel: the photo, the fitted circle, the waterline and the measured gap. */
-function WheelZoom({ photo, size, wheel }: { photo: string; size: [number, number]; wheel: WheelRecord }) {
+export function WheelZoom({ photo, size, wheel }: { photo: string; size: [number, number]; wheel: WheelRecord }) {
   const c = wheel.circle
   const [bx0, by0, bx1, by1] = wheel.box
   const r = c ? c.r : Math.max(bx1 - bx0, by1 - by0) / 2
@@ -128,7 +128,7 @@ function WheelZoom({ photo, size, wheel }: { photo: string; size: [number, numbe
   const id = `clip-${Math.round(cx)}-${Math.round(cy)}`
   const wl = wheel.waterline_y
   const bottom = cy + r
-  const label = { fontSize: r * 0.3, fill: '#fff', stroke: '#0d1b26', strokeWidth: r * 0.07, paintOrder: 'stroke', fontFamily: 'IBM Plex Mono', fontWeight: 600 } as const
+  const label = { fontSize: r * 0.24, fill: '#fff', stroke: '#0d1b26', strokeWidth: r * 0.07, paintOrder: 'stroke', fontFamily: 'IBM Plex Mono', fontWeight: 600 } as const
   return (
     <svg viewBox={`${cx - pad} ${cy - pad} ${pad * 2} ${pad * 2}`} className="aspect-square w-full rounded-md bg-ink">
       <image href={photo} width={size[0]} height={size[1]} />

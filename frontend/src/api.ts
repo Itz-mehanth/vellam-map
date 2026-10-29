@@ -21,6 +21,7 @@ export interface ReportProperties {
   verdict: Verdict
   place?: string | null
   demo?: boolean
+  has_evidence?: boolean
 }
 
 export interface ReportFeature {
@@ -201,3 +202,37 @@ export async function ask(input: { audio?: Blob; question?: string; language?: s
   if (!res.ok) throw new Error((await res.json().catch(() => null))?.detail ?? 'Could not answer')
   return res.json()
 }
+
+// ---- Evidence behind a published report ----
+
+export interface Evidence {
+  id: number
+  created_at: number
+  status: string
+  place: string | null
+  lat: number
+  lng: number
+  depth_cm: number | null
+  uncertainty_cm: number | null
+  verdict: Verdict
+  demo: boolean
+  has_photo: boolean
+  has_overlay: boolean
+  evidence: {
+    width: number
+    height: number
+    water: { coverage_pct: number; prompt: string }
+    wheels: WheelRecord[]
+    fusion: { depth_cm: number; uncertainty_cm: number; weight: number }[]
+    cross_check: 'agree' | 'disagree' | 'unavailable'
+    exif: ExifInfo
+  } | null
+}
+
+export async function fetchEvidence(id: number): Promise<Evidence> {
+  const res = await fetch(`${API}/api/reports/${id}/evidence`)
+  if (!res.ok) throw new Error('Could not load this report')
+  return res.json()
+}
+
+export const imageUrl = (id: number, kind: 'photo' | 'overlay') => `${API}/api/reports/${id}/${kind}.jpg`
