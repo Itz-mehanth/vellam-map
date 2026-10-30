@@ -31,7 +31,7 @@ curl -L -o flooded_cars.zip "https://zenodo.org/api/records/14833532/files/flood
 curl -L -o test.txt         "https://zenodo.org/api/records/14833532/files/test.txt/content"
 python -I -c "import zipfile; zipfile.ZipFile('flooded_cars.zip').extractall('data')"
 cd ../../..
-python -u eval/benchmark_flooded_cars.py --per-level 10     # 50 photos; --per-level 40 for a bigger run
+python -u eval/benchmark_flooded_cars.py --per-level 20     # 100 photos, about 900 API calls, about an hour
 python eval/benchmark_flooded_cars.py --self-test            # metrics only, no API calls
 ```
 
@@ -43,4 +43,7 @@ What it can and cannot show:
   assumption; change it and re-run to see how sensitive the result is.
 - The images are cropped around the car and upscaled, so wheel geometry sees less of the scene than a phone
   photo would. Coverage figures are a lower bound.
-- A run spends Meta API credits (about six calls per photo).
+- A run spends Meta API credits (about nine calls per photo, including blurring faces and plates).
+- It also writes the bundle the app's Benchmark tab reads (`frontend/public/benchmark/`: redacted photos, intermediate
+  overlays, recorded stage events, statistics). It is built in a staging folder and swapped in only when the run
+  completes, so an interrupted run never leaves the tab with missing images.

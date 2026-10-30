@@ -178,6 +178,33 @@ function CoverageBars({ data }: { data: BenchIndex }) {
   )
 }
 
+/** Did the verification gate keep real floods and drop non-floods? Computed from each photo's recorded decision. */
+function Gate({ photos }: { photos: BenchPhoto[] }) {
+  const ok = photos.filter((p) => !p.error)
+  const dry = ok.filter((p) => p.level === 0)
+  const wet = ok.filter((p) => p.level >= 1)
+  const rejected = (g: BenchPhoto[]) => g.filter((p) => p.status === 'rejected_not_flood').length
+  const rows = [
+    { label: 'Cars not in water, correctly rejected', n: rejected(dry), of: dry.length, good: true },
+    { label: 'Flooded cars, wrongly rejected as "not a flood"', n: rejected(wet), of: wet.length, good: false },
+  ]
+  return (
+    <div className="space-y-3">
+      {rows.map((r) => (
+        <div key={r.label}>
+          <div className="mb-1 flex items-baseline justify-between gap-2 text-[12.5px]">
+            <span className="text-ink-2">{r.label}</span>
+            <span className="shrink-0 font-mono text-[12px] font-semibold text-ink">{r.n} / {r.of} <span className="font-normal text-ink-3">({r.of ? Math.round((r.n / r.of) * 100) : 0}%)</span></span>
+          </div>
+          <span className="block h-1.5 overflow-hidden rounded-full bg-line-2">
+            <span className="block h-full rounded-full" style={{ width: `${r.of ? (r.n / r.of) * 100 : 0}%`, background: r.good ? '#2f7d5b' : '#b42334' }} />
+          </span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function Thumb({ p, edges, onOpen }: { p: BenchPhoto; edges: number[]; onOpen: () => void }) {
   const vis = closeness(p, p.visual_mid, edges)
   const geo = closeness(p, p.geometry_cm, edges)
@@ -340,6 +367,14 @@ export function BenchmarkPanel() {
         <Label className="mb-2">How often each method gave a reading</Label>
         <CoverageBars data={data} />
         <p className="mt-2 text-[11.5px] text-ink-3">Level 0 cars are not in water, so no depth is the right answer there.</p>
+      </section>
+
+      <section>
+        <Label className="mb-2">Did the verification gate get it right?</Label>
+        <Gate photos={data.photos} />
+        <p className="mt-2 text-[11.5px] leading-snug text-ink-3">
+          A wrongly rejected flood is a lost report. These upscaled news-style crops may look "staged or stock" to the checker more than a phone photo would.
+        </p>
       </section>
 
       <section>

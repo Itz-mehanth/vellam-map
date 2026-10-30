@@ -202,26 +202,33 @@ Hosting it publicly is optional and best done with care for your key; see [docs/
 **Centimetre accuracy has not been measured yet.** That needs photos with tape-measured depths; the test is
 ready ([`eval/accuracy.py`](eval/accuracy.py), bar: 15 cm mean error).
 
-What we do have is a first benchmark on **50 real photos from a public dataset** of flooded cars with
-ground-truth depth *levels* (five ordered levels, not centimetres; full write-up in
-[docs/BENCHMARK.md](docs/BENCHMARK.md)):
+What we do have is a benchmark on **100 real photos from a public dataset** of flooded cars with ground-truth
+depth *levels* (five ordered levels, not centimetres; full write-up in [docs/BENCHMARK.md](docs/BENCHMARK.md)):
 
 | | Muse Spark by-eye estimate | Wheel geometry |
 |---|---|---|
-| Photos with a reading | 36 of 50 | 6 of 50 |
-| Rank correlation with true level | **0.88** | 0.34 |
-| Within one level of truth | **100%** | 83% |
+| Photos with a reading | 69 of 100 | 12 of 100 |
+| Rank correlation with true level | **0.89** | 0.54 |
+| Within one level of truth | **99%** | 83% |
 
-So on this data the by-eye estimate ranks depth well and the wheel geometry is **not yet reliable**. The same
-benchmark found and fixed a bug (impossible 2 to 6 m readings from a bad circle fit). Caveats: 50 photos, one
-sample, and the dataset's cropped, upscaled car images give geometry less to work with than a phone photo
-would. The depth maths is also validated on synthetic wheels (recovered within 0.5 cm), which does not
-validate SAM's masks on real photos. The two estimates are cross-checked, and disagreements go to review.
+![The app's Benchmark tab: scorecards, predicted depth by true level, confusion matrix, coverage and the verification gate](docs/img/benchmark.jpg)
+
+So on this data the by-eye estimate ranks depth well and the wheel geometry is **not yet reliable**: it read only
+12 photos and reads low. The verification gate correctly rejected 19 of 20 dry cars but also wrongly rejected
+16 of 80 real floods (20%). The same benchmark found and fixed a bug (impossible 2 to 6 m readings from a bad
+circle fit). Caveats: 100 photos, one sample, and the dataset's cropped, upscaled car images give geometry less
+to work with than a phone photo would. The depth maths is also validated on synthetic wheels (recovered within
+0.5 cm), which does not validate SAM's masks on real photos. The two estimates are cross-checked, and
+disagreements go to review.
+
+The app's **Benchmark** tab shows all of this and lets you open any photo and replay its recorded pipeline,
+intermediate images included, without an API call. Create its data with
+`python -u eval/benchmark_flooded_cars.py --per-level 20` (faces and plates are blurred before images are saved).
 
 Known limits:
 
 - **Geometry needs a wheel partly under water** with the waterline crossing the tyre. Many flood photos have
-  wheels fully hidden (it read 6 of 50 benchmark photos); those get only a visual guess.
+  wheels fully hidden (it read 12 of 100 benchmark photos); those get only a visual guess.
 - **Spray and reflections can fool the waterline.** The cross-check against the visual range catches large
   disagreements, not every error.
 - **Speech-to-text garbles place names.** The agent matches them to known places and says which one it assumed.
