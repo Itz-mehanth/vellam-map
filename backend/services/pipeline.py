@@ -162,8 +162,12 @@ def decide(duplicate_of, verdict: dict, depth_cm, meta: dict | None = None) -> s
     return "flood_visual_estimate" if has_visual else "flood_unmeasured"
 
 
-async def analyse(image: bytes, lat: float, lng: float):
-    """Async generator of stage events; the last one has stage == "result"."""
+async def analyse(image: bytes, lat: float, lng: float, *, benchmark: bool = False):
+    """Async generator of stage events; the last one has stage == "result".
+
+    benchmark=True is for offline evaluation: it skips the face and plate detection and the place-name
+    lookup (no image is kept, and hundreds of runs must not hit the public geocoder).
+    """
     t0 = time.perf_counter()
     mark = t0
 
@@ -182,7 +186,8 @@ async def analyse(image: bytes, lat: float, lng: float):
     duplicate_of = verify.find_duplicate(phash)
     meta = exif.inspect(image, lat, lng)
     judge_task = asyncio.create_task(verify.judge(image))  # runs alongside segmentation
-    privacy_task = asyncio.create_task(private_regions(image, shape))  # faces and plates, blurred before any image is kept
+    # Faces and plates, blurred before any image is kept.
+    privacy_task = None if benchmark else asyncio.create_task(private_regions(image, shape))
     yield event("intake", "Photo received", {
         "width": w, "height": h, "kb": round(len(image) / 1024), "phash": str(phash),
         "duplicate_of": duplicate_of, "lat": lat, "lng": lng, "exif": meta,
@@ -259,7 +264,7 @@ async def analyse(image: bytes, lat: float, lng: float):
     depth_cm = fused.depth_cm if fused else None
     unc = fused.uncertainty_cm if fused else None
     status = decide(duplicate_of, verdict, depth_cm, meta)
-    place = await geo.place_name(lat, lng) if status in store.PUBLISHED else None
+    place = await geo.place_name(lat, lng) if status in store.PUBLISHED and not benchmark else None
     evidence = {
         "width": w, "height": h,
         "water": {"coverage_pct": round(100 * float(water.mean()), 1), "prompt": water_prompt},
@@ -271,10 +276,10 @@ async def analyse(image: bytes, lat: float, lng: float):
     }
     report_id = store.add_report(lat, lng, str(phash), depth_cm, unc, status, verdict, place=place, evidence=evidence)
     try:
-        hide = await privacy_task
+        hide = await privacy_task if privacy_task else None
     except Exception:
         hide = None  # fail closed: if faces and plates cannot be located, no image is kept
-    if status != "rejected_duplicate" and hide is not None:
+    if status != "rejected_duplicate" and hide is not None and not benchmark:
         store.save_media(report_id, "photo", evidence_photo(image, hide))
         store.save_media(report_id, "overlay", overlay_jpeg(image, masks_layers, hide))
     yield event("result", "Decision", {

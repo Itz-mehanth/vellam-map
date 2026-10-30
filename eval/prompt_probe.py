@@ -18,7 +18,7 @@ async def main(photos: list[Path]) -> None:
     for p in photos:
         image = p.read_bytes()
         counts = await asyncio.gather(*(segment(image, q) for q in PROMPTS))
-        print(p.name, {q: len(c) for q, c in zip(PROMPTS, counts)}, flush=True)
+        print(p.name, {q: len(c) for q, c in zip(PROMPTS, counts, strict=True)}, flush=True)
 
 
 if __name__ == "__main__":

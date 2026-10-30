@@ -20,7 +20,7 @@ COLOURS = [(0, 120, 255), (255, 60, 0), (0, 200, 80), (255, 200, 0)]
 async def main(photo: Path, out: Path, concepts: list[str]) -> None:
     image = photo.read_bytes()
     canvas = np.asarray(Image.open(photo).convert("RGB")).astype(float)
-    for colour, concept in zip(COLOURS, concepts):
+    for colour, concept in zip(COLOURS, concepts, strict=False):
         for o in await segment(image, concept):
             left, top = int(o.box[0]), int(o.box[1])
             h, w = o.mask.shape

@@ -18,3 +18,9 @@ media/
 
 # Recorded pipeline output (regenerate with eval/record_replays.py)
 eval/replays/
+
+# Downloaded research datasets (large, third-party licences)
+eval/datasets/
+eval/*.log
+eval/benchmark.db
+eval/replay.db
