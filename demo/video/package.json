@@ -1,0 +1,19 @@
+{
+  "name": "vellam-demo-video",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "still": "remotion still src/index.ts Pipeline out/pipeline.png --frame=",
+    "render": "remotion render src/index.ts Pipeline out/pipeline.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.539",
+    "@remotion/google-fonts": "^4.0.539",
+    "@types/react": "^18.3.31",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.539",
+    "typescript": "^7.0.2",
+    "webpack": "5.96.1"
+  }
+}

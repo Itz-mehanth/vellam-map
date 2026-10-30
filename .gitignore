@@ -28,3 +28,9 @@ frontend/public/benchmark.building/
 
 demo/*.mp4
 demo/cap*/
+demo/audio_out/
+demo/video/public/footage/
+demo/ambience/*.wav
+demo/audio_out2/
+demo/video/out/
+demo/video/node_modules/
