@@ -1,0 +1,1001 @@
+[
+ {
+  "id": "car2-26-Level0_3",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Ground appears only wet/reflective with no visible standing or flowing floodwater."
+  }
+ },
+ {
+  "id": "car-556-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Car is caked in mud on wet-looking ground but blur and tight crop prevent confirming standing water extent."
+  }
+ },
+ {
+  "id": "car2-42-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Wet reflective water covers the road around the car but blur and tight cropping prevent confirming its extent."
+  }
+ },
+ {
+  "id": "car-1199-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": true,
+   "reason": "Rear of car is standing in water on a road but the tight crop prevents confirming how far the water spreads."
+  }
+ },
+ {
+  "id": "car-1763-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Water is visible around the vehicle's wheels on the road but blurriness and tight cropping prevent confirming extent."
+  }
+ },
+ {
+  "id": "car-916-Level0_6",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "No standing water is visible around the car, only blurry grassy ground beneath it."
+  }
+ },
+ {
+  "id": "car-1044-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry image shows a car with water spray on the road but extent is obscured by splash."
+  }
+ },
+ {
+  "id": "car-42-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "The pavement around the parked cars appears dry with no standing or flowing water visible."
+  }
+ },
+ {
+  "id": "car-988-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Dark blurry ground under SUV appears wet and reflective but extent cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-2143-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Cars are parked on dry pavement with no standing or flowing water visible."
+  }
+ },
+ {
+  "id": "car-1040-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The road is wet and reflective around the SUV but low resolution and tight cropping prevent confirming standing floodwater extent."
+  }
+ },
+ {
+  "id": "car2-63-Level0_4",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry cropped photo shows reflective wet ground around people and car but spread cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-64-Level0_3",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The blurry image shows possibly wet pavement around the tow truck but cannot confirm standing floodwater extent."
+  }
+ },
+ {
+  "id": "car-345-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Vehicles are standing in shallow muddy water on the road but the tight crop prevents confirming how far it spreads."
+  }
+ },
+ {
+  "id": "car-83-Level0_3",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry night image shows a car with water spray around it on a road but extent is unclear."
+  }
+ },
+ {
+  "id": "car-1171-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry foliage-obscured view of a red car where ground water cannot be confirmed or ruled out."
+  }
+ },
+ {
+  "id": "car-191-Level0_14",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry tightly cropped view shows a reflective wet surface under the cars but extent is unclear."
+  }
+ },
+ {
+  "id": "car-907-Level0_7",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "The parking lot surface around the vehicles is dry with no standing water visible."
+  }
+ },
+ {
+  "id": "car2-54-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The road under the taxi looks wet and reflective but blurriness and tight cropping prevent confirming standing floodwater extent."
+  }
+ },
+ {
+  "id": "car-7-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry cropped photo shows water around the truck and person but extent is unclear."
+  }
+ },
+ {
+  "id": "car-1962-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "A car drives through water on a road but splash and blur prevent confirming flood extent."
+  }
+ },
+ {
+  "id": "car-120-Level1_4",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry image shows an SUV standing in water covering the road but the spread cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-1953-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Water covers the ground around the cars and person's legs but blur and tight cropping prevent confirming how far it spreads."
+  }
+ },
+ {
+  "id": "car-55-Level1_2",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Watery reflections surround the vehicles on the road at night but blur and darkness prevent confirming extent."
+  }
+ },
+ {
+  "id": "car-299-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "A white van is driving through water splashing around its wheels but blurriness and tight cropping prevent confirming the extent of flooding."
+  }
+ },
+ {
+  "id": "car-489-Level1_2",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Deep floodwater covers the street and splashes high around the wheels of multiple cars."
+  }
+ },
+ {
+  "id": "car-1780-Level1_2",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "A car drives through water on a road but blur and tight cropping prevent confirming how far the water spreads."
+  }
+ },
+ {
+  "id": "car-517-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The blurry tightly cropped photo shows a sedan standing in murky water around its wheels but the spread cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-1914-Level1_3",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry image shows vehicles on a road with water around the wheels but extent cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-1458-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry tightly cropped view shows indistinct water-like ground around the car's wheel but extent is unclear."
+  }
+ },
+ {
+  "id": "car-1648-Level1_3",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Silver SUV is driving through water on a road but the blurry tight crop and splash prevent confirming how far the water spreads."
+  }
+ },
+ {
+  "id": "car-1033-Level1_15",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry tightly cropped view shows muddy water around cars but extent is unclear."
+  }
+ },
+ {
+  "id": "car-1713-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "A blue van stands in water covering the road but blurriness and tight cropping prevent confirming how far the water spreads."
+  }
+ },
+ {
+  "id": "car-498-Level1_7",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry tightly cropped view shows wet reflective road around the vehicle but cannot confirm extent of standing water."
+  }
+ },
+ {
+  "id": "car-1623-Level1_5",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The dark blurry image prevents confirming water spread around the parked cars so possible flooding cannot be ruled out."
+  }
+ },
+ {
+  "id": "car-659-Level1_5",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "White car appears surrounded by murky brown water but heavy blur and tight crop prevent confirming flood extent."
+  }
+ },
+ {
+  "id": "car-1637-Level1_3",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry tightly cropped view shows water around the car's wheels but cannot confirm how far it spreads."
+  }
+ },
+ {
+  "id": "car-659-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "White vehicle is standing in murky brown water but the blurry tightly cropped view shows no street context to confirm how far it spreads."
+  }
+ },
+ {
+  "id": "car-1806-Level1_3",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry tightly cropped view shows murky water splash around van wheels but spread cannot be confirmed."
+  }
+ },
+ {
+  "id": "car2-66-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy water surrounds the vehicle's wheels but blur and tight cropping prevent confirming how far flooding spreads."
+  }
+ },
+ {
+  "id": "car-1146-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Brown floodwater submerges the car's wheels and spreads across the surrounding ground."
+  }
+ },
+ {
+  "id": "car-573-Level2_8",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Murky water appears to surround the SUV's tires but blurriness and tight cropping prevent confirming its extent."
+  }
+ },
+ {
+  "id": "car-1434-Level2_3",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry image shows reflective wet ground around vehicles on a road but extent and depth are unclear."
+  }
+ },
+ {
+  "id": "car-606-Level2_3",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry photo shows water around the car and people but the spread cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-596-Level2_9",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A car is submerged to its grille in murky water that fills the entire surrounding ground area."
+  }
+ },
+ {
+  "id": "car-1306-Level2_2",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Water is visible pooling around the vehicle's wheels but the tight crop and blur prevent confirming its spread."
+  }
+ },
+ {
+  "id": "car-2042-Level2_4",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy water surrounds the vehicle but blurriness and tight cropping prevent confirming flood extent."
+  }
+ },
+ {
+  "id": "car-2233-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Rear of car is driving through water with heavy splash but blur and tight crop prevent confirming flood extent."
+  }
+ },
+ {
+  "id": "car-1346-Level2_3",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Murky floodwater surrounds the vehicles and submerges their wheels well beyond a small puddle."
+  }
+ },
+ {
+  "id": "car-828-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Car is driving through water on a road but the blurry tightly cropped image cannot confirm how far the water spreads."
+  }
+ },
+ {
+  "id": "car-2132-Level2_3",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Two cars are surrounded by extensive standing murky water well beyond a small puddle."
+  }
+ },
+ {
+  "id": "car-1397-Level2_4",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Floodwater covers the street and splashes up to the car's bumper with other vehicles surrounded behind."
+  }
+ },
+ {
+  "id": "car-2097-Level2_6",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater surrounds and partially submerges multiple parked cars."
+  }
+ },
+ {
+  "id": "car-1427-Level2_2",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry image shows indistinct water-like splash around the SUV's lower front but extent cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-2195-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater covers the ground around the car up to its wheels with people wading nearby."
+  }
+ },
+ {
+  "id": "car-1195-Level2_2",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "A car sits in water on a road but blur and tight cropping prevent confirming how far the water spreads."
+  }
+ },
+ {
+  "id": "car-1939-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "A red car is driving through water covering the road but blur and tight cropping prevent confirming how far flooding spreads."
+  }
+ },
+ {
+  "id": "car-573-Level2_9",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy brown water covers the ground and surrounds both vehicles beyond a small puddle."
+  }
+ },
+ {
+  "id": "car-421-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "A car stands in water covering the ground but blur and tight cropping prevent confirming how far the water spreads."
+  }
+ },
+ {
+  "id": "car-2249-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "White van stands in water covering the road but blur and tight crop prevent confirming how far it spreads."
+  }
+ },
+ {
+  "id": "car-1608-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Brown water surrounds the SUV but blurriness and tight cropping prevent confirming street flooding extent."
+  }
+ },
+ {
+  "id": "car-1690-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater surrounds the car and covers the street well beyond a small puddle."
+  }
+ },
+ {
+  "id": "car-2108-Level3_5",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Two cars are deeply submerged in murky water rising to the windows."
+  }
+ },
+ {
+  "id": "car-516-Level3_5",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Brown floodwater deeply surrounds and partially submerges multiple cars across the visible area."
+  }
+ },
+ {
+  "id": "car-1206-Level3_2",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry overhead view shows a car surrounded by brown material that looks like water but blur and tight crop prevent confirming spread."
+  }
+ },
+ {
+  "id": "car-1959-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A red car sits in widespread standing water reaching its doors with people wading behind it."
+  }
+ },
+ {
+  "id": "car-752-Level3_3",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A white vehicle is nearly submerged in widespread muddy water with debris piled on it."
+  }
+ },
+ {
+  "id": "car-501-Level3_5",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry low-resolution view appears to show vehicles surrounded by water but extent cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-1859-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A van is partially submerged in deep brown water that fills the surrounding area beyond a puddle."
+  }
+ },
+ {
+  "id": "car-2108-Level3_8",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry overhead view shows a white car surrounded by dark water but tight cropping prevents confirming flood extent."
+  }
+ },
+ {
+  "id": "car-1665-Level3_33",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Murky brown water appears to surround the vehicles but blur and tight cropping prevent confirming its extent."
+  }
+ },
+ {
+  "id": "car-1014-Level3_2",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A sedan is submerged to the doors in extensive muddy water surrounding it."
+  }
+ },
+ {
+  "id": "car-2280-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Multiple parked cars are submerged to mid-door in murky standing water."
+  }
+ },
+ {
+  "id": "car-248-Level3_2",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "A car is surrounded by brown murky material that appears to be water but blur and tight cropping prevent confirming extent."
+  }
+ },
+ {
+  "id": "car-651-Level3_5",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Brown water surrounds both cars but heavy blur and tight crop prevent confirming how far it spreads."
+  }
+ },
+ {
+  "id": "car-1071-Level3_2",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater surrounds and partially submerges the car across the entire visible area."
+  }
+ },
+ {
+  "id": "car-1845-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A car is submerged to its windows in murky brown water covering the surrounding street area."
+  }
+ },
+ {
+  "id": "car-1849-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": true,
+   "reason": "Vehicle is surrounded by splashing water but tight crop prevents confirming street flooding versus river crossing."
+  }
+ },
+ {
+  "id": "car-1665-Level3_59",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry overhead view shows vehicles surrounded by murky brown surface that appears to be water but extent is unconfirmed."
+  }
+ },
+ {
+  "id": "car-76-Level3_3",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "The blue car is submerged to its doors in murky water covering the surrounding ground."
+  }
+ },
+ {
+  "id": "car-2214-Level4_7",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Cars are submerged to the windows in standing water well beyond a small puddle."
+  }
+ },
+ {
+  "id": "car2-68-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Brown floodwater surrounds the car up to the doors and extends across the ground behind it."
+  }
+ },
+ {
+  "id": "car-607-Level4_3",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry tightly cropped view of cars with indistinct muddy area around them cannot confirm flood extent."
+  }
+ },
+ {
+  "id": "car-104-Level4_2",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The image is extremely blurry and tightly cropped but appears to show muddy water surrounding a vehicle roof."
+  }
+ },
+ {
+  "id": "car-576-Level4_2",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy water is visible around the van but heavy blur and tight cropping prevent confirming how far it spreads."
+  }
+ },
+ {
+  "id": "car-248-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry dark car appears surrounded by brownish covering suggestive of water but extent cannot be confirmed due to blur."
+  }
+ },
+ {
+  "id": "car4-61-Level4_4",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Water submerges a car to the roof but tight cropping and blur prevent confirming spread."
+  }
+ },
+ {
+  "id": "car-135-Level4_7",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Parked cars are submerged up to the windshields in murky standing floodwater."
+  }
+ },
+ {
+  "id": "car-2322-Level4_3",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry tightly cropped photo shows a car apparently surrounded by water but its extent cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-441-Level4_4",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "A white car is surrounded by murky brown water but the image is too blurry and tightly cropped to confirm extent."
+  }
+ },
+ {
+  "id": "car-2212-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Two vehicles are submerged nearly to the roof in murky water."
+  }
+ },
+ {
+  "id": "car-1682-Level4_11",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "A vehicle is surrounded by murky tan water but heavy blur and tight crop prevent confirming extent."
+  }
+ },
+ {
+  "id": "car-499-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A car is almost completely submerged in murky brown water extending beyond the vehicle."
+  }
+ },
+ {
+  "id": "car-210-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Murky brown water submerges the car to its windows and spreads across the ground into the background."
+  }
+ },
+ {
+  "id": "car-2214-Level4_6",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Multiple vehicles are submerged to window level in widespread brown floodwater."
+  }
+ },
+ {
+  "id": "car-1875-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A car is submerged to its windows/roof in murky water filling the frame."
+  }
+ },
+ {
+  "id": "car-2108-Level4_2",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "White car is submerged to the roof in murky water extending well beyond a puddle."
+  }
+ },
+ {
+  "id": "car-1593-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Two cars are submerged to the roof in widespread murky brown water."
+  }
+ },
+ {
+  "id": "car-607-Level4_2",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Tightly cropped blurry cars appear mud-covered with indistinct water around them but extent cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-2214-Level4_5",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy water appears to surround the vehicles but blur and tight cropping prevent confirming how far it spreads."
+  }
+ },
+ {
+  "id": "n00",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "A dry historic street with parked cars and pedestrians shows no standing water on the ground."
+  }
+ },
+ {
+  "id": "n04",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "No water is visible on the dry gravel lot around the car and trees."
+  }
+ },
+ {
+  "id": "n07",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Cars are kicking up spray on a wet road but depth and spread of standing water cannot be confirmed."
+  }
+ },
+ {
+  "id": "n18",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "The wet pavement is clearly wash water from a man pressure-washing a car at a car wash, not standing floodwater."
+  }
+ },
+ {
+  "id": "n22",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "The car wash forecourt, road and grass are dry with no standing water visible."
+  }
+ },
+ {
+  "id": "n24",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": true,
+   "reason": "The image shows only a tiled swimming pool with reflections, which is explicitly not floodwater."
+  }
+ },
+ {
+  "id": "n28",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": true,
+   "reason": "The large water area is a contained swimming pool with dry surrounding decks and no floodwater visible."
+  }
+ },
+ {
+  "id": "n36",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Empty parking garage shows damp concrete but no standing or flowing floodwater."
+  }
+ },
+ {
+  "id": "n38",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Indoor multi-storey car park shows parked cars on concrete floors with no standing or flowing water visible."
+  }
+ },
+ {
+  "id": "n40",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Indoor parking garage shows dry painted floor with no standing water."
+  }
+ },
+ {
+  "id": "n47",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Busy street with vehicles shows dry asphalt and no standing or flowing water around them."
+  }
+ }
+]

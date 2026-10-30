@@ -1,4 +1,5 @@
 export interface Verdict {
+  flood_evidence?: 'clear' | 'possible' | 'none'
   is_flood?: boolean
   is_outdoor_street?: boolean
   looks_staged_or_stock?: boolean

@@ -10,7 +10,7 @@ from pathlib import Path
 DB_PATH = Path(os.getenv("DB_PATH") or Path(__file__).resolve().parents[1] / "vellam.db")
 
 # Statuses that appear on the map and feed alerts and answers.
-PUBLISHED = ("verified", "flood_unmeasured", "flood_visual_estimate", "flood_review")
+PUBLISHED = ("verified", "flood_unmeasured", "flood_visual_estimate", "flood_review", "flood_unconfirmed")
 
 
 def _conn() -> sqlite3.Connection:

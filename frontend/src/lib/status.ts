@@ -2,6 +2,11 @@ import type { Tone } from './tone'
 
 export const STATUS: Record<string, { label: string; tone: Tone; text: string }> = {
   verified: { label: 'Verified', tone: 'ok', text: 'Published to the live map.' },
+  flood_unconfirmed: {
+    label: 'Unconfirmed',
+    tone: 'warn',
+    text: 'Water seems to be on the ground, but the photo is too blurry, dark, cropped or shallow to confirm how far it spreads. It is shown, flagged as unconfirmed.',
+  },
   flood_visual_estimate: {
     label: 'Visual estimate',
     tone: 'warn',

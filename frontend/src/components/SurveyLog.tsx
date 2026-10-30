@@ -229,9 +229,9 @@ function FusionBody({ d }: { d: FusionData }) {
   )
 }
 
-function CheckRow({ ok, label }: { ok: boolean | undefined; label: string }) {
-  const Icon = ok === undefined ? Minus : ok ? Check : X
-  const tone: Tone = ok === undefined ? 'neutral' : ok ? 'ok' : 'bad'
+function CheckRow({ ok, label }: { ok: boolean | 'unsure' | undefined; label: string }) {
+  const Icon = ok === undefined || ok === 'unsure' ? Minus : ok ? Check : X
+  const tone: Tone = ok === undefined ? 'neutral' : ok === 'unsure' ? 'warn' : ok ? 'ok' : 'bad'
   return (
     <li className="flex items-center gap-2.5 py-1.5 text-[13px]">
       <span className={`flex h-[18px] w-[18px] items-center justify-center rounded-full ${toneClasses(tone)}`}>
@@ -247,7 +247,10 @@ function VerifyBody({ d }: { d: VerifyData }) {
   return (
     <div>
       <ul>
-        <CheckRow ok={v.is_flood === undefined ? undefined : v.is_flood && !v.is_puddle_or_splash} label="A real flood, not a puddle or splash" />
+        <CheckRow
+          ok={v.flood_evidence === 'clear' ? true : v.flood_evidence === 'possible' ? 'unsure' : v.flood_evidence === 'none' ? false : undefined}
+          label={v.flood_evidence === 'possible' ? 'Water seems present, but the photo cannot confirm it' : 'Floodwater visible, not a puddle or a dry scene'}
+        />
         <CheckRow ok={v.looks_staged_or_stock === undefined ? undefined : !v.looks_staged_or_stock} label="Original photo, not stock or staged" />
         <CheckRow ok={d.duplicate_of === null} label="Not seen before" />
         {d.exif.has_taken_at && <CheckRow ok={!d.exif.stale} label="Taken in the last 3 days" />}

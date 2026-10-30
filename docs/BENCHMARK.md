@@ -36,17 +36,47 @@ Combining them (geometry where it exists, else by-eye): rank correlation 0.87, w
 
 Of the 7 photos where both methods produced a reading, 6 were within one level of each other.
 
-### The verification gate
+### The verification gate (found a problem, then fixed it)
 
-| | Result |
-|---|---|
-| Dry cars (Level 0) correctly rejected as "not a flood" | 19 of 20 |
-| **Flooded cars (Levels 1 to 4) wrongly rejected as "not a flood"** | **16 of 80 (20%)** |
+In the 100-photo run the original gate (a strict yes/no "is this a flood?") correctly rejected 19 of 20 Level 0
+cars, but it also **wrongly rejected 16 of 80 genuinely flooded photos (20%)**. A wrongly rejected flood is a
+lost report. The recorded reasons showed what was going on: 7 were "too blurry, dark or cropped to confirm"
+(including cars nearly submerged) and 9 were "just a splash or shallow water" (Level 1 and 2 floods are shallow
+by definition). My first guess, that the "looks staged or stock" check was to blame, was wrong: it caused 1 of 16.
 
-A wrongly rejected flood is a lost report, so this matters. The dataset's photos are upscaled news-style crops,
-which may look "staged or stock" to the checker more than a phone photo would; we have not tested that
-explanation. One photo was flagged as a duplicate, an artefact of running the 100 photos concurrently against
-one scratch database.
+**The fix:** the gate now grades its evidence, as `clear`, `possible` or `none`. Only `none` is rejected;
+`possible` is published but flagged **unconfirmed**. Uncertainty is no longer treated as a "no".
+
+**How it was tested, so the result is not just fitted to the photos it was tuned on:**
+- *Level 0 is not a fair "should reject" class.* Those photos are mostly wet roads, muddy shallow water and
+  spray, not dry scenes, so a model calling them "possible" is arguably right. Using them as negatives would have
+  tuned the gate on noise. The negatives are 21 real non-flood photos from Wikimedia Commons instead (wet roads
+  and rain, car washes, pools, a wet garage floor, dry streets and car parks), listed with licences in
+  `eval/negatives_manifest.json` and fetched by `eval/fetch_negatives.py`.
+- *Two disjoint sets.* The prompt was tuned on the 100 development photos plus 11 of the negatives, then
+  measured once on 70 new flooded photos and the other 10 negatives that it had never seen.
+- *One call per photo, no SAM,* so each run is cheap (`eval/gate_benchmark.py`).
+
+| Held-out photos | Original gate | New gate |
+|---|---|---|
+| Real floods rejected (lost reports) | 23 of 70 (**33%**) | **1 of 70 (1%)** |
+| Real floods published but flagged unconfirmed | 0 | 24 of 70 (34%) |
+| Non-floods accepted outright | 0 of 10 | 0 of 10 |
+| Non-floods shown as unconfirmed | 0 | 1 of 10 |
+| Non-floods rejected | 10 of 10 | 9 of 10 |
+| By-eye depth ranking on real floods | 0.85 (51 photos) | **0.90** (45 photos) |
+
+The development set told the same story (22% rejected before, 1% after). The one non-flood shown as
+unconfirmed is a wheel throwing spray on a wet road, which is genuinely ambiguous.
+
+**Costs of the change, stated plainly:**
+- About a third of real floods now appear as *unconfirmed* instead of confirmed: the model would not commit to
+  clear flooding from a blurry or shallow-water photo.
+- A photo marked "possible" gets **no by-eye depth** (every "clear" photo kept its depth: 50 of 55). That is a
+  deliberate rule, since we do not invent a depth when the flooding itself is uncertain, but it means fewer
+  depth readings overall (45 against 51 held-out photos).
+- The negative set is small (21 photos), so the false-alarm rates are rough: 0 of 10 accepted outright could
+  be a real rate anywhere from 0% to about 30%.
 
 ## What it shows
 
@@ -83,7 +113,6 @@ one scratch database.
 The product already treats the two estimates as independent checks: geometry is cross-checked against the
 visual range, and a large disagreement sends the report to review instead of publishing it. The benchmark
 supports keeping that design and labelling by-eye estimates plainly as estimates. It also argues against
-presenting wheel geometry as the proven part of the system, and says the verification gate needs tuning so it
-stops discarding real floods.
+presenting wheel geometry as the proven part of the system, and led to the gate change above.
 
 Raw per-photo results are in [`eval/results/`](../eval/results/).

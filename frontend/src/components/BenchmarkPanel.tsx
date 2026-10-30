@@ -370,10 +370,10 @@ export function BenchmarkPanel() {
       </section>
 
       <section>
-        <Label className="mb-2">Did the verification gate get it right?</Label>
+        <Label className="mb-2">Did the original verification gate get it right?</Label>
         <Gate photos={data.photos} />
         <p className="mt-2 text-[11.5px] leading-snug text-ink-3">
-          A wrongly rejected flood is a lost report. These upscaled news-style crops may look "staged or stock" to the checker more than a phone photo would.
+          Recorded with the original yes/no gate. A wrongly rejected flood is a lost report, so the gate was changed to grade its evidence (clear, possible, none); the new gate is measured separately in docs/BENCHMARK.md.
         </p>
       </section>
 

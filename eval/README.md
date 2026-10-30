@@ -11,6 +11,7 @@ virtualenv active.
 | `smoke_test.py` | Confirms the key and model IDs work with one Muse Spark call and three SAM 3.1 calls. |
 | `prompt_probe.py` | Counts how many instances each SAM prompt finds per photo. Used to choose prompts. |
 | `benchmark_flooded_cars.py` | **Public-dataset benchmark.** Runs the pipeline on real flooded-car photos with ground-truth depth *levels* and reports coverage, rank correlation and level agreement. See below. |
+| `gate_benchmark.py` | Tests the verification gate alone (one cheap call per photo) on real floods and on 21 real non-flood photos, on development and held-out sets. `fetch_negatives.py` downloads the non-flood photos. |
 | `record_replays.py` | Records the pipeline's real output for every sample photo and prints how many gave a geometric depth. |
 | `overlay.py` | Draws SAM masks on a photo for visual checking. |
 

@@ -85,6 +85,7 @@ function ReportPopup({ f }: { f: ReportFeature }) {
       <p className="font-mono text-[11px] text-ink-3">
         {sinceLabel(p.created_at)}
         {p.status === 'flood_review' && ' · under review'}
+        {p.status === 'flood_unconfirmed' && ' · unconfirmed'}
         {p.demo && ' · demo data'}
       </p>
     </div>

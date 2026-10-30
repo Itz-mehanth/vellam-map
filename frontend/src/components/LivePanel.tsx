@@ -153,6 +153,7 @@ export function LivePanel({
                   <DepthPill depth={reportDepth(p)} size="sm" />
                   <span className="min-w-0 flex-1 truncate text-[13px] text-ink">{p.place ?? `${lat.toFixed(3)}, ${lng.toFixed(3)}`}</span>
                   {p.status === 'flood_review' && <Tag tone="warn">review</Tag>}
+                  {p.status === 'flood_unconfirmed' && <Tag tone="warn">unconfirmed</Tag>}
                   <span className="shrink-0 text-right font-mono text-[11px] leading-tight text-ink-3">
                     {sinceLabel(p.created_at)}
                     {p.demo && <span className="block text-[10px] uppercase tracking-wide text-ink-4">demo</span>}

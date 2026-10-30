@@ -9,7 +9,7 @@ from services import exif
 from services.limits import RateLimiter
 from services.pipeline import cross_check, decide
 
-FLOOD = {"is_flood": True, "is_puddle_or_splash": False, "looks_staged_or_stock": False,
+FLOOD = {"flood_evidence": "clear", "is_flood": True, "looks_staged_or_stock": False,
          "depth_cm_low": 20, "depth_cm_high": 35}
 
 
@@ -23,9 +23,17 @@ def test_cross_check():
 def test_decide_order_of_rejections():
     assert decide(7, FLOOD, 30) == "rejected_duplicate"
     assert decide(None, FLOOD, 30, {"stale": True}) == "rejected_stale"
-    assert decide(None, FLOOD | {"is_flood": False}, 30) == "rejected_not_flood"
-    assert decide(None, FLOOD | {"is_puddle_or_splash": True}, 30) == "rejected_not_flood"
+    assert decide(None, FLOOD | {"flood_evidence": "none", "is_flood": False}, 30) == "rejected_not_flood"
     assert decide(None, FLOOD | {"looks_staged_or_stock": True}, 30) == "rejected_not_flood"
+
+
+def test_uncertain_evidence_is_flagged_not_discarded():
+    possible = FLOOD | {"flood_evidence": "possible"}
+    assert decide(None, possible, None) == "flood_unconfirmed"
+    assert decide(None, possible, 30) == "flood_unconfirmed"  # even with a measurement
+    assert decide(None, possible, 90) == "flood_review"  # a geometry disagreement is the stronger flag
+    assert decide(None, possible | {"is_flood": True, "looks_staged_or_stock": True}, 30) == "rejected_not_flood"
+    assert decide(7, possible, 30) == "rejected_duplicate"
 
 
 def test_decide_publishes_according_to_evidence():
@@ -33,7 +41,7 @@ def test_decide_publishes_according_to_evidence():
     assert decide(None, FLOOD, 90) == "flood_review"  # geometry far from the visual range
     assert decide(None, FLOOD, 30, {"mismatch": True}) == "flood_review"
     assert decide(None, FLOOD, None) == "flood_visual_estimate"
-    assert decide(None, {"is_flood": True}, None) == "flood_unmeasured"
+    assert decide(None, {"flood_evidence": "clear"}, None) == "flood_unmeasured"
 
 
 def jpeg(exif_bytes=None) -> bytes:

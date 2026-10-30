@@ -1,0 +1,1001 @@
+[
+ {
+  "id": "car2-26-Level0_3",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The pavement looks wet but no water is seen rising above the tires' contact with the ground."
+  }
+ },
+ {
+  "id": "car-556-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Car is caked in mud and ground looks damp but blur prevents confirming water rising above tire contact."
+  }
+ },
+ {
+  "id": "car2-42-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The road looks wet and reflective but blur prevents confirming water rising above the tires."
+  }
+ },
+ {
+  "id": "car-1199-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": true,
+   "reason": "Water is visible pooling under the rear of the car but cropping and resolution prevent confirming depth above the tyre contact patch."
+  }
+ },
+ {
+  "id": "car-1763-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Ground looks wet with possible shallow water around the tires but blur prevents confirming water rising above tire contact."
+  }
+ },
+ {
+  "id": "car-916-Level0_6",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "No standing water is visible around the car, only blurry grassy ground."
+  }
+ },
+ {
+  "id": "car-1044-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The road looks wet with spray around the car but blur and rain obscure any water level at the tyres."
+  }
+ },
+ {
+  "id": "car-42-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "The pavement around the car's tires appears dry with no standing or flowing water visible."
+  }
+ },
+ {
+  "id": "car-988-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "The SUV is parked indoors by a numbered wall with only a damp reflective floor and no water visible above the tyre contact."
+  }
+ },
+ {
+  "id": "car-2143-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "The pavement around the parked cars looks dry with no standing water visible above the tyre contact points."
+  }
+ },
+ {
+  "id": "car-1040-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The road is wet and reflective but no water is seen rising above the tyres' ground contact."
+  }
+ },
+ {
+  "id": "car2-63-Level0_4",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Ground looks wet and reflective but blur prevents confirming water rising above tyre bottoms or feet."
+  }
+ },
+ {
+  "id": "car-64-Level0_3",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The road appears wet and reflective but no standing water is visible above tyre or foot contact."
+  }
+ },
+ {
+  "id": "car-345-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Street is broadly wet with muddy reflective sheen but no distinct waterline rising above the tyres is visible."
+  }
+ },
+ {
+  "id": "car-83-Level0_3",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Heavy blur and glare obscure the tyre-ground contact so water above the tyres cannot be confirmed though the ground looks wet."
+  }
+ },
+ {
+  "id": "car-1171-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Tire-ground contact is obscured by blur and foliage so water above the tire bottoms cannot be confirmed or ruled out."
+  }
+ },
+ {
+  "id": "car-191-Level0_14",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Tight blurry crop hides the tire-ground contact so the dark reflective ground cannot be confirmed as water above the tires."
+  }
+ },
+ {
+  "id": "car-907-Level0_7",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "The ground around the vehicles is dry concrete with no standing or flowing water visible."
+  }
+ },
+ {
+  "id": "car2-54-Level0_2",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The road looks wet and reflective but no water is visibly rising above the bottom of the tires."
+  }
+ },
+ {
+  "id": "car-7-Level0_1",
+  "level": 0,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Ground looks wet with widespread water but blur prevents confirming water rising above tyres or feet."
+  }
+ },
+ {
+  "id": "car-1962-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Street is wet with splash around the car but blur and spray obscure any water rising above the tyres."
+  }
+ },
+ {
+  "id": "car-120-Level1_4",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Murky standing water covers the street around the SUV and obscures where the tyres meet the ground."
+  }
+ },
+ {
+  "id": "car-1953-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Water visibly covers the street and rises around the car's lower body above the tyre contact point."
+  }
+ },
+ {
+  "id": "car-55-Level1_2",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The street looks wet and reflective around the vehicles but blur and darkness prevent confirming water rising above tyres or feet."
+  }
+ },
+ {
+  "id": "car-299-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Water visibly covers the roadway and rises above the bottom of the van's tyres with splashing."
+  }
+ },
+ {
+  "id": "car-489-Level1_2",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Floodwater is visibly flowing over the street and rising above the bottom of the car's tyres with heavy splashing."
+  }
+ },
+ {
+  "id": "car-1780-Level1_2",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Water is visibly flowing across the road around the car's tires well beyond a small puddle."
+  }
+ },
+ {
+  "id": "car-517-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater covers the street and rises above the bottoms of the car's tires."
+  }
+ },
+ {
+  "id": "car-1914-Level1_3",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Water visibly covers the street around the cars well beyond a small puddle."
+  }
+ },
+ {
+  "id": "car-1458-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Image is very blurry but the ground around the car's tyre looks wet and muddy without clearly showing water above tyre contact."
+  }
+ },
+ {
+  "id": "car-1648-Level1_3",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Floodwater is visibly flowing on the street and rising above the bottom of the SUV's tyres."
+  }
+ },
+ {
+  "id": "car-1033-Level1_15",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry tight crop shows wet muddy ground around cars but water rising above tyre contact is not clearly visible."
+  }
+ },
+ {
+  "id": "car-1713-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Floodwater covers the street and rises above the bottom of the vehicle's tires."
+  }
+ },
+ {
+  "id": "car-498-Level1_7",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Ground appears wet and reflective but no water is seen rising above the tyres due to blur and tight crop."
+  }
+ },
+ {
+  "id": "car-1623-Level1_5",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The image is dark and blurry so no water above tyre contact is visible but wet ground cannot be ruled out."
+  }
+ },
+ {
+  "id": "car-659-Level1_5",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The ground around the car looks like brown water but blur prevents confirming water rising above the tyre contact."
+  }
+ },
+ {
+  "id": "car-1637-Level1_3",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Ground around the car looks wet with possible shallow water but blur prevents seeing water rise above tyre contact."
+  }
+ },
+ {
+  "id": "car-659-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "The white car is surrounded by widespread muddy water covering the ground beyond a puddle."
+  }
+ },
+ {
+  "id": "car-1806-Level1_3",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry splash around the van suggests water but tyre contact is obscured so depth above ground cannot be confirmed."
+  }
+ },
+ {
+  "id": "car2-66-Level1_1",
+  "level": 1,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater covers the street and visibly rises around the tires above their ground contact."
+  }
+ },
+ {
+  "id": "car-1146-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater surrounds the car and rises well above the bottom of its tires."
+  }
+ },
+ {
+  "id": "car-573-Level2_8",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Murky brown standing water covers a large paved area beside and behind the car beyond a small puddle."
+  }
+ },
+ {
+  "id": "car-1434-Level2_3",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Ground around cars looks wet with possible shallow water but blur prevents seeing water rising above tire contact."
+  }
+ },
+ {
+  "id": "car-606-Level2_3",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Brown floodwater covers the ground and rises above the car's tires and the person's feet."
+  }
+ },
+ {
+  "id": "car-596-Level2_9",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy water surrounds the car and covers its lower body up to the grille well above the tyres."
+  }
+ },
+ {
+  "id": "car-1306-Level2_2",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Ground around the car looks wet and reflective but blur prevents seeing water rise above tyre contact."
+  }
+ },
+ {
+  "id": "car-2042-Level2_4",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry image shows ground around car that looks like muddy water but water level at tyres cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-2233-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Heavy spray and blur hide where the tires meet the ground so water depth cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-1346-Level2_3",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Murky water covers the ground and rises above the bottoms of the car tires."
+  }
+ },
+ {
+  "id": "car-828-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Water visibly covers and flows across the street around the car with splash rising around the bumper."
+  }
+ },
+ {
+  "id": "car-2132-Level2_3",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Murky water covers the street and rises above the bottoms of the cars' tires."
+  }
+ },
+ {
+  "id": "car-1397-Level2_4",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Turbulent floodwater covers the street and rises around the car's bumper well above the tyre contact patch."
+  }
+ },
+ {
+  "id": "car-2097-Level2_6",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater surrounds cars and rises well above tyre bottoms across the street."
+  }
+ },
+ {
+  "id": "car-1427-Level2_2",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Heavy blur and tight cropping hide the tire-ground contact so surrounding wetness cannot be confirmed as standing floodwater."
+  }
+ },
+ {
+  "id": "car-2195-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater covers the street and rises well above the bottom of the car's tyres."
+  }
+ },
+ {
+  "id": "car-1195-Level2_2",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Standing murky water covers the roadway around the car beyond a small puddle."
+  }
+ },
+ {
+  "id": "car-1939-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Floodwater visibly covers the street and rises above the bottom of the car's tyres."
+  }
+ },
+ {
+  "id": "car-573-Level2_9",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater covers the entire ground around both cars beyond a small puddle."
+  }
+ },
+ {
+  "id": "car-421-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Standing floodwater covers the street and rises above the bottom of the car's tires."
+  }
+ },
+ {
+  "id": "car-2249-Level2_1",
+  "level": 2,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Standing floodwater surrounds the van and rises above the bottom of its tyres."
+  }
+ },
+ {
+  "id": "car-1608-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy water surrounds the vehicle and rises up its rear bodywork well above tyre level."
+  }
+ },
+ {
+  "id": "car-1690-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Floodwater visibly covers the street and rises well above the bottom of the car's tyres."
+  }
+ },
+ {
+  "id": "car-2108-Level3_5",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Cars are submerged in murky water rising far above the bottom of their tyres."
+  }
+ },
+ {
+  "id": "car-516-Level3_5",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater surrounds the vehicles and rises well above the bottoms of the tyres up the doors."
+  }
+ },
+ {
+  "id": "car-1206-Level3_2",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry overhead view shows a car surrounded by a brown expanse that may be muddy water but no clear waterline above the tyres is visible."
+  }
+ },
+ {
+  "id": "car-1959-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Standing water surrounds the red car and rises well above the bottom of its tyres."
+  }
+ },
+ {
+  "id": "car-752-Level3_3",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A vehicle is almost completely submerged in murky water rising far above its tyres."
+  }
+ },
+ {
+  "id": "car-501-Level3_5",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Street around vehicles looks wet and possibly water-covered but blur prevents confirming water above tire contact."
+  }
+ },
+ {
+  "id": "car-1859-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A van is partially submerged in muddy brown water rising well above its tires."
+  }
+ },
+ {
+  "id": "car-2108-Level3_8",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A white car is surrounded by extensive murky standing water covering the ground beyond a small puddle."
+  }
+ },
+ {
+  "id": "car-1665-Level3_33",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry overhead view suggests surrounding ground may be covered in water but no waterline above tyre contact is visible."
+  }
+ },
+ {
+  "id": "car-1014-Level3_2",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A silver sedan is submerged in brown floodwater rising well above the bottom of its tyres."
+  }
+ },
+ {
+  "id": "car-2280-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Vehicles are submerged in brown standing water rising to their doors."
+  }
+ },
+ {
+  "id": "car-248-Level3_2",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry overhead view shows car surrounded by brown area that may be floodwater but water level at tyres cannot be confirmed."
+  }
+ },
+ {
+  "id": "car-651-Level3_5",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Both cars are surrounded by extensive brown floodwater covering the ground."
+  }
+ },
+ {
+  "id": "car-1071-Level3_2",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A car is surrounded by extensive murky standing water covering the ground."
+  }
+ },
+ {
+  "id": "car-1845-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A car is submerged to door level in murky standing water covering the street."
+  }
+ },
+ {
+  "id": "car-1849-Level3_1",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": true,
+   "reason": "The SUV's front is engulfed in flowing water up to the headlights, well above the bottom of its tyres."
+  }
+ },
+ {
+  "id": "car-1665-Level3_59",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The ground around the cars looks wet and muddy but blur and overhead angle prevent confirming water above tire level."
+  }
+ },
+ {
+  "id": "car-76-Level3_3",
+  "level": 3,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Blue car is visibly submerged in murky water rising to its doors, well above the bottom of its tyres."
+  }
+ },
+ {
+  "id": "car-2214-Level4_7",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Water surrounds both cars and rises to the doors and windows well above the tyres."
+  }
+ },
+ {
+  "id": "car2-68-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater surrounds the car and rises to the doors well above the tyre bottoms with flooded ground extending behind."
+  }
+ },
+ {
+  "id": "car-607-Level4_3",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Heavy blur and tight cropping hide tyre ground contact but brownish tones around vehicles suggest possible muddy water."
+  }
+ },
+ {
+  "id": "car-104-Level4_2",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Image is extremely blurry but shows what may be muddy water around a vehicle without visible ground contact to confirm depth."
+  }
+ },
+ {
+  "id": "car-576-Level4_2",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy brown water is visibly rising against the side of the white van."
+  }
+ },
+ {
+  "id": "car-248-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Image is extremely blurry and dark so water depth at the tyres cannot be seen but the ground around the car looks wet or submerged."
+  }
+ },
+ {
+  "id": "car4-61-Level4_4",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A car is nearly submerged with water reaching its roofline."
+  }
+ },
+ {
+  "id": "car-135-Level4_7",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Brown floodwater submerges parked cars well above tire level."
+  }
+ },
+ {
+  "id": "car-2322-Level4_3",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Heavily blurred tight crop shows a car surrounded by pale area that may be water but no tyre waterline is visible."
+  }
+ },
+ {
+  "id": "car-441-Level4_4",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy brown water covers the entire ground area around the car and rises against its body."
+  }
+ },
+ {
+  "id": "car-2212-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Vehicles are submerged to near roof level in brown floodwater."
+  }
+ },
+ {
+  "id": "car-1682-Level4_11",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry overhead view shows car surrounded by tan area that may be muddy water but no clear waterline above ground contact is visible."
+  }
+ },
+ {
+  "id": "car-499-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A white car is almost completely submerged with muddy water rising to its roof, far above the tyres."
+  }
+ },
+ {
+  "id": "car-210-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Murky brown water rises well above the tyres to cover the car's lower doors."
+  }
+ },
+ {
+  "id": "car-2214-Level4_6",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Muddy floodwater surrounds multiple vehicles rising well above tyre level across a wide area."
+  }
+ },
+ {
+  "id": "car-1875-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "A car is submerged in murky water up to its windows, well above the bottom of its tyres."
+  }
+ },
+ {
+  "id": "car-2108-Level4_2",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "The white car is surrounded by water rising to its windshield, well above the bottom of its tyres."
+  }
+ },
+ {
+  "id": "car-1593-Level4_1",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "clear",
+   "looks_staged_or_stock": false,
+   "reason": "Two cars are submerged to their roofs in murky brown floodwater."
+  }
+ },
+ {
+  "id": "car-607-Level4_2",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Blurry tightly cropped cars appear surrounded by murky brown substance that may be floodwater but no clear waterline above tyres is visible."
+  }
+ },
+ {
+  "id": "car-2214-Level4_5",
+  "level": 4,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "Brown murky surroundings suggest water around the cars but blur and tight cropping hide the waterline at the tyres."
+  }
+ },
+ {
+  "id": "n00",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Historic street scene shows dry pavement with parked cars and pedestrians and no standing water."
+  }
+ },
+ {
+  "id": "n04",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Gravel parking area and surrounding ground appear dry with no standing water visible."
+  }
+ },
+ {
+  "id": "n07",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "possible",
+   "looks_staged_or_stock": false,
+   "reason": "The road is wet with spray from vehicles but no water is seen rising above the tyres' contact point."
+  }
+ },
+ {
+  "id": "n18",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Ground is only wet from the pressure-washer spray with no standing water above the tyre or foot contact."
+  }
+ },
+ {
+  "id": "n22",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "The pavement and grass around the car wash are dry with no standing water visible."
+  }
+ },
+ {
+  "id": "n24",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": true,
+   "reason": "The water is contained within a tiled swimming pool showing palm reflections, not floodwater on a street."
+  }
+ },
+ {
+  "id": "n28",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": true,
+   "reason": "The only water is a contained swimming pool with dry surrounding decks and no floodwater visible."
+  }
+ },
+ {
+  "id": "n36",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Empty covered parking deck shows only stained concrete with no standing or flowing floodwater."
+  }
+ },
+ {
+  "id": "n38",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Indoor multi-storey car park with dry concrete floors and parked cars shows no standing water."
+  }
+ },
+ {
+  "id": "n40",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Indoor parking garage shows dry floors with no standing or flowing water."
+  }
+ },
+ {
+  "id": "n47",
+  "level": -1,
+  "verdict": {
+   "flood_evidence": "none",
+   "looks_staged_or_stock": false,
+   "reason": "Busy street traffic is visible on dry asphalt with no standing or flowing water."
+  }
+ }
+]

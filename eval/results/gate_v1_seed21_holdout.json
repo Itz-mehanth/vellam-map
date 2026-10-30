@@ -1,0 +1,1502 @@
+[
+ {
+  "id": "car-518-Level0_2",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Image is too blurry to clearly show floodwater covering the street beyond a puddle."
+  }
+ },
+ {
+  "id": "car-1394-Level0_1",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 0,
+   "depth_cm_high": 2,
+   "depth_reference": "car wheels fully visible with no submersion",
+   "reason": "Street is only wet from rain with car wheels fully exposed and no floodwater reaching wheels or covering road."
+  }
+ },
+ {
+  "id": "car-119-Level0_6",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Road appears merely wet with no clear standing water reaching wheels or kerbs."
+  }
+ },
+ {
+  "id": "car-1205-Level0_1",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "No standing water is visible, only a car on a damp wooded road with no flooding."
+  }
+ },
+ {
+  "id": "car-469-Level0_4",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry overhead view shows a parked car with no clear floodwater covering the ground."
+  }
+ },
+ {
+  "id": "car-1633-Level0_2",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry front view of car on wet pavement shows no standing water reaching wheels, kerbs, or legs."
+  }
+ },
+ {
+  "id": "car-1410-Level0_1",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Car parked on damp pavement with no standing floodwater covering road or reaching wheels."
+  }
+ },
+ {
+  "id": "car-117-Level0_7",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Image is too blurry and cropped to clearly show floodwater covering the street."
+  }
+ },
+ {
+  "id": "car-120-Level0_5",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Wet ground is visible but no clear standing floodwater covering the road or reaching up the wheels."
+  }
+ },
+ {
+  "id": "car-1529-Level0_1",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 0,
+   "depth_cm_high": 2,
+   "depth_reference": "vehicle wheel",
+   "reason": "Ground is only damp with small puddles and no water covering wheels or feet."
+  }
+ },
+ {
+  "id": "car-1709-Level0_3",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry rear view shows only muddy wet ground without clear deep water reaching wheels, kerbs, or doors."
+  }
+ },
+ {
+  "id": "car-1803-Level0_1",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Car is covered in snow with only snow and wet ground visible and no standing floodwater."
+  }
+ },
+ {
+  "id": "car-317-Level0_3",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": false,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Close-up of muddy vehicle front shows no clear street or ground floodwater coverage."
+  }
+ },
+ {
+  "id": "car-2224-Level0_1",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "No standing floodwater visible, only a car tilted into muddy collapsed ground."
+  }
+ },
+ {
+  "id": "car-1239-Level0_1",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Road is only wet with no standing floodwater reaching wheels, kerbs, or legs."
+  }
+ },
+ {
+  "id": "car-142-Level0_1",
+  "level": 0,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 5,
+   "depth_cm_high": 20,
+   "depth_reference": "vehicle wheel (~60 cm)",
+   "reason": "Muddy floodwater covers the street around the car well beyond a puddle."
+  }
+ },
+ {
+  "id": "car-103-Level0_10",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Image is too blurry and cropped to show clear floodwater covering street."
+  }
+ },
+ {
+  "id": "car-119-Level0_5",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 0,
+   "depth_cm_high": 5,
+   "depth_reference": "vehicle wheel",
+   "reason": "Road surface is only wet with no clear standing floodwater reaching wheels or legs."
+  }
+ },
+ {
+  "id": "car-604-Level0_5",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 5,
+   "depth_cm_high": 15,
+   "depth_reference": "vehicle wheel ~60 cm",
+   "reason": "Blurry crop shows only shallow water at tire base without clear wide street flooding."
+  }
+ },
+ {
+  "id": "car-926-Level0_3",
+  "level": 0,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry overexposed street view shows possible shallow spray but no clear floodwater reaching wheels or covering the road."
+  }
+ },
+ {
+  "id": "car-365-Level1_1",
+  "level": 1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 5,
+   "depth_cm_high": 15,
+   "depth_reference": "vehicle wheel ~60 cm",
+   "reason": "Car creating splash through shallow water without clear deep water reaching wheels, kerbs or doors."
+  }
+ },
+ {
+  "id": "car2-31-Level1_1",
+  "level": 1,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 15,
+   "depth_cm_high": 30,
+   "depth_reference": "vehicle wheel ~60 cm",
+   "reason": "Muddy floodwater covers the whole road and submerges the lower wheels of the sedan."
+  }
+ },
+ {
+  "id": "car-392-Level1_2",
+  "level": 1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Cropped rear view shows water around vehicle but wheels, depth markers and full road extent are not clearly visible."
+  }
+ },
+ {
+  "id": "car-2346-Level1_1",
+  "level": 1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 5,
+   "depth_cm_high": 15,
+   "depth_reference": "vehicle wheel",
+   "reason": "Cropped low-resolution view shows only shallow water at car wheels without clear widespread street flooding."
+  }
+ },
+ {
+  "id": "car-552-Level1_3",
+  "level": 1,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 10,
+   "depth_cm_high": 25,
+   "depth_reference": "vehicle wheel ~60 cm",
+   "reason": "Brown floodwater covers the whole street and reaches the lower wheels and bumper of the SUV."
+  }
+ },
+ {
+  "id": "car-1720-Level1_1",
+  "level": 1,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 30,
+   "depth_cm_high": 50,
+   "depth_reference": "adult knee ~50 cm and vehicle wheel ~60 cm",
+   "reason": "Muddy floodwater covers the whole road and reaches people's calves/knees and the van's wheels while people push the stranded van."
+  }
+ },
+ {
+  "id": "car-1623-Level1_4",
+  "level": 1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry night image shows only wet reflective road with no clear standing water reaching wheels."
+  }
+ },
+ {
+  "id": "car-1448-Level1_1",
+  "level": 1,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 5,
+   "depth_cm_high": 15,
+   "depth_reference": "vehicle wheel ~60 cm",
+   "reason": "Muddy floodwater covers the whole road and reaches the lower wheels of the SUV."
+  }
+ },
+ {
+  "id": "car-1637-Level1_6",
+  "level": 1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Road looks merely wet with no clear standing floodwater reaching wheels, kerbs, or legs."
+  }
+ },
+ {
+  "id": "car-813-Level1_1",
+  "level": 1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 5,
+   "depth_cm_high": 15,
+   "depth_reference": "car wheel ~60 cm, water below rim",
+   "reason": "Car kick-up splash dominates view with only shallow water around wheels and no clear wide road inundation."
+  }
+ },
+ {
+  "id": "car-1750-Level1_3",
+  "level": 1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": false,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry indoor-like view of a car with indistinct wet floor but no clear outdoor street flooding."
+  }
+ },
+ {
+  "id": "car-201-Level1_2",
+  "level": 1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry car on wet pavement with no clear standing water reaching wheels or covering road."
+  }
+ },
+ {
+  "id": "car-1919-Level1_2",
+  "level": 1,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 15,
+   "depth_cm_high": 30,
+   "depth_reference": "car wheel ~60 cm and adult ankle",
+   "reason": "Floodwater covers the whole street reaching the car's lower wheels and a person's ankles."
+  }
+ },
+ {
+  "id": "car-693-Level1_1",
+  "level": 1,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 15,
+   "depth_cm_high": 30,
+   "depth_reference": "vehicle wheel ~60 cm and lower taxi door",
+   "reason": "Floodwater covers the whole road and reaches the taxi wheels and lower doors well beyond a puddle."
+  }
+ },
+ {
+  "id": "car-422-Level1_2",
+  "level": 1,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "White SUV is surrounded on all sides by murky brown water covering all visible ground."
+  }
+ },
+ {
+  "id": "car-949-Level1_1",
+  "level": 1,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": true,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 20,
+   "depth_cm_high": 40,
+   "depth_reference": "vehicle wheel (~60 cm)",
+   "reason": "Rear of SUV shows water covering the entire road with deep splash around wheels during heavy rain."
+  }
+ },
+ {
+  "id": "car-662-Level1_2",
+  "level": 1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 5,
+   "depth_cm_high": 15,
+   "depth_reference": "car wheel ~60 cm with splash at lower rim",
+   "reason": "Car is splashing through shallow water with no clear widespread street inundation."
+  }
+ },
+ {
+  "id": "car-1191-Level1_1",
+  "level": 1,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": true,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 10,
+   "depth_cm_high": 25,
+   "depth_reference": "vehicle wheel ~60 cm",
+   "reason": "Floodwater covers the whole road and reaches the van's lower wheels."
+  }
+ },
+ {
+  "id": "car-975-Level1_1",
+  "level": 1,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 10,
+   "depth_cm_high": 25,
+   "depth_reference": "vehicle wheel ~60 cm, water covering lower tyre",
+   "reason": "Floodwater covers the whole ground area and reaches the lower wheels of the car."
+  }
+ },
+ {
+  "id": "car-790-Level1_3",
+  "level": 1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Image is too blurry to confirm floodwater clearly covering a street or ground area."
+  }
+ },
+ {
+  "id": "car-403-Level2_3",
+  "level": 2,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry rear view of white car at night shows wet ground but no clear floodwater reaching wheels or covering road."
+  }
+ },
+ {
+  "id": "car-360-Level2_4",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 10,
+   "depth_cm_high": 20,
+   "depth_reference": "adult ankle/foot and car rear bumper clearance",
+   "reason": "Murky water covers all visible ground reaching the pedestrian's feet and the car's lower bumper."
+  }
+ },
+ {
+  "id": "car-117-Level2_8",
+  "level": 2,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Image is too cropped and blurry to confirm widespread flooding, showing only turbulent splash in front of vehicle."
+  }
+ },
+ {
+  "id": "car-2006-Level2_3",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 15,
+   "depth_cm_high": 35,
+   "depth_reference": "car front bumper and wheel height",
+   "reason": "Muddy floodwater covers the whole ground and reaches the car's lower bumper well beyond a puddle."
+  }
+ },
+ {
+  "id": "car2-42-Level2_5",
+  "level": 2,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Tight crop shows only localized muddy splash around the wheel without clear widespread street flooding."
+  }
+ },
+ {
+  "id": "car-445-Level2_1",
+  "level": 2,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Extremely blurry night shot shows car lights but no clear floodwater reaching wheels, kerbs, or legs."
+  }
+ },
+ {
+  "id": "car-2042-Level2_5",
+  "level": 2,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry low-resolution view cannot clearly confirm muddy floodwater versus sand and lacks a clear depth reference."
+  }
+ },
+ {
+  "id": "car-899-Level2_1",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 40,
+   "depth_cm_high": 60,
+   "depth_reference": "vehicle wheel ~60 cm and lower doors submerged",
+   "reason": "Floodwater covers the entire street and submerges car wheels up to the lower doors."
+  }
+ },
+ {
+  "id": "car2-8-Level2_3",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "thigh",
+   "depth_cm_low": 60,
+   "depth_cm_high": 90,
+   "depth_reference": "van side door and handle height",
+   "reason": "Floodwater fills underpass and submerges lower van doors well beyond a puddle."
+  }
+ },
+ {
+  "id": "car-360-Level2_1",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 20,
+   "depth_cm_high": 40,
+   "depth_reference": "vehicle wheel ~60 cm and pedestrian ankles",
+   "reason": "Muddy water covers the whole street lot and submerges the lower wheels of cars and a pedestrian's ankles."
+  }
+ },
+ {
+  "id": "car-1300-Level2_1",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 40,
+   "depth_cm_high": 70,
+   "depth_reference": "vehicle bumper and headlights",
+   "reason": "Floodwater surrounds the vehicle on all sides and reaches the bumper just below the headlights."
+  }
+ },
+ {
+  "id": "car-1749-Level2_4",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 30,
+   "depth_cm_high": 60,
+   "depth_reference": "car wheel ~60 cm, water reaches wheels and lower doors",
+   "reason": "Floodwater covers the whole road and reaches the car's wheels and lower doors."
+  }
+ },
+ {
+  "id": "car-254-Level2_3",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 25,
+   "depth_cm_high": 40,
+   "depth_reference": "car front bumper and license plate height, adult lower legs",
+   "reason": "Muddy water covers the whole alley and reaches the car's front bumper and people's shins."
+  }
+ },
+ {
+  "id": "car-936-Level2_1",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 20,
+   "depth_cm_high": 40,
+   "depth_reference": "van wheel ~60 cm and front bumper height",
+   "reason": "Muddy floodwater covers the whole road and reaches the van wheels and lower bumper"
+  }
+ },
+ {
+  "id": "car-2260-Level2_4",
+  "level": 2,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry night image shows a splash bow wave but no clear widespread floodwater reaching wheels or covering street."
+  }
+ },
+ {
+  "id": "car-1739-Level2_1",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 30,
+   "depth_cm_high": 50,
+   "depth_reference": "vehicle wheel and lower door sill",
+   "reason": "Muddy floodwater covers the whole roadway and submerges the car's wheels up to the lower doors."
+  }
+ },
+ {
+  "id": "car-229-Level2_1",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "deeper",
+   "depth_cm_low": 90,
+   "depth_cm_high": 130,
+   "depth_reference": "car body submerged to windows, wheel ~60 cm",
+   "reason": "Sedan is submerged to its windows in muddy water covering the surrounding ground."
+  }
+ },
+ {
+  "id": "car-517-Level2_5",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 30,
+   "depth_cm_high": 50,
+   "depth_reference": "vehicle wheel ~60 cm and front bumper height",
+   "reason": "Muddy floodwater covers entire roadway and reaches the SUV's wheels and lower bumper."
+  }
+ },
+ {
+  "id": "car-1647-Level2_1",
+  "level": 2,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Car creates large splash but standing water depth and wide road coverage are not clearly visible."
+  }
+ },
+ {
+  "id": "car-2241-Level2_1",
+  "level": 2,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 10,
+   "depth_cm_high": 25,
+   "depth_reference": "vehicle wheel ~60 cm",
+   "reason": "Floodwater spreads across the street around the van reaching the lower wheels."
+  }
+ },
+ {
+  "id": "car-1173-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "waist",
+   "depth_cm_low": 80,
+   "depth_cm_high": 110,
+   "depth_reference": "sedan door and window sill height",
+   "reason": "Sedan is submerged to its doors/windows with water covering the entire street surface."
+  }
+ },
+ {
+  "id": "car-2107-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Rear of vehicle surrounded by standing water covering the entire visible road surface beyond a puddle."
+  }
+ },
+ {
+  "id": "car-1839-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "waist",
+   "depth_cm_low": 80,
+   "depth_cm_high": 110,
+   "depth_reference": "car hood/headlight submerged to windshield base",
+   "reason": "Car is submerged to the windshield with rescue boat nearby, showing deep floodwater far beyond a puddle."
+  }
+ },
+ {
+  "id": "car-711-Level3_5",
+  "level": 3,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Image is too blurry to clearly show floodwater covering street beyond a puddle."
+  }
+ },
+ {
+  "id": "car-1122-Level3_3",
+  "level": 3,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Image is too blurry to show floodwater clearly covering street or any depth reference."
+  }
+ },
+ {
+  "id": "car-856-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "deeper",
+   "depth_cm_low": 110,
+   "depth_cm_high": 150,
+   "depth_reference": "car body submerged to windows",
+   "reason": "Brown floodwater submerges a car to its windows across the street."
+  }
+ },
+ {
+  "id": "car-1185-Level3_4",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 40,
+   "depth_cm_high": 70,
+   "depth_reference": "car wheel ~60cm submerged to doors",
+   "reason": "Brown floodwater covers entire area submerging parked cars to wheels and lower doors."
+  }
+ },
+ {
+  "id": "car-458-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "thigh",
+   "depth_cm_low": 60,
+   "depth_cm_high": 90,
+   "depth_reference": "car hood height and submerged wheels",
+   "reason": "Murky floodwater covers a wide area and submerges the car up to the hood."
+  }
+ },
+ {
+  "id": "car-2130-Level3_3",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "thigh",
+   "depth_cm_low": 60,
+   "depth_cm_high": 90,
+   "depth_reference": "car wheel ~60 cm and mid-door submersion",
+   "reason": "Murky floodwater submerges two cars to mid-doors covering the entire ground area."
+  }
+ },
+ {
+  "id": "car-2013-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "thigh",
+   "depth_cm_low": 60,
+   "depth_cm_high": 80,
+   "depth_reference": "car wheel ~60 cm submerged to doors",
+   "reason": "Floodwater covers the whole street and submerges car wheels up to the doors."
+  }
+ },
+ {
+  "id": "car-2050-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 40,
+   "depth_cm_high": 60,
+   "depth_reference": "car wheel (~60 cm) fully submerged with waterline on doors",
+   "reason": "Muddy floodwater covers the whole street, fully submerges car wheels and reaches doors while people wade nearby."
+  }
+ },
+ {
+  "id": "car-1499-Level3_2",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "thigh",
+   "depth_cm_low": 60,
+   "depth_cm_high": 90,
+   "depth_reference": "small car wheel ~60cm and headlight/door height",
+   "reason": "Muddy floodwater submerges the car's wheels and lower doors across the whole scene well beyond a puddle."
+  }
+ },
+ {
+  "id": "car-1890-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 30,
+   "depth_cm_high": 50,
+   "depth_reference": "car wheel and lower door",
+   "reason": "Floodwater covers the street and reaches the car's wheels and lower doors well beyond a puddle."
+  }
+ },
+ {
+  "id": "car-633-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "waist",
+   "depth_cm_low": 70,
+   "depth_cm_high": 110,
+   "depth_reference": "car wheel ~60 cm fully submerged up to doors",
+   "reason": "Muddy floodwater covers wide ground area and submerges vehicle wheels and doors."
+  }
+ },
+ {
+  "id": "car-470-Level3_2",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "deeper",
+   "depth_cm_low": 120,
+   "depth_cm_high": 150,
+   "depth_reference": "submerged sedan car body",
+   "reason": "Sedan is almost fully submerged in muddy water covering the roadway well beyond a puddle."
+  }
+ },
+ {
+  "id": "car-1435-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "waist",
+   "depth_cm_low": 80,
+   "depth_cm_high": 110,
+   "depth_reference": "car hood and windshield base height",
+   "reason": "Brown floodwater submerges ambulance to hood level well beyond a puddle."
+  }
+ },
+ {
+  "id": "car-177-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Blurry night image shows only light glare and reflections without clear floodwater covering street or reaching vehicle reference points"
+  }
+ },
+ {
+  "id": "car-881-Level3_2",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "ankle",
+   "depth_cm_low": 15,
+   "depth_cm_high": 30,
+   "depth_reference": "car wheel ~60cm and rear bumper height",
+   "reason": "Muddy floodwater covers the street around the car rear up to the lower bodywork."
+  }
+ },
+ {
+  "id": "car-2349-Level3_1",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "thigh",
+   "depth_cm_low": 50,
+   "depth_cm_high": 80,
+   "depth_reference": "car wheel ~60 cm with water up to doors",
+   "reason": "Muddy floodwater covers surrounding ground and submerges car up to doors."
+  }
+ },
+ {
+  "id": "car-2341-Level3_2",
+  "level": 3,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "knee",
+   "depth_cm_low": 30,
+   "depth_cm_high": 60,
+   "depth_reference": "car wheel ~60 cm",
+   "reason": "Brown floodwater covers a wide area and submerges car wheels up to doors."
+  }
+ },
+ {
+  "id": "car-1725-Level4_1",
+  "level": 4,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "waist",
+   "depth_cm_low": 80,
+   "depth_cm_high": 120,
+   "depth_reference": "SUV wheels fully submerged with water to doors/windows",
+   "reason": "Muddy floodwater covers the roadway and submerges vehicles to door level."
+  }
+ },
+ {
+  "id": "car-1386-Level4_1",
+  "level": 4,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "deeper",
+   "depth_cm_low": 100,
+   "depth_cm_high": 140,
+   "depth_reference": "car submerged to window level, wheel ~60 cm",
+   "reason": "Muddy floodwater submerges cars to window level across outdoor area."
+  }
+ },
+ {
+  "id": "car-2322-Level4_1",
+  "level": 4,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "deeper",
+   "depth_cm_low": 110,
+   "depth_cm_high": 140,
+   "depth_reference": "car body submerged to windows and roof",
+   "reason": "Multiple cars are submerged to windows and roof by water covering the whole area."
+  }
+ },
+ {
+  "id": "car-289-Level4_3",
+  "level": 4,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "deeper",
+   "depth_cm_low": 130,
+   "depth_cm_high": 160,
+   "depth_reference": "SUV submerged to roof",
+   "reason": "SUV is submerged to its roof in murky water covering the whole street area."
+  }
+ },
+ {
+  "id": "car-2198-Level4_2",
+  "level": 4,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "deeper",
+   "depth_cm_low": 100,
+   "depth_cm_high": 130,
+   "depth_reference": "pickup windshield and side mirror height",
+   "reason": "Floodwater submerges pickup to windshield with people and dogs on roof during rescue."
+  }
+ },
+ {
+  "id": "car-376-Level4_2",
+  "level": 4,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": false,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Tight crop shows only murky water and unidentifiable blue object with no street, kerb, wheel or scale context."
+  }
+ },
+ {
+  "id": "car-52-Level4_3",
+  "level": 4,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "deeper",
+   "depth_cm_low": 120,
+   "depth_cm_high": 150,
+   "depth_reference": "car submerged to roof",
+   "reason": "Floodwater submerges a red car up to its roof well beyond wheels and doors."
+  }
+ },
+ {
+  "id": "car-1786-Level4_9",
+  "level": 4,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "deeper",
+   "depth_cm_low": 120,
+   "depth_cm_high": 150,
+   "depth_reference": "car roof height, only roof visible above water",
+   "reason": "Muddy floodwater submerges a car to its roof across the frame."
+  }
+ },
+ {
+  "id": "car-1789-Level4_1",
+  "level": 4,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "waist",
+   "depth_cm_low": 80,
+   "depth_cm_high": 120,
+   "depth_reference": "car body submerged to trunk and doors",
+   "reason": "Car is submerged to trunk and doors in widespread standing water."
+  }
+ },
+ {
+  "id": "car-1676-Level4_2",
+  "level": 4,
+  "verdict": {
+   "is_flood": true,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "waist",
+   "depth_cm_low": 80,
+   "depth_cm_high": 110,
+   "depth_reference": "car hood and windshield base",
+   "reason": "Muddy floodwater submerges multiple parked cars to hood level across a wide area."
+  }
+ },
+ {
+  "id": "n02",
+  "level": -1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Road and parking area are only wet with no standing floodwater covering street or reaching wheels or kerbs."
+  }
+ },
+ {
+  "id": "n06",
+  "level": -1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": true,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Close-up shows only tire spray from shallow water with no visible flooded street area."
+  }
+ },
+ {
+  "id": "n10",
+  "level": -1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": true,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "View shows only raindrops on glass over a blurred street with no floodwater clearly covering road or ground."
+  }
+ },
+ {
+  "id": "n19",
+  "level": -1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": true,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Dry car wash and street with no standing water visible."
+  }
+ },
+ {
+  "id": "n23",
+  "level": -1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": false,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Car wash yard with only damp wet concrete and no standing floodwater covering street or reaching wheels."
+  }
+ },
+ {
+  "id": "n26",
+  "level": -1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": false,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Image shows a resort swimming pool on a sunny patio, not floodwater covering a street."
+  }
+ },
+ {
+  "id": "n29",
+  "level": -1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": false,
+   "looks_staged_or_stock": true,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Image shows a clear resort swimming pool reflecting hotel buildings, not floodwater covering a street."
+  }
+ },
+ {
+  "id": "n37",
+  "level": -1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": false,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Dry multi-storey car park with no standing water visible."
+  }
+ },
+ {
+  "id": "n39",
+  "level": -1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": true,
+   "is_outdoor_street": false,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Indoor underground garage shows only thin wet sheen, not floodwater covering street to wheels or kerbs."
+  }
+ },
+ {
+  "id": "n41",
+  "level": -1,
+  "verdict": {
+   "is_flood": false,
+   "is_puddle_or_splash": false,
+   "is_outdoor_street": false,
+   "looks_staged_or_stock": false,
+   "water_depth_hint": "unknown",
+   "depth_cm_low": null,
+   "depth_cm_high": null,
+   "depth_reference": null,
+   "reason": "Indoor parking garage with dry painted floor and parked cars shows no floodwater."
+  }
+ }
+]

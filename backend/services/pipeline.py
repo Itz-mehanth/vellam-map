@@ -157,12 +157,16 @@ def decide(duplicate_of, verdict: dict, depth_cm, meta: dict | None = None) -> s
         return "rejected_duplicate"
     if meta.get("stale"):
         return "rejected_stale"
-    if verdict.get("is_flood") is False or verdict.get("is_puddle_or_splash") or verdict.get("looks_staged_or_stock"):
+    if verdict.get("is_flood") is False or verdict.get("looks_staged_or_stock"):
         return "rejected_not_flood"
     if meta.get("mismatch"):
         return "flood_review"
+    if depth_cm is not None and cross_check(depth_cm, verdict) == "disagree":
+        return "flood_review"
+    if verdict.get("flood_evidence") == "possible":
+        return "flood_unconfirmed"  # water seems present but the photo cannot confirm it: shown, flagged
     if depth_cm is not None:
-        return "flood_review" if cross_check(depth_cm, verdict) == "disagree" else "verified"
+        return "verified"
     has_visual = verdict.get("depth_cm_low") is not None and verdict.get("depth_cm_high") is not None
     return "flood_visual_estimate" if has_visual else "flood_unmeasured"
 

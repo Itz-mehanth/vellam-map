@@ -187,9 +187,10 @@ Hosting it publicly is optional and best done with care for your key; see [docs/
 
 - **Never "safe".** The app and its Q&A agent show estimated depth, uncertainty and age, and never say a road is
   safe. Estimates carry error bars; guesses and review cases are labelled, not hidden.
-- **Verification before the map.** Real flood (not a puddle or splash), original photo, not a duplicate, taken
-  in the last three days, taken near where it was reported, and geometry agreeing with the visual estimate.
-  Missing metadata counts as unknown, never as a failure.
+- **Verification before the map.** Flood evidence graded clear, possible or none (only "none" is rejected;
+  "possible" is shown as unconfirmed), original photo, not a duplicate, taken in the last three days, taken near
+  where it was reported, and geometry agreeing with the visual estimate. Missing metadata counts as unknown,
+  never as a failure.
 - **Privacy.** SAM 3.1 finds faces and licence plates and they are blurred before any image is stored. If that
   detection fails, no image is kept. Only published reports serve images. Blurring depends on SAM finding every
   face and plate, so small or partly hidden ones can be missed.
@@ -214,8 +215,9 @@ depth *levels* (five ordered levels, not centimetres; full write-up in [docs/BEN
 ![The app's Benchmark tab: scorecards, predicted depth by true level, confusion matrix, coverage and the verification gate](docs/img/benchmark.jpg)
 
 So on this data the by-eye estimate ranks depth well and the wheel geometry is **not yet reliable**: it read only
-12 photos and reads low. The verification gate correctly rejected 19 of 20 dry cars but also wrongly rejected
-16 of 80 real floods (20%). The same benchmark found and fixed a bug (impossible 2 to 6 m readings from a bad
+12 photos and reads low. The first verification gate also wrongly rejected 16 of 80 real floods (20%); it now grades
+its evidence instead of forcing yes or no, which cut that to 1 of 70 on photos it was never tuned on (33% before),
+at the cost of flagging about a third of real floods as "unconfirmed" ([details](docs/BENCHMARK.md)). The same benchmark found and fixed a bug (impossible 2 to 6 m readings from a bad
 circle fit). Caveats: 100 photos, one sample, and the dataset's cropped, upscaled car images give geometry less
 to work with than a phone photo would. The depth maths is also validated on synthetic wheels (recovered within
 0.5 cm), which does not validate SAM's masks on real photos. The two estimates are cross-checked, and
