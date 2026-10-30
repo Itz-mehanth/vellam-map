@@ -4,6 +4,7 @@ import json
 import os
 import sqlite3
 import time
+from contextlib import contextmanager
 from pathlib import Path
 
 DB_PATH = Path(os.getenv("DB_PATH") or Path(__file__).resolve().parents[1] / "vellam.db")
@@ -35,10 +36,21 @@ def _conn() -> sqlite3.Connection:
     return conn
 
 
+@contextmanager
+def _db():
+    """A connection that commits on success and, unlike `with sqlite3.connect()`, is always closed."""
+    conn = _conn()
+    try:
+        with conn:
+            yield conn
+    finally:
+        conn.close()
+
+
 def add_report(lat, lng, phash, depth_cm, uncertainty_cm, status, verdict: dict,
                place: str | None = None, is_demo: bool = False, created_at: float | None = None,
                evidence: dict | None = None) -> int:
-    with _conn() as c:
+    with _db() as c:
         cur = c.execute(
             "INSERT INTO reports (created_at, lat, lng, phash, depth_cm, uncertainty_cm, status, verdict, place, is_demo, evidence)"
             " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -65,19 +77,19 @@ def media_path(report_id: int, kind: str) -> Path | None:
 
 
 def get_report(report_id: int):
-    with _conn() as c:
+    with _db() as c:
         return c.execute("SELECT * FROM reports WHERE id = ?", (report_id,)).fetchone()
 
 
 def all_reports() -> list[sqlite3.Row]:
-    with _conn() as c:
+    with _db() as c:
         return c.execute("SELECT * FROM reports ORDER BY created_at DESC").fetchall()
 
 
 def published_reports(max_age_hours: float | None = None) -> list[sqlite3.Row]:
     cutoff = time.time() - max_age_hours * 3600 if max_age_hours else 0
     marks = ",".join("?" * len(PUBLISHED))
-    with _conn() as c:
+    with _db() as c:
         return c.execute(
             f"SELECT * FROM reports WHERE status IN ({marks}) AND created_at >= ? ORDER BY created_at DESC",
             (*PUBLISHED, cutoff),
@@ -89,12 +101,12 @@ def delete_report(report_id: int) -> bool:
         p = media_path(report_id, kind)
         if p:
             p.unlink(missing_ok=True)
-    with _conn() as c:
+    with _db() as c:
         return c.execute("DELETE FROM reports WHERE id = ?", (report_id,)).rowcount > 0
 
 
 def clear_demo() -> int:
-    with _conn() as c:
+    with _db() as c:
         return c.execute("DELETE FROM reports WHERE is_demo = 1").rowcount
 
 

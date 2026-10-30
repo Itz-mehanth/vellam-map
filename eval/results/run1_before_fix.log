@@ -1,0 +1,69 @@
+50 photos (10 per level, seed 7), 3 at a time
+[  1/50] L0 car-556-Level0_2.jpg       geometry       -  by-eye None  
+[  2/50] L0 car2-42-Level0_2.jpg       geometry    2 cm  by-eye 2.5  
+[  3/50] L0 car2-26-Level0_3.jpg       geometry    1 cm  by-eye None  
+[  4/50] L0 car-1199-Level0_1.jpg      geometry       -  by-eye 3.5  
+[  5/50] L0 car-1763-Level0_2.jpg      geometry       -  by-eye 6.0  
+[  6/50] L0 car-916-Level0_6.jpg       geometry       -  by-eye None  
+[  7/50] L0 car-42-Level0_2.jpg        geometry       -  by-eye None  
+[  8/50] L0 car-1044-Level0_1.jpg      geometry       -  by-eye None  
+[  9/50] L0 car-2143-Level0_2.jpg      geometry       -  by-eye None  
+[ 10/50] L0 car-988-Level0_2.jpg       geometry   13 cm  by-eye None  
+[ 11/50] L1 car-1406-Level1_2.jpg      geometry       -  by-eye 10.0  
+[ 12/50] L1 car-365-Level1_1.jpg       geometry       -  by-eye None  
+[ 13/50] L1 car-700-Level1_1.jpg       geometry       -  by-eye None  
+[ 14/50] L1 car2-66-Level1_1.jpg       geometry    4 cm  by-eye 15.0  
+[ 15/50] L1 car-2355-Level1_1.jpg      geometry       -  by-eye 10.0  
+[ 16/50] L1 car-790-Level1_3.jpg       geometry       -  by-eye None  
+[ 17/50] L1 car-1780-Level1_2.jpg      geometry       -  by-eye 17.5  
+[ 18/50] L1 car-645-Level1_2.jpg       geometry   45 cm  by-eye 22.5  
+[ 19/50] L1 car-493-Level1_1.jpg       geometry       -  by-eye None  
+[ 20/50] L1 car-2244-Level1_1.jpg      geometry       -  by-eye 55.0  
+[ 21/50] L2 car-1300-Level2_1.jpg      geometry       -  by-eye 45.0  
+[ 22/50] L2 car-2132-Level2_3.jpg      geometry  203 cm  by-eye 30.0  
+[ 23/50] L2 car-476-Level2_6.jpg       geometry    3 cm  by-eye 40.0  
+[ 24/50] L2 car-1350-Level2_2.jpg      geometry       -  by-eye 30.0  
+[ 25/50] L2 car-573-Level2_8.jpg       geometry       -  by-eye 12.5  
+[ 26/50] L2 car-564-Level2_3.jpg       geometry  614 cm  by-eye 35.0  
+[ 27/50] L2 car-1397-Level2_4.jpg      geometry  402 cm  by-eye 30.0  
+[ 28/50] L2 car-1969-Level2_3.jpg      geometry       -  by-eye 70.0  
+[ 29/50] L2 car-640-Level2_1.jpg       geometry       -  by-eye 50.0  
+[ 30/50] L2 car-1434-Level2_3.jpg      geometry       -  by-eye None  
+[ 31/50] L3 car-1845-Level3_1.jpg      geometry       -  by-eye 77.5  
+[ 32/50] L3 car-1499-Level3_2.jpg      geometry       -  by-eye 75.0  
+[ 33/50] L3 car-1071-Level3_2.jpg      geometry       -  by-eye 52.5  
+[ 34/50] L3 car-2130-Level3_3.jpg      geometry       -  by-eye 75.0  
+[ 35/50] L3 car-1122-Level3_3.jpg      geometry       -  by-eye None  
+[ 36/50] L3 car-470-Level3_2.jpg       geometry       -  by-eye 125.0  
+[ 37/50] L3 car-1890-Level3_1.jpg      geometry       -  by-eye 40.0  
+[ 38/50] L3 car-651-Level3_5.jpg       geometry       -  by-eye 37.5  
+[ 39/50] L3 car-1206-Level3_2.jpg      geometry       -  by-eye 100.0  
+[ 40/50] L3 car-2013-Level3_1.jpg      geometry       -  by-eye 70.0  
+[ 41/50] L4 car-441-Level4_4.jpg       geometry       -  by-eye 100.0  
+[ 42/50] L4 car-2198-Level4_2.jpg      geometry       -  by-eye 135.0  
+[ 43/50] L4 car-2214-Level4_7.jpg      geometry       -  by-eye 95.0  
+[ 44/50] L4 car-135-Level4_7.jpg       geometry       -  by-eye 97.5  
+[ 45/50] L4 car-376-Level4_2.jpg       geometry       -  by-eye None  
+[ 46/50] L4 car-2212-Level4_1.jpg      geometry       -  by-eye 135.0  
+[ 47/50] L4 car2-68-Level4_1.jpg       geometry       -  by-eye 75.0  
+[ 48/50] L4 car-1786-Level4_9.jpg      geometry       -  by-eye 135.0  
+[ 49/50] L4 car-1676-Level4_2.jpg      geometry       -  by-eye 105.0  
+[ 50/50] L4 car-210-Level4_1.jpg       geometry       -  by-eye 75.0  
+Traceback (most recent call last):
+  File "C:\Users\mehan\vellam-map\eval\benchmark_flooded_cars.py", line 200, in <module>
+    self_test() if a.self_test else asyncio.run(main(a.per_level, a.seed, a.concurrency))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\mehan\vellam-map\eval\benchmark_flooded_cars.py", line 180, in main
+    store.DB_PATH.unlink(missing_ok=True)
+  File "C:\Users\mehan\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1342, in unlink
+    os.unlink(self)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\mehan\\vellam-map\\eval\\benchmark.db'

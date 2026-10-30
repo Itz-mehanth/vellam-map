@@ -20,6 +20,7 @@ What this can and cannot show
 
 import argparse
 import asyncio
+import contextlib
 import csv
 import random
 import statistics
@@ -177,7 +178,6 @@ async def main(per_level: int, seed: int, concurrency: int) -> None:
         rows.append(r)
         g = f"{r['geometry_cm']:.0f} cm" if r["geometry_cm"] is not None else "-"
         print(f"[{i:>3}/{len(items)}] L{r['level']} {r['file']:<26} geometry {g:>7}  by-eye {r['visual_mid']}  {r.get('error', '')}", flush=True)
-    store.DB_PATH.unlink(missing_ok=True)
 
     RESULTS.mkdir(exist_ok=True)
     out = RESULTS / f"flooded_cars_{per_level}pl_seed{seed}.csv"
@@ -188,6 +188,8 @@ async def main(per_level: int, seed: int, concurrency: int) -> None:
         w.writerows(rows)
     print(summarise(rows))
     print(f"\nper-photo results: {out}")
+    with contextlib.suppress(OSError):  # a scratch file; never worth losing a finished run over
+        store.DB_PATH.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

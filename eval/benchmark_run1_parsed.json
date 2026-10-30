@@ -1,0 +1,352 @@
+[
+ {
+  "file": "car-556-Level0_2.jpg",
+  "level": 0,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car2-42-Level0_2.jpg",
+  "level": 0,
+  "geometry_cm": 2.0,
+  "visual_mid": 2.5,
+  "error": null
+ },
+ {
+  "file": "car2-26-Level0_3.jpg",
+  "level": 0,
+  "geometry_cm": 1.0,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-1199-Level0_1.jpg",
+  "level": 0,
+  "geometry_cm": null,
+  "visual_mid": 3.5,
+  "error": null
+ },
+ {
+  "file": "car-1763-Level0_2.jpg",
+  "level": 0,
+  "geometry_cm": null,
+  "visual_mid": 6.0,
+  "error": null
+ },
+ {
+  "file": "car-916-Level0_6.jpg",
+  "level": 0,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-42-Level0_2.jpg",
+  "level": 0,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-1044-Level0_1.jpg",
+  "level": 0,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-2143-Level0_2.jpg",
+  "level": 0,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-988-Level0_2.jpg",
+  "level": 0,
+  "geometry_cm": 13.0,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-1406-Level1_2.jpg",
+  "level": 1,
+  "geometry_cm": null,
+  "visual_mid": 10.0,
+  "error": null
+ },
+ {
+  "file": "car-365-Level1_1.jpg",
+  "level": 1,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-700-Level1_1.jpg",
+  "level": 1,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car2-66-Level1_1.jpg",
+  "level": 1,
+  "geometry_cm": 4.0,
+  "visual_mid": 15.0,
+  "error": null
+ },
+ {
+  "file": "car-2355-Level1_1.jpg",
+  "level": 1,
+  "geometry_cm": null,
+  "visual_mid": 10.0,
+  "error": null
+ },
+ {
+  "file": "car-790-Level1_3.jpg",
+  "level": 1,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-1780-Level1_2.jpg",
+  "level": 1,
+  "geometry_cm": null,
+  "visual_mid": 17.5,
+  "error": null
+ },
+ {
+  "file": "car-645-Level1_2.jpg",
+  "level": 1,
+  "geometry_cm": 45.0,
+  "visual_mid": 22.5,
+  "error": null
+ },
+ {
+  "file": "car-493-Level1_1.jpg",
+  "level": 1,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-2244-Level1_1.jpg",
+  "level": 1,
+  "geometry_cm": null,
+  "visual_mid": 55.0,
+  "error": null
+ },
+ {
+  "file": "car-1300-Level2_1.jpg",
+  "level": 2,
+  "geometry_cm": null,
+  "visual_mid": 45.0,
+  "error": null
+ },
+ {
+  "file": "car-2132-Level2_3.jpg",
+  "level": 2,
+  "geometry_cm": 203.0,
+  "visual_mid": 30.0,
+  "error": null
+ },
+ {
+  "file": "car-476-Level2_6.jpg",
+  "level": 2,
+  "geometry_cm": 3.0,
+  "visual_mid": 40.0,
+  "error": null
+ },
+ {
+  "file": "car-1350-Level2_2.jpg",
+  "level": 2,
+  "geometry_cm": null,
+  "visual_mid": 30.0,
+  "error": null
+ },
+ {
+  "file": "car-573-Level2_8.jpg",
+  "level": 2,
+  "geometry_cm": null,
+  "visual_mid": 12.5,
+  "error": null
+ },
+ {
+  "file": "car-564-Level2_3.jpg",
+  "level": 2,
+  "geometry_cm": 614.0,
+  "visual_mid": 35.0,
+  "error": null
+ },
+ {
+  "file": "car-1397-Level2_4.jpg",
+  "level": 2,
+  "geometry_cm": 402.0,
+  "visual_mid": 30.0,
+  "error": null
+ },
+ {
+  "file": "car-1969-Level2_3.jpg",
+  "level": 2,
+  "geometry_cm": null,
+  "visual_mid": 70.0,
+  "error": null
+ },
+ {
+  "file": "car-640-Level2_1.jpg",
+  "level": 2,
+  "geometry_cm": null,
+  "visual_mid": 50.0,
+  "error": null
+ },
+ {
+  "file": "car-1434-Level2_3.jpg",
+  "level": 2,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-1845-Level3_1.jpg",
+  "level": 3,
+  "geometry_cm": null,
+  "visual_mid": 77.5,
+  "error": null
+ },
+ {
+  "file": "car-1499-Level3_2.jpg",
+  "level": 3,
+  "geometry_cm": null,
+  "visual_mid": 75.0,
+  "error": null
+ },
+ {
+  "file": "car-1071-Level3_2.jpg",
+  "level": 3,
+  "geometry_cm": null,
+  "visual_mid": 52.5,
+  "error": null
+ },
+ {
+  "file": "car-2130-Level3_3.jpg",
+  "level": 3,
+  "geometry_cm": null,
+  "visual_mid": 75.0,
+  "error": null
+ },
+ {
+  "file": "car-1122-Level3_3.jpg",
+  "level": 3,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-470-Level3_2.jpg",
+  "level": 3,
+  "geometry_cm": null,
+  "visual_mid": 125.0,
+  "error": null
+ },
+ {
+  "file": "car-1890-Level3_1.jpg",
+  "level": 3,
+  "geometry_cm": null,
+  "visual_mid": 40.0,
+  "error": null
+ },
+ {
+  "file": "car-651-Level3_5.jpg",
+  "level": 3,
+  "geometry_cm": null,
+  "visual_mid": 37.5,
+  "error": null
+ },
+ {
+  "file": "car-1206-Level3_2.jpg",
+  "level": 3,
+  "geometry_cm": null,
+  "visual_mid": 100.0,
+  "error": null
+ },
+ {
+  "file": "car-2013-Level3_1.jpg",
+  "level": 3,
+  "geometry_cm": null,
+  "visual_mid": 70.0,
+  "error": null
+ },
+ {
+  "file": "car-441-Level4_4.jpg",
+  "level": 4,
+  "geometry_cm": null,
+  "visual_mid": 100.0,
+  "error": null
+ },
+ {
+  "file": "car-2198-Level4_2.jpg",
+  "level": 4,
+  "geometry_cm": null,
+  "visual_mid": 135.0,
+  "error": null
+ },
+ {
+  "file": "car-2214-Level4_7.jpg",
+  "level": 4,
+  "geometry_cm": null,
+  "visual_mid": 95.0,
+  "error": null
+ },
+ {
+  "file": "car-135-Level4_7.jpg",
+  "level": 4,
+  "geometry_cm": null,
+  "visual_mid": 97.5,
+  "error": null
+ },
+ {
+  "file": "car-376-Level4_2.jpg",
+  "level": 4,
+  "geometry_cm": null,
+  "visual_mid": null,
+  "error": null
+ },
+ {
+  "file": "car-2212-Level4_1.jpg",
+  "level": 4,
+  "geometry_cm": null,
+  "visual_mid": 135.0,
+  "error": null
+ },
+ {
+  "file": "car2-68-Level4_1.jpg",
+  "level": 4,
+  "geometry_cm": null,
+  "visual_mid": 75.0,
+  "error": null
+ },
+ {
+  "file": "car-1786-Level4_9.jpg",
+  "level": 4,
+  "geometry_cm": null,
+  "visual_mid": 135.0,
+  "error": null
+ },
+ {
+  "file": "car-1676-Level4_2.jpg",
+  "level": 4,
+  "geometry_cm": null,
+  "visual_mid": 105.0,
+  "error": null
+ },
+ {
+  "file": "car-210-Level4_1.jpg",
+  "level": 4,
+  "geometry_cm": null,
+  "visual_mid": 75.0,
+  "error": null
+ }
+]

@@ -25,6 +25,8 @@ WHEELS = {k: v for k, v in REFERENCE.items() if v["shape"] == "circle"}
 
 WATER_RGB, WHEEL_RGB = (37, 99, 235), (249, 115, 22)
 MAX_RIM_POINTS_SENT = 80
+# A partly submerged wheel cannot show water deeper than its own diameter (small allowance for size spread).
+MAX_DEPTH_OVER_WHEEL = 1.05
 WATER_PROMPTS = ["water", "flood water", "flooded road"]
 
 
@@ -129,6 +131,9 @@ def analyse_wheel(wheel: np.ndarray, water: np.ndarray, name: str, ref: dict) ->
         return rec | {"reason": "water does not touch wheel"}
     if not (0.45 * h <= r <= 1.6 * max(h, w)):
         return rec | {"reason": "implausible circle fit"}
+    if est.depth_cm > ref["range_cm"][1] * MAX_DEPTH_OVER_WHEEL:
+        # Found on a public benchmark: a badly fitted circle gave readings of 2 to 6 m from a 60 cm wheel.
+        return rec | {"reason": "reading exceeds the wheel's height"}
     rec["cm_per_px"] = ref["diameter_cm"] / (2 * r)
     rec["depth_cm"], rec["uncertainty_cm"] = est.depth_cm, est.uncertainty_cm
     return rec
