@@ -30,6 +30,10 @@ VOICE_TRANSCRIBE_MODEL = os.getenv("VOICE_TRANSCRIBE_MODEL", "muse-voice-transcr
 client = AsyncOpenAI(
     base_url=os.getenv("META_API_BASE_URL", "https://api.meta.ai/v1"),
     api_key=os.getenv("META_API_KEY"),
+    # Fail within a minute instead of the SDK's ten, so an unreachable API shows an error rather than a hang.
+    # Calls normally take 5 to 20 s; segment() already retries transient failures itself.
+    timeout=float(os.getenv("META_API_TIMEOUT_S", "60")),
+    max_retries=1,
 )
 
 
