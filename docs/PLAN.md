@@ -19,7 +19,8 @@ Hackathon deadline: **Nov 4, 2026, 9 PM ET**.
 | Product | Live streamed pipeline UI, 19 licensed sample photos, installable PWA, mobile layout | Done |
 | Quality | 33 tests including synthetic-wheel depth validation, ruff, oxlint, CI | Done |
 | Hosting | Docker, Render and Vercel configuration (optional; see DEPLOY.md) | Ready, not deployed |
-| **Accuracy** | **Measured error against photos with known depths** | **Not done: needs real photos** |
+| Accuracy | First benchmark on 50 public real photos with depth levels (docs/BENCHMARK.md) | Done: by-eye estimate strong, wheel geometry weak |
+| **Accuracy** | **Centimetre error against tape-measured photos** | **Not done: needs real photos** |
 
 The one open item that matters is accuracy. `eval/accuracy.py` runs the go/no-go test (mean error under 15 cm)
 as soon as photos with independently measured depths exist. Until then every depth is an unvalidated estimate,

@@ -199,15 +199,29 @@ Hosting it publicly is optional and best done with care for your key; see [docs/
 
 ## Accuracy and limits
 
-**Accuracy has not been measured against ground truth yet.** The depth maths is validated on synthetic wheels
-whose true depth is known (recovered within 0.5 cm, and within a few cm under 1 px of noise), but that does not
-validate SAM's masks on real photos. [`eval/accuracy.py`](eval/accuracy.py) runs the real test, with a go/no-go
-bar of 15 cm mean error, as soon as photos with independently measured depths exist.
+**Centimetre accuracy has not been measured yet.** That needs photos with tape-measured depths; the test is
+ready ([`eval/accuracy.py`](eval/accuracy.py), bar: 15 cm mean error).
+
+What we do have is a first benchmark on **50 real photos from a public dataset** of flooded cars with
+ground-truth depth *levels* (five ordered levels, not centimetres; full write-up in
+[docs/BENCHMARK.md](docs/BENCHMARK.md)):
+
+| | Muse Spark by-eye estimate | Wheel geometry |
+|---|---|---|
+| Photos with a reading | 36 of 50 | 6 of 50 |
+| Rank correlation with true level | **0.88** | 0.34 |
+| Within one level of truth | **100%** | 83% |
+
+So on this data the by-eye estimate ranks depth well and the wheel geometry is **not yet reliable**. The same
+benchmark found and fixed a bug (impossible 2 to 6 m readings from a bad circle fit). Caveats: 50 photos, one
+sample, and the dataset's cropped, upscaled car images give geometry less to work with than a phone photo
+would. The depth maths is also validated on synthetic wheels (recovered within 0.5 cm), which does not
+validate SAM's masks on real photos. The two estimates are cross-checked, and disagreements go to review.
 
 Known limits:
 
 - **Geometry needs a wheel partly under water** with the waterline crossing the tyre. Many flood photos have
-  wheels fully hidden; those get only a visual guess.
+  wheels fully hidden (it read 6 of 50 benchmark photos); those get only a visual guess.
 - **Spray and reflections can fool the waterline.** The cross-check against the visual range catches large
   disagreements, not every error.
 - **Speech-to-text garbles place names.** The agent matches them to known places and says which one it assumed.
