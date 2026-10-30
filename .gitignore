@@ -24,3 +24,4 @@ eval/datasets/
 eval/*.log
 eval/benchmark.db
 eval/replay.db
+frontend/public/benchmark.building/

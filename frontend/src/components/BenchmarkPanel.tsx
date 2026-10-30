@@ -184,7 +184,16 @@ function Thumb({ p, edges, onOpen }: { p: BenchPhoto; edges: number[]; onOpen: (
   return (
     <button onClick={onOpen} disabled={!p.images} className="group min-w-0 text-left disabled:opacity-40">
       <span className="relative block aspect-[4/3] overflow-hidden rounded-md bg-sunken ring-1 ring-line group-hover:ring-ink-4">
-        {p.images && <img src={photoUrl(p.id)} alt={`Benchmark photo ${p.id}, true level ${p.level}`} loading="lazy" className="h-full w-full object-cover" />}
+        <span className="absolute inset-0 grid place-items-center text-[10px] text-ink-4">no image</span>
+        {p.images && (
+          <img
+            src={photoUrl(p.id)}
+            alt={`Benchmark photo ${p.id}, true level ${p.level}`}
+            loading="lazy"
+            onError={(e) => { e.currentTarget.style.display = 'none' }}
+            className="relative h-full w-full object-cover"
+          />
+        )}
         <span className="absolute left-1 top-1 rounded bg-ink/80 px-1 font-mono text-[10px] font-semibold text-white">L{p.level}</span>
       </span>
       <span className="mt-1 flex flex-wrap gap-1">
@@ -229,7 +238,7 @@ function Detail({ p, data, onBack }: { p: BenchPhoto; data: BenchIndex; onBack: 
         <ArrowLeft size={14} /> All benchmark photos
       </button>
       <div className="overflow-hidden rounded-lg border border-line bg-ink">
-        <img src={photoUrl(p.id)} alt={`Benchmark photo ${p.id}`} className="max-h-60 w-full object-contain" />
+        <img src={photoUrl(p.id)} alt={`Benchmark photo ${p.id}`} onError={(e) => { e.currentTarget.style.display = 'none' }} className="max-h-60 w-full object-contain" />
       </div>
       <div>
         <Label>Ground truth</Label>

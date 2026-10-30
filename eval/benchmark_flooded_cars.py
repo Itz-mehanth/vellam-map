@@ -249,13 +249,13 @@ async def main(per_level: int, seed: int, concurrency: int, out: Path) -> None:
         sys.exit(f"Dataset not found in {DATA}. See eval/README.md for the download step.")
     store.DB_PATH = ROOT / "benchmark.db"  # scratch database: keeps runs out of the real map
     store.DB_PATH.unlink(missing_ok=True)
-    for sub in ("img", "photos"):  # a new run replaces the old bundle, so no stale photos linger
-        shutil.rmtree(out / sub, ignore_errors=True)
+    staging = out.with_name(out.name + ".building")  # swapped in only when the whole run has finished
+    shutil.rmtree(staging, ignore_errors=True)
 
     items = sample(per_level, seed)
     print(f"{len(items)} photos ({per_level} per level, seed {seed}), {concurrency} at a time", flush=True)
     sem = asyncio.Semaphore(concurrency)
-    tasks = [asyncio.create_task(run_one(lv, p, sem, out)) for lv, p in items]
+    tasks = [asyncio.create_task(run_one(lv, p, sem, staging)) for lv, p in items]
     rows = []
     for i, t in enumerate(asyncio.as_completed(tasks), 1):
         r = await t
@@ -271,7 +271,7 @@ async def main(per_level: int, seed: int, concurrency: int, out: Path) -> None:
         w.writeheader()
         w.writerows(rows)
 
-    out.mkdir(parents=True, exist_ok=True)
+    staging.mkdir(parents=True, exist_ok=True)
     bundle = {
         "meta": {
             "dataset": "STURM-FloodDepth Flooded Cars (test split)",
@@ -285,7 +285,9 @@ async def main(per_level: int, seed: int, concurrency: int, out: Path) -> None:
         "metrics": compute_metrics(rows),
         "photos": rows,
     }
-    (out / "index.json").write_text(json.dumps(bundle), encoding="utf-8")
+    (staging / "index.json").write_text(json.dumps(bundle), encoding="utf-8")
+    shutil.rmtree(out, ignore_errors=True)  # the previous bundle goes only now that the new one is complete
+    shutil.move(str(staging), str(out))
     print(summarise(rows))
     print(f"\nper-photo results: {csv_path}\napp bundle       : {out}")
     with contextlib.suppress(OSError):  # a scratch file; never worth losing a finished run over
