@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
 from PIL import Image
 
-from services import agent, alerts, limits, store, verify
+from services import agent, alerts, limits, replay, store, verify
 from services.meta_client import transcribe
 from services.pipeline import analyse
 
@@ -50,7 +50,7 @@ def health():
         db = True
     except Exception:
         db = False
-    return {"ok": db, "db": db, "meta_key_set": bool(os.getenv("META_API_KEY"))}
+    return {"ok": db, "db": db, "meta_key_set": bool(os.getenv("META_API_KEY")), "replay": replay.enabled()}
 
 
 async def _read_image(photo: UploadFile) -> bytes:
@@ -77,6 +77,17 @@ async def create_report_stream(
         raise HTTPException(400, "invalid location")
     limits.report_limiter.check(limits.client_id(request))
     image = await _read_image(photo)
+
+    if replay.enabled():
+        recorded = replay.find(image)
+        if recorded is None:
+            raise HTTPException(422, "Replay mode: this server has no API key, so it can only replay the sample photos. Pick one of the samples.")
+
+        async def replayed():
+            async for ev in replay.play(recorded):
+                yield json.dumps(ev) + "\n"
+
+        return StreamingResponse(replayed(), media_type="application/x-ndjson")
 
     async def events():
         try:
@@ -155,6 +166,8 @@ async def ask(
 ):
     """A flood question, spoken (WAV) or typed -> answer grounded in the live map."""
     limits.ask_limiter.check(limits.client_id(request))
+    if replay.enabled():
+        raise HTTPException(503, "Replay mode: questions need a Meta API key, so they are switched off here.")
     transcript = None
     if audio is not None:
         data = await audio.read()

@@ -5,7 +5,7 @@
 <h1 align="center">Vellam Map</h1>
 
 <p align="center">
-  <strong>Photograph a flooded street. Know how deep the water is.<br />Warn everyone nearby, in Tamil or English.</strong>
+  <strong>A flood early-warning system for Chennai, built from photos people already take.<br />Report, verify, measure, map, alert, and ask by voice in Tamil or English.</strong>
 </p>
 
 <p align="center">
@@ -19,7 +19,16 @@
 
 *Vellam* (வெள்ளம்) is Tamil for flood. This is a flood-reporting app built for Chennai, where people already
 share flood photos on WhatsApp but nobody can tell from a photo whether a road is 10 cm or 1 m under water.
-Vellam turns the photo into a number.
+Vellam turns the photo into a number, checks that it is real, puts it on a live map, and warns the people nearby.
+
+It is a system, not a single model call. Four models do four different jobs and check each other:
+**SAM 3.1** segments the water and wheels, **geometry** turns that into centimetres, **Muse Spark** judges whether
+the photo is a real flood and gives an independent depth estimate (a large disagreement sends the report to
+review instead of the map), and **Muse Voice Transcribe** with Muse Spark answers Tamil and English questions
+about the live data. Around them sit duplicate, stale and location checks, face and number-plate blurring,
+area-level alert clustering, and a public-data benchmark that found, and fixed, real problems.
+
+All of the code in this repository was written during the hackathon (first commit 28 October 2026).
 
 Built for the **Meta Global AI Developer Hackathon** (Indie Developer track, *Build for Your World*) with
 **SAM 3.1**, **Muse Spark** and **Muse Voice Transcribe** through the Meta Model API.
@@ -27,6 +36,10 @@ Built for the **Meta Global AI Developer Hackathon** (Indie Developer track, *Bu
 > **Run it yourself.** There is no hosted instance, because every report and question spends credits on the
 > API key the server holds. Clone it, add your own Meta API key, and it runs on your machine in about five
 > minutes: [Quick start](#quick-start).
+>
+> **No key? Try replay mode.** Start the backend with `REPLAY=1` (no key needed). Each test photo in the Report
+> tab then plays back the pipeline run recorded on it with the real models, and the Benchmark tab replays the
+> 100-photo run. Your own photos and the voice assistant need a key.
 
 ---
 

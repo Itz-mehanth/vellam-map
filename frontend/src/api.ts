@@ -124,6 +124,15 @@ export const STAGE_ORDER: StageId[] = ['intake', 'water', 'objects', 'geometry',
 
 export type StageEvents = { [K in StageId]?: { ms: number; data: StageDataMap[K] } }
 
+export async function fetchReplayMode(): Promise<boolean> {
+  try {
+    const res = await fetch(`${API}/api/health`)
+    return res.ok && Boolean((await res.json()).replay)
+  } catch {
+    return false
+  }
+}
+
 export async function fetchMap(): Promise<ReportFeature[]> {
   const res = await fetch(`${API}/api/map`)
   if (!res.ok) throw new Error('Could not load the map')
@@ -142,6 +151,10 @@ export async function streamReport(
   body.append('lat', String(lat))
   body.append('lng', String(lng))
   const res = await fetch(`${API}/api/reports/stream`, { method: 'POST', body })
+  if (res.status === 422) {
+    const detail = (await res.json().catch(() => null))?.detail
+    throw new Error(typeof detail === 'string' ? detail : 'This demo can only replay the sample photos')
+  }
   if (!res.ok || !res.body) throw new Error(res.status === 400 ? 'That file is not a valid image' : 'Report failed')
 
   const reader = res.body.getReader()

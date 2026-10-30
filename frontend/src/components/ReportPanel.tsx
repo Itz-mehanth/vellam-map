@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { ArrowRight, Camera, ImageUp, LocateFixed, RotateCcw, X } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { STAGE_ORDER, streamReport, type StageEvents } from '../api'
+import { fetchReplayMode, STAGE_ORDER, streamReport, type StageEvents } from '../api'
 import { SurveyLog } from './SurveyLog'
 import { CHENNAI, useCurrentPosition } from '../lib/useLocation'
 import { Button, Label } from './ui'
@@ -21,6 +21,7 @@ function Samples({ onPick, selected }: { onPick: (f: File) => void; selected: st
     queryFn: async (): Promise<Sample[]> => (await fetch('/samples/samples.json')).json(),
     staleTime: Infinity,
   })
+  const { data: replay } = useQuery({ queryKey: ['replay-mode'], queryFn: fetchReplayMode, staleTime: Infinity })
   const active = samples.find((s) => s.file === selected)
   const pick = async (s: Sample) => {
     const blob = await (await fetch(`/samples/${s.file}`)).blob()
@@ -29,6 +30,12 @@ function Samples({ onPick, selected }: { onPick: (f: File) => void; selected: st
   if (!samples.length) return null
   return (
     <section>
+      {replay && (
+        <p className="mb-3 rounded-md border border-line bg-sunken px-3 py-2 text-[12px] leading-snug text-ink-3">
+          <strong className="font-semibold text-ink-2">Replay mode.</strong> This copy has no API key, so each test photo plays
+          back the pipeline run recorded on it with the real models. Your own photos and the voice assistant need a key.
+        </p>
+      )}
       <div className="mb-2 flex items-baseline justify-between">
         <Label>Test photos</Label>
         <span className="font-mono text-[10.5px] text-ink-4">Wikimedia Commons</span>

@@ -1,0 +1,44 @@
+1
+00:00:00,500 --> 00:00:09,500
+In Chennai, everyone shares flood photos. Nobody can tell how deep the water is.
+
+2
+00:00:10,500 --> 00:00:21,000
+Vellam is a flood early-warning system. Reports become a live map and area alerts for the people nearby.
+
+3
+00:00:22,200 --> 00:00:30,200
+Upload a photo. SAM 3.1 outlines the water and the wheels, and geometry turns the waterline into centimetres.
+
+4
+00:00:30,700 --> 00:00:38,450
+Muse Spark independently checks it is a real flood and estimates depth. Both readings are shown, with their uncertainty.
+
+5
+00:00:39,650 --> 00:00:50,650
+When the two methods disagree, the report goes to review instead of the map. Wrong depths are worse than none.
+
+6
+00:00:51,850 --> 00:00:56,670
+Not a flood? It is rejected, with the reason. Duplicates, stale photos and wrong locations are caught too.
+
+7
+00:00:57,370 --> 00:01:10,370
+Ask by voice. Muse Voice Transcribe and Muse Spark answer from the live map: is this road flooded?
+
+8
+00:01:11,370 --> 00:01:18,370
+We tested on 100 real public photos. Muse Spark ranks depth well: rank correlation 0.89.
+
+9
+00:01:18,370 --> 00:01:25,250
+The strict check was losing real floods, so we fixed it: 33% rejected down to 1% on photos it had never seen. Wheel geometry is weaker, and we show that.
+
+10
+00:01:25,950 --> 00:01:38,950
+And we measured it in the real world, in Chennai, with a tape measure.
+
+11
+00:01:39,950 --> 00:01:46,950
+Open source. Built with SAM 3.1, Muse Spark and Muse Voice Transcribe.
+

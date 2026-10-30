@@ -25,3 +25,6 @@ eval/*.log
 eval/benchmark.db
 eval/replay.db
 frontend/public/benchmark.building/
+
+demo/*.mp4
+demo/cap*/
