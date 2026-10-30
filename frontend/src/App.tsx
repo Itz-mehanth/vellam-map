@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import { Camera, Mic, Radio } from 'lucide-react'
+import { BarChart3, Camera, Mic, Radio } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { fetchAlerts, fetchMap } from './api'
 import { AskPanel } from './components/AskPanel'
+import { BenchmarkPanel } from './components/BenchmarkPanel'
 import { LivePanel } from './components/LivePanel'
 import { ReportDetail } from './components/ReportDetail'
 import { Wordmark } from './components/Logo'
@@ -11,7 +12,7 @@ import { ReportPanel } from './components/ReportPanel'
 import { Segmented } from './components/ui'
 import { sinceLabel } from './lib/depth'
 
-type Tab = 'live' | 'report' | 'ask'
+type Tab = 'live' | 'report' | 'ask' | 'benchmark'
 
 // Each fly-to request needs a new identity so asking for the same place twice still moves the map.
 let nonce = 0
@@ -66,9 +67,10 @@ export default function App() {
   }
 
   const tabs = [
-    { value: 'live' as Tab, label: <><Radio size={14} strokeWidth={1.75} /> Live{alerts.length > 0 && <span className="rounded bg-gauge px-1 font-mono text-[10px] leading-4 text-white">{alerts.length}</span>}</> },
-    { value: 'report' as Tab, label: <><Camera size={14} strokeWidth={1.75} /> Report</> },
-    { value: 'ask' as Tab, label: <><Mic size={14} strokeWidth={1.75} /> Ask</> },
+    { value: 'live' as Tab, label: <><Radio size={14} strokeWidth={1.75} className="hidden sm:block" /> Live{alerts.length > 0 && <span className="rounded bg-gauge px-1 font-mono text-[10px] leading-4 text-white">{alerts.length}</span>}</> },
+    { value: 'report' as Tab, label: <><Camera size={14} strokeWidth={1.75} className="hidden sm:block" /> Report</> },
+    { value: 'ask' as Tab, label: <><Mic size={14} strokeWidth={1.75} className="hidden sm:block" /> Ask</> },
+    { value: 'benchmark' as Tab, label: <><BarChart3 size={14} strokeWidth={1.75} className="hidden sm:block" /> Benchmark</> },
   ]
 
   return (
@@ -103,6 +105,11 @@ export default function App() {
             <div className={tab === 'ask' ? 'enter' : 'hidden'}>
               <AskPanel onFly={fly} />
             </div>
+            {tab === 'benchmark' && (
+              <div className="enter">
+                <BenchmarkPanel />
+              </div>
+            )}
           </div>
           <p className="border-t border-line-2 px-4 py-2.5 text-[11px] leading-snug text-ink-3">
             Depths are estimates with an error range. Vellam never says a road is safe. Follow official flood warnings.

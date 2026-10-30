@@ -72,7 +72,7 @@ export function Segmented<T extends string>({
           aria-selected={value === o.value}
           onClick={() => onChange(o.value)}
           className={`inline-flex items-center justify-center gap-1.5 rounded-md font-medium transition-all ${full ? 'flex-1' : ''} ${
-            size === 'sm' ? 'px-2 py-1 text-[12px]' : 'px-3 py-1.5 text-[13px]'
+            size === 'sm' ? 'px-2 py-1 text-[12px]' : full ? 'px-1.5 py-1.5 text-[13px]' : 'px-3 py-1.5 text-[13px]'
           } ${value === o.value ? 'bg-surface text-ink shadow-[0_1px_2px_rgb(13_27_38/0.08)]' : 'text-ink-3 hover:text-ink'}`}
         >
           {o.label}

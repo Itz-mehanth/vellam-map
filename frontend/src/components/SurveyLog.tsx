@@ -264,7 +264,7 @@ function VerifyBody({ d }: { d: VerifyData }) {
   )
 }
 
-function ResultBody({ d, verdict, onShow }: { d: ResultData; verdict?: Verdict; onShow: () => void }) {
+function ResultBody({ d, verdict, onShow }: { d: ResultData; verdict?: Verdict; onShow?: () => void }) {
   const s = STATUS[d.status] ?? { label: d.status, tone: 'neutral' as Tone, text: '' }
   const visual = d.depth_cm === null && verdict?.depth_cm_low != null && verdict.depth_cm_high != null
   const depth = d.depth_cm ?? (visual ? (verdict!.depth_cm_low! + verdict!.depth_cm_high!) / 2 : null)
@@ -301,9 +301,9 @@ function ResultBody({ d, verdict, onShow }: { d: ResultData; verdict?: Verdict; 
       </div>
       <div className="flex items-center justify-between">
         <span className="font-mono text-[11px] text-ink-3">
-          #{d.id} · {duration(d.total_ms)}
+          {d.id > 0 && `#${d.id} · `}{duration(d.total_ms)}
         </span>
-        {published && (
+        {published && onShow && (
           <Button variant="secondary" onClick={onShow} className="py-1.5 text-[12.5px]">
             Show on map
           </Button>
@@ -347,7 +347,7 @@ function Step({ n, id, state, ms, last, children }: { n: number; id: StageId; st
   )
 }
 
-export function SurveyLog({ events, running, photo, onShow }: { events: StageEvents; running: boolean; photo: string | null; onShow: () => void }) {
+export function SurveyLog({ events, running, photo, onShow }: { events: StageEvents; running: boolean; photo: string | null; onShow?: () => void }) {
   const next = STAGE_ORDER.findIndex((s) => !events[s])
   const size: [number, number] = events.intake ? [events.intake.data.width, events.intake.data.height] : [1, 1]
   const body = (id: StageId): ReactNode => {
