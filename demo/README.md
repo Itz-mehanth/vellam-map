@@ -10,7 +10,6 @@ videos and audio are not committed; they are regenerated with the steps below.
 | `video/public/bench.json` | The 100-photo benchmark summary the film's charts draw. |
 | `video/public/stills/` | Real Chennai flood photographs from Wikimedia Commons. Authors and licences: `video/public/STILLS_SOURCES.md`. |
 | `capture.py` | Records the real app (replay mode) with Playwright, for the screen-capture scenes. |
-| `assemble.py` | An earlier, simpler cut made with ffmpeg only. |
 | `audio2.py` | Synthesizes the score and sound cues (stereo) and mixes them under the film. |
 | `ambience/SOURCES.txt` | Source of the rain and traffic recording used in the opening (CC0). |
 

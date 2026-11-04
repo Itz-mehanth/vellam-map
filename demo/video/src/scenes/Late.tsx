@@ -1,7 +1,7 @@
 import { AbsoluteFill, useCurrentFrame } from 'remotion'
 import bench from '../../public/bench.json'
 import { C, LINEAR, MECH, mono, prog, sans, tamil } from '../theme'
-import { Caption, Contours, Count, Label, Reveal, Slate } from '../ui'
+import { Caption, Contours, Count, Label, Reveal } from '../ui'
 
 const FlowBox = ({ at, title, text, color }: { at: number; title: string; text: string; color: string }) => (
   <Reveal at={at} style={{ width: 300 }}>
@@ -35,9 +35,6 @@ export const Voice = () => {
         <Label color={C.ink2}>Example question</Label>
         <div style={{ fontFamily: tamil, fontWeight: 500, fontSize: 44, color: C.ink, marginTop: 14, lineHeight: 1.5 }}>இந்த பகுதியில் வெள்ளத்தின் ஆழம் எவ்வளவு?</div>
         <div style={{ fontFamily: sans, fontSize: 26, color: C.ink2, marginTop: 6 }}>How deep is the flooding in this area?</div>
-      </Reveal>
-      <Reveal at={220} style={{ position: 'absolute', left: 1180, top: 700, width: 620 }}>
-        <div style={{ fontFamily: mono, fontSize: 19, color: C.ink2, lineHeight: 1.5 }}>Voice and questions need a Meta API key, so they are off in the keyless replay mode.</div>
       </Reveal>
       <Caption lines={[{ from: 20, to: 340, text: 'Ask in Tamil or English: Muse Voice Transcribe listens, Muse Spark answers.' }]} />
     </AbsoluteFill>

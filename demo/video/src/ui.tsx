@@ -35,18 +35,6 @@ export const Contours = ({ color, opacity = 0.5, draw = 60, seed = 1 }: { color:
   )
 }
 
-/** A marked stand-in for footage only the team can shoot. Never mistaken for the finished film. */
-export const Slate = ({ title, note, style }: { title: string; note: string; style?: CSSProperties }) => (
-  <AbsoluteFill style={{ background: '#101412', ...style }}>
-    <Contours color="#2a322d" opacity={0.9} draw={1} seed={4} />
-    <div style={{ position: 'absolute', left: 120, top: 120, border: `2px dashed ${C.amber}`, padding: '18px 26px', borderRadius: 6 }}>
-      <Label color={C.amber} style={{ fontSize: 20 }}>Placeholder: footage to insert</Label>
-      <div style={{ fontFamily: sans, fontSize: 30, color: C.paper, marginTop: 8, maxWidth: 760 }}>{title}</div>
-      <div style={{ fontFamily: sans, fontSize: 22, color: C.ink2, marginTop: 6, maxWidth: 760 }}>{note}</div>
-    </div>
-  </AbsoluteFill>
-)
-
 export type Line = { from: number; to: number; text: string }
 
 /** Documentary captions: bottom-left, at most two lines. Re-time these to the recorded voice. */

@@ -17,7 +17,7 @@ Hackathon deadline: **Nov 4, 2026, 9 PM ET**.
 | Map | Base maps (streets, satellite, terrain), overlays (rain radar, traffic with a key, alert zones) | Done |
 | Voice | Tamil and English questions, grounded answers with sources, location-aware | Done |
 | Product | Live streamed pipeline UI, 19 licensed sample photos, installable PWA, mobile layout | Done |
-| Quality | 33 tests including synthetic-wheel depth validation, ruff, oxlint, CI | Done |
+| Quality | 42 tests including synthetic-wheel depth validation, ruff, oxlint, CI | Done |
 | Hosting | Docker, Render and Vercel configuration (optional; see DEPLOY.md) | Ready, not deployed |
 | Accuracy | Benchmark on 100 public real photos with depth levels, with a Benchmark tab and replay (docs/BENCHMARK.md) | Done: by-eye estimate strong, wheel geometry weak, gate fixed: rejected 33%, now 1% of real floods on held-out photos |
 

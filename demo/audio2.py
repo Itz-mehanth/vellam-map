@@ -281,8 +281,6 @@ def sfx():
     place(bus, tone(311.13, 1.3, "tri"), S["limits"] + f2s(30), 0.16, -0.3)
     place(bus, tone(587.33, 1.2, "sine"), S["limits"] + f2s(170), 0.14, 0.3)
     place(bus, tone(440.0, 0.8, "tri"), S["limits"] + f2s(260), 0.10, 0.0)
-    # field placeholders: real footage will bring its own sound, so only a quiet click for the comparison
-    place(bus, tick(2100, 0.06), S["field"] + f2s(60), 0.12, 0.0)
     # end card: one accent when the title appears, then GitHub
     n = int(2.4 * SR)
     k = np.arange(n) / SR

@@ -255,7 +255,7 @@ Known limits:
 ```bash
 cd backend && pip install -r requirements-dev.txt
 ruff check .                # lint
-python -m pytest -q         # 33 tests; no network or API key needed
+python -m pytest -q         # 42 tests; no network or API key needed
 cd ../frontend && npm run lint && npm run build
 ```
 
@@ -298,7 +298,7 @@ backend/
     geo.py            reverse geocoding and distances
     limits.py         upload and rate limits
     store.py          SQLite and evidence images
-  tests/              33 tests
+  tests/              42 tests
 frontend/
   src/components/     LivePanel, ReportPanel, SurveyLog, ReportDetail, AskPanel, MapStage, LayerControl
   src/lib/            depth bands, status text, layers, location
