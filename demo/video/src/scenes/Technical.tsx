@@ -4,6 +4,7 @@ import s18 from '../../public/photos/s18.json'
 import crop from '../../public/photos/wheelA_crop.json'
 import { C, LINEAR, MECH, mono, prog, sans } from '../theme'
 import { Caption, Label, Reveal } from '../ui'
+import { Wheel3D } from '../three/Wheel3D'
 
 // Every number and coordinate here is read from the recorded pipeline runs (backend/replays), not typed by hand.
 type Wheel = { depth_cm: number | null; uncertainty_cm: number | null; box: number[]; circle?: { cx: number; cy: number; r: number }; waterline_y?: number; cm_per_px?: number; reason: string }
@@ -101,7 +102,7 @@ const WheelCloseup = ({ f }: { f: number }) => {
 
 const Ruler = ({ f }: { f: number }) => {
   const base = 780
-  const px = 9 // px per cm
+  const px = 8 // px per cm
   const bar = (cx: number, d: number, u: number, color: string, at: number, name: string) => {
     const p = prog(f, at, 40, MECH)
     const h = d * px * p
@@ -154,7 +155,7 @@ const Case = ({ at, x, photo, title, geo, vis, ok }: { at: number; x: number; ph
 export const Technical = () => {
   const f = useCurrentFrame()
   const water = prog(f, 40, 50, LINEAR)
-  const showPhoto = f < 1110
+  const showPhoto = f < 1110 && !(f >= 770 && f < 900)
   const v = A.verify.verdict
   const wheelCount = A.geometry.wheels.length
   const photoDim = f >= 570 && f < 900 ? 0.5 : 1
@@ -165,6 +166,19 @@ export const Technical = () => {
           <Img src={staticFile('photos/s05.jpg')} style={{ width: PHOTO.w, height: PHOTO.h, position: 'absolute', opacity: photoDim === 1 ? 1 : 0.55 }} />
           <Img src={staticFile('photos/s05_water_mask.png')} style={{ width: PHOTO.w, height: PHOTO.h, position: 'absolute', opacity: water * (f < 300 ? 1 : 0.55) }} />
           {f >= 300 && <WheelMarks f={f - 300} />}
+        </div>
+      )}
+      {f >= 770 && f < 900 && (
+        <div style={{ position: 'absolute', left: PHOTO.left, top: PHOTO.top, width: PHOTO.w, height: PHOTO.h, background: C.ink, overflow: 'hidden' }}>
+          <Reveal at={0} style={{ position: 'absolute', inset: 0 }}>
+            <Wheel3D depthCm={A.fusion.depth_cm} width={PHOTO.w} height={PHOTO.h} />
+          </Reveal>
+          <div style={{ position: 'absolute', left: 24, top: 20, fontFamily: mono, fontSize: 18, color: C.tealLight, letterSpacing: 1.5 }}>THE IDEA · DIAGRAM, NOT A PHOTO</div>
+          <div style={{ position: 'absolute', left: 24, bottom: 22, fontFamily: mono, fontSize: 22, color: C.paper, lineHeight: 1.5 }}>
+            wheel size known → every pixel has a size
+            <br />
+            <b style={{ color: C.amber }}>depth = wheel under the waterline</b>
+          </div>
         </div>
       )}
       {f < 300 && (

@@ -54,8 +54,10 @@ Built for the **Meta Global AI Developer Hackathon** (Indie Developer track, *Bu
 
 - **1.81 billion people** (23% of the world) face serious flood risk, and 89% of them live in low- and
   middle-income countries ([World Bank](https://blogs.worldbank.org/en/climatechange/flood-risk-already-affects-181-billion-people-climate-change-and-unplanned)).
-- In Chennai, about 290 people died in the 2015 floods and 17 in Cyclone Michaung (2023), many from
-  electrocution and wall collapse in waterlogged streets.
+- More than 400 people died in Tamil Nadu in the 2015 floods (the state government's figure, cited by the CAG in
+  2018, is 470; Wikipedia lists 422) and at least 17 in Chennai in Cyclone Michaung (2023, per
+  [CBS](https://www.cbsnews.com/news/cyclone-michaung-chennai-india-landfall-andhra-pradesh-deaths-evacuations-today/)),
+  many of those from electrocution and drowning in waterlogged streets.
 - During a flood, the question that matters is *how deep is this street right now*. People post photos, but a
   photo is not data: a driver or a rescue team cannot tell what depth it shows.
 - Research shows depth can be read from photos using objects of known size

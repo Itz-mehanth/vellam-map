@@ -65,12 +65,12 @@ export const Problem = () => {
         </Reveal>
         <Reveal at={170} y={30}>
           <div style={{ fontFamily: mono, fontWeight: 500, fontSize: 116, color: C.paper, letterSpacing: -3, marginTop: 56 }}>
-            <span style={{ fontSize: 56, color: C.ink2 }}>about </span>
-            <Count to={290} at={170} dur={60} />
+            <span style={{ fontSize: 56, color: C.ink2 }}>more than </span>
+            <Count to={400} at={170} dur={60} />
           </div>
         </Reveal>
         <Reveal at={190}>
-          <div style={{ fontFamily: sans, fontSize: 34, color: C.grid }}>lives lost in Chennai&apos;s 2015 floods</div>
+          <div style={{ fontFamily: sans, fontSize: 34, color: C.grid }}>lives lost in Tamil Nadu&apos;s 2015 floods</div>
         </Reveal>
       </div>
       <Reveal at={150} dur={30} y={0} style={{ position: 'absolute', left: 1000, top: 110, width: 800, height: 420, overflow: 'hidden', border: `1px solid ${C.gridDark}` }}>
@@ -89,8 +89,8 @@ export const Problem = () => {
           </div>
         </Reveal>
       </div>
-      <div style={{ position: 'absolute', left: 120, bottom: 150, fontFamily: mono, fontSize: 17, color: C.ink2 }}>Sources: World Bank (2024) · reported 2015 Chennai flood toll (verify before publishing)</div>
-      <Caption lines={[{ from: 40, to: 400, text: 'Flooding affects billions. Chennai knows it. Yet a photograph cannot tell a rescuer how deep the water is.' }]} />
+      <div style={{ position: 'absolute', left: 120, bottom: 215, fontFamily: mono, fontSize: 17, color: C.ink2 }}>Sources: World Bank (2024) · 2015 toll: Tamil Nadu government figure of 470 cited by the CAG (2018); Wikipedia lists 422</div>
+      <Caption lines={[{ from: 40, to: 400, text: 'Flooding affects billions. In 2015, more than four hundred people died in Tamil Nadu. Yet a photograph cannot tell a rescuer how deep the water is.' }]} />
     </AbsoluteFill>
   )
 }

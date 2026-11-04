@@ -116,3 +116,20 @@ supports keeping that design and labelling by-eye estimates plainly as estimates
 presenting wheel geometry as the proven part of the system, and led to the gate change above.
 
 Raw per-photo results are in [`eval/results/`](../eval/results/).
+
+## Tried and not shipped: the car body as a ruler
+
+Wheel geometry reads nothing on deep floods (Levels 3 and 4), because the wheels are under water. We tested whether
+the visible part of the car could stand in: SAM 3.1 outlines the largest car, and the feature is the car's visible
+height divided by its width (`eval/vehicle_probe.py`, results in `eval/results/vehicle_probe.json`).
+
+- The car outline was found on 93 of the 100 photos.
+- The median ratio does fall as the level rises (0.72, 0.66, 0.57, 0.48, 0.39 for Levels 0 to 4).
+- But the signal is weak and noisy: Spearman -0.40 against the true level, and between neighbouring levels the
+  deeper photo has the smaller ratio in only 57% to 61% of pairs (50% is chance). At Levels 3 against 4 it is 59%.
+- It is also confounded by the angle the car is photographed from (a car seen side-on is more than twice as wide as
+  one seen from the front), so it could not become a centimetre estimate even with a better feature.
+
+So it is not used. Muse Spark's by-eye depth (rank correlation 0.89) remains the dependable estimate for deep water.
+A better version would need the viewing angle or a known-size marker such as the number plate, and photos with
+measured depths to test it on.

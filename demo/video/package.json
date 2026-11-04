@@ -7,12 +7,16 @@
     "render": "remotion render src/index.ts Pipeline out/pipeline.mp4"
   },
   "dependencies": {
+    "@react-three/fiber": "^8.15.19",
     "@remotion/cli": "^4.0.539",
     "@remotion/google-fonts": "^4.0.539",
+    "@remotion/three": "^4.0.539",
     "@types/react": "^18.3.31",
+    "@types/three": "^0.160.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "remotion": "^4.0.539",
+    "three": "^0.160.1",
     "typescript": "^7.0.2",
     "webpack": "5.96.1"
   }

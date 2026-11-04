@@ -1,0 +1,874 @@
+[
+ {
+  "id": "car-1033-Level1_15",
+  "level": 1,
+  "ok": true,
+  "width_px": 266.0,
+  "visible_h_px": 227.0,
+  "ratio": 0.8533834586466166,
+  "cars": 3
+ },
+ {
+  "id": "car-248-Level4_1",
+  "level": 4,
+  "ok": true,
+  "width_px": 314.0,
+  "visible_h_px": 203.0,
+  "ratio": 0.6464968152866242,
+  "cars": 1
+ },
+ {
+  "id": "car-2322-Level4_3",
+  "level": 4,
+  "ok": true,
+  "width_px": 371.0,
+  "visible_h_px": 191.0,
+  "ratio": 0.5148247978436657,
+  "cars": 3
+ },
+ {
+  "id": "car-1397-Level2_4",
+  "level": 2,
+  "ok": true,
+  "width_px": 495.0,
+  "visible_h_px": 251.0,
+  "ratio": 0.5070707070707071,
+  "cars": 5
+ },
+ {
+  "id": "car-1849-Level3_1",
+  "level": 3,
+  "ok": true,
+  "width_px": 550.0,
+  "visible_h_px": 259.0,
+  "ratio": 0.4709090909090909,
+  "cars": 1
+ },
+ {
+  "id": "car-1346-Level2_3",
+  "level": 2,
+  "ok": true,
+  "width_px": 318.0,
+  "visible_h_px": 212.0,
+  "ratio": 0.6666666666666666,
+  "cars": 4
+ },
+ {
+  "id": "car-441-Level4_4",
+  "level": 4,
+  "ok": false
+ },
+ {
+  "id": "car-120-Level1_4",
+  "level": 1,
+  "ok": true,
+  "width_px": 402.0,
+  "visible_h_px": 205.0,
+  "ratio": 0.5099502487562189,
+  "cars": 2
+ },
+ {
+  "id": "car-1458-Level1_1",
+  "level": 1,
+  "ok": true,
+  "width_px": 373.0,
+  "visible_h_px": 250.0,
+  "ratio": 0.6702412868632708,
+  "cars": 1
+ },
+ {
+  "id": "car-1427-Level2_2",
+  "level": 2,
+  "ok": true,
+  "width_px": 289.0,
+  "visible_h_px": 215.0,
+  "ratio": 0.7439446366782007,
+  "cars": 3
+ },
+ {
+  "id": "car-1859-Level3_1",
+  "level": 3,
+  "ok": false
+ },
+ {
+  "id": "car-1959-Level3_1",
+  "level": 3,
+  "ok": true,
+  "width_px": 563.0,
+  "visible_h_px": 253.0,
+  "ratio": 0.4493783303730018,
+  "cars": 2
+ },
+ {
+  "id": "car-1434-Level2_3",
+  "level": 2,
+  "ok": true,
+  "width_px": 332.0,
+  "visible_h_px": 235.0,
+  "ratio": 0.7078313253012049,
+  "cars": 5
+ },
+ {
+  "id": "car-499-Level4_1",
+  "level": 4,
+  "ok": true,
+  "width_px": 656.0,
+  "visible_h_px": 230.0,
+  "ratio": 0.35060975609756095,
+  "cars": 1
+ },
+ {
+  "id": "car-1623-Level1_5",
+  "level": 1,
+  "ok": true,
+  "width_px": 243.0,
+  "visible_h_px": 169.0,
+  "ratio": 0.6954732510288066,
+  "cars": 2
+ },
+ {
+  "id": "car-2108-Level3_5",
+  "level": 3,
+  "ok": true,
+  "width_px": 224.0,
+  "visible_h_px": 190.0,
+  "ratio": 0.8482142857142857,
+  "cars": 2
+ },
+ {
+  "id": "car-1763-Level0_2",
+  "level": 0,
+  "ok": true,
+  "width_px": 424.0,
+  "visible_h_px": 191.0,
+  "ratio": 0.45047169811320753,
+  "cars": 2
+ },
+ {
+  "id": "car-1939-Level2_1",
+  "level": 2,
+  "ok": true,
+  "width_px": 469.0,
+  "visible_h_px": 183.0,
+  "ratio": 0.39019189765458423,
+  "cars": 2
+ },
+ {
+  "id": "car-576-Level4_2",
+  "level": 4,
+  "ok": true,
+  "width_px": 242.0,
+  "visible_h_px": 225.0,
+  "ratio": 0.9297520661157025,
+  "cars": 1
+ },
+ {
+  "id": "car2-63-Level0_4",
+  "level": 0,
+  "ok": true,
+  "width_px": 487.0,
+  "visible_h_px": 196.0,
+  "ratio": 0.4024640657084189,
+  "cars": 4
+ },
+ {
+  "id": "car-2108-Level3_8",
+  "level": 3,
+  "ok": true,
+  "width_px": 240.0,
+  "visible_h_px": 262.0,
+  "ratio": 1.0916666666666666,
+  "cars": 2
+ },
+ {
+  "id": "car-2042-Level2_4",
+  "level": 2,
+  "ok": true,
+  "width_px": 297.0,
+  "visible_h_px": 242.0,
+  "ratio": 0.8148148148148148,
+  "cars": 2
+ },
+ {
+  "id": "car-1637-Level1_3",
+  "level": 1,
+  "ok": true,
+  "width_px": 211.0,
+  "visible_h_px": 331.0,
+  "ratio": 1.5687203791469195,
+  "cars": 3
+ },
+ {
+  "id": "car-607-Level4_2",
+  "level": 4,
+  "ok": true,
+  "width_px": 527.0,
+  "visible_h_px": 276.0,
+  "ratio": 0.523719165085389,
+  "cars": 7
+ },
+ {
+  "id": "car-2280-Level3_1",
+  "level": 3,
+  "ok": true,
+  "width_px": 799.0,
+  "visible_h_px": 197.0,
+  "ratio": 0.246558197747184,
+  "cars": 4
+ },
+ {
+  "id": "car-1648-Level1_3",
+  "level": 1,
+  "ok": true,
+  "width_px": 251.0,
+  "visible_h_px": 251.0,
+  "ratio": 1.0,
+  "cars": 2
+ },
+ {
+  "id": "car-1171-Level0_1",
+  "level": 0,
+  "ok": true,
+  "width_px": 258.0,
+  "visible_h_px": 186.0,
+  "ratio": 0.7209302325581395,
+  "cars": 3
+ },
+ {
+  "id": "car-607-Level4_3",
+  "level": 4,
+  "ok": true,
+  "width_px": 557.0,
+  "visible_h_px": 244.0,
+  "ratio": 0.4380610412926391,
+  "cars": 1
+ },
+ {
+  "id": "car-2097-Level2_6",
+  "level": 2,
+  "ok": true,
+  "width_px": 733.0,
+  "visible_h_px": 260.0,
+  "ratio": 0.35470668485675305,
+  "cars": 3
+ },
+ {
+  "id": "car-248-Level3_2",
+  "level": 3,
+  "ok": false
+ },
+ {
+  "id": "car-1713-Level1_1",
+  "level": 1,
+  "ok": true,
+  "width_px": 270.0,
+  "visible_h_px": 193.0,
+  "ratio": 0.7148148148148148,
+  "cars": 2
+ },
+ {
+  "id": "car-1044-Level0_1",
+  "level": 0,
+  "ok": true,
+  "width_px": 298.0,
+  "visible_h_px": 216.0,
+  "ratio": 0.7248322147651006,
+  "cars": 1
+ },
+ {
+  "id": "car-2132-Level2_3",
+  "level": 2,
+  "ok": true,
+  "width_px": 319.0,
+  "visible_h_px": 200.0,
+  "ratio": 0.6269592476489029,
+  "cars": 3
+ },
+ {
+  "id": "car-1780-Level1_2",
+  "level": 1,
+  "ok": true,
+  "width_px": 284.0,
+  "visible_h_px": 172.0,
+  "ratio": 0.6056338028169014,
+  "cars": 1
+ },
+ {
+  "id": "car2-68-Level4_1",
+  "level": 4,
+  "ok": true,
+  "width_px": 744.0,
+  "visible_h_px": 166.0,
+  "ratio": 0.22311827956989247,
+  "cars": 1
+ },
+ {
+  "id": "car-501-Level3_5",
+  "level": 3,
+  "ok": true,
+  "width_px": 432.0,
+  "visible_h_px": 207.0,
+  "ratio": 0.4791666666666667,
+  "cars": 2
+ },
+ {
+  "id": "car-2195-Level2_1",
+  "level": 2,
+  "ok": true,
+  "width_px": 476.0,
+  "visible_h_px": 184.0,
+  "ratio": 0.3865546218487395,
+  "cars": 1
+ },
+ {
+  "id": "car4-61-Level4_4",
+  "level": 4,
+  "ok": true,
+  "width_px": 522.0,
+  "visible_h_px": 204.0,
+  "ratio": 0.39080459770114945,
+  "cars": 1
+ },
+ {
+  "id": "car-1806-Level1_3",
+  "level": 1,
+  "ok": true,
+  "width_px": 259.0,
+  "visible_h_px": 209.0,
+  "ratio": 0.806949806949807,
+  "cars": 3
+ },
+ {
+  "id": "car-516-Level3_5",
+  "level": 3,
+  "ok": true,
+  "width_px": 616.0,
+  "visible_h_px": 237.0,
+  "ratio": 0.3847402597402597,
+  "cars": 3
+ },
+ {
+  "id": "car-1199-Level0_1",
+  "level": 0,
+  "ok": true,
+  "width_px": 242.0,
+  "visible_h_px": 192.0,
+  "ratio": 0.7933884297520661,
+  "cars": 1
+ },
+ {
+  "id": "car-2233-Level2_1",
+  "level": 2,
+  "ok": true,
+  "width_px": 353.0,
+  "visible_h_px": 206.0,
+  "ratio": 0.5835694050991501,
+  "cars": 1
+ },
+ {
+  "id": "car-1914-Level1_3",
+  "level": 1,
+  "ok": true,
+  "width_px": 431.0,
+  "visible_h_px": 211.0,
+  "ratio": 0.4895591647331787,
+  "cars": 2
+ },
+ {
+  "id": "car-651-Level3_5",
+  "level": 3,
+  "ok": true,
+  "width_px": 232.0,
+  "visible_h_px": 216.0,
+  "ratio": 0.9310344827586207,
+  "cars": 2
+ },
+ {
+  "id": "car-2249-Level2_1",
+  "level": 2,
+  "ok": false
+ },
+ {
+  "id": "car-191-Level0_14",
+  "level": 0,
+  "ok": true,
+  "width_px": 259.0,
+  "visible_h_px": 332.0,
+  "ratio": 1.281853281853282,
+  "cars": 2
+ },
+ {
+  "id": "car-752-Level3_3",
+  "level": 3,
+  "ok": false
+ },
+ {
+  "id": "car-2143-Level0_2",
+  "level": 0,
+  "ok": true,
+  "width_px": 252.0,
+  "visible_h_px": 267.0,
+  "ratio": 1.0595238095238095,
+  "cars": 2
+ },
+ {
+  "id": "car-1953-Level1_1",
+  "level": 1,
+  "ok": true,
+  "width_px": 422.0,
+  "visible_h_px": 249.0,
+  "ratio": 0.590047393364929,
+  "cars": 3
+ },
+ {
+  "id": "car-421-Level2_1",
+  "level": 2,
+  "ok": true,
+  "width_px": 514.0,
+  "visible_h_px": 233.0,
+  "ratio": 0.45330739299610895,
+  "cars": 1
+ },
+ {
+  "id": "car-1962-Level1_1",
+  "level": 1,
+  "ok": true,
+  "width_px": 586.0,
+  "visible_h_px": 330.0,
+  "ratio": 0.5631399317406144,
+  "cars": 4
+ },
+ {
+  "id": "car-104-Level4_2",
+  "level": 4,
+  "ok": false
+ },
+ {
+  "id": "car-76-Level3_3",
+  "level": 3,
+  "ok": true,
+  "width_px": 659.0,
+  "visible_h_px": 249.0,
+  "ratio": 0.37784522003034904,
+  "cars": 1
+ },
+ {
+  "id": "car-573-Level2_8",
+  "level": 2,
+  "ok": true,
+  "width_px": 268.0,
+  "visible_h_px": 192.0,
+  "ratio": 0.7164179104477612,
+  "cars": 1
+ },
+ {
+  "id": "car-1040-Level0_1",
+  "level": 0,
+  "ok": true,
+  "width_px": 336.0,
+  "visible_h_px": 275.0,
+  "ratio": 0.8184523809523809,
+  "cars": 1
+ },
+ {
+  "id": "car-299-Level1_1",
+  "level": 1,
+  "ok": true,
+  "width_px": 528.0,
+  "visible_h_px": 234.0,
+  "ratio": 0.4431818181818182,
+  "cars": 1
+ },
+ {
+  "id": "car-345-Level0_1",
+  "level": 0,
+  "ok": true,
+  "width_px": 833.0,
+  "visible_h_px": 1803.0,
+  "ratio": 2.164465786314526,
+  "cars": 5
+ },
+ {
+  "id": "car-42-Level0_2",
+  "level": 0,
+  "ok": true,
+  "width_px": 266.0,
+  "visible_h_px": 360.0,
+  "ratio": 1.3533834586466165,
+  "cars": 3
+ },
+ {
+  "id": "car-573-Level2_9",
+  "level": 2,
+  "ok": true,
+  "width_px": 326.0,
+  "visible_h_px": 177.0,
+  "ratio": 0.5429447852760736,
+  "cars": 2
+ },
+ {
+  "id": "car-135-Level4_7",
+  "level": 4,
+  "ok": true,
+  "width_px": 884.0,
+  "visible_h_px": 228.0,
+  "ratio": 0.2579185520361991,
+  "cars": 4
+ },
+ {
+  "id": "car-556-Level0_2",
+  "level": 0,
+  "ok": true,
+  "width_px": 209.0,
+  "visible_h_px": 152.0,
+  "ratio": 0.7272727272727273,
+  "cars": 4
+ },
+ {
+  "id": "car-489-Level1_2",
+  "level": 1,
+  "ok": true,
+  "width_px": 1769.0,
+  "visible_h_px": 591.0,
+  "ratio": 0.33408705483323914,
+  "cars": 4
+ },
+ {
+  "id": "car-498-Level1_7",
+  "level": 1,
+  "ok": true,
+  "width_px": 264.0,
+  "visible_h_px": 219.0,
+  "ratio": 0.8295454545454546,
+  "cars": 3
+ },
+ {
+  "id": "car-596-Level2_9",
+  "level": 2,
+  "ok": true,
+  "width_px": 347.0,
+  "visible_h_px": 223.0,
+  "ratio": 0.6426512968299711,
+  "cars": 1
+ },
+ {
+  "id": "car-1593-Level4_1",
+  "level": 4,
+  "ok": true,
+  "width_px": 1124.0,
+  "visible_h_px": 246.0,
+  "ratio": 0.2188612099644128,
+  "cars": 2
+ },
+ {
+  "id": "car-606-Level2_3",
+  "level": 2,
+  "ok": true,
+  "width_px": 281.0,
+  "visible_h_px": 210.0,
+  "ratio": 0.7473309608540926,
+  "cars": 1
+ },
+ {
+  "id": "car-64-Level0_3",
+  "level": 0,
+  "ok": true,
+  "width_px": 499.0,
+  "visible_h_px": 221.0,
+  "ratio": 0.44288577154308617,
+  "cars": 1
+ },
+ {
+  "id": "car-1682-Level4_11",
+  "level": 4,
+  "ok": true,
+  "width_px": 217.0,
+  "visible_h_px": 203.0,
+  "ratio": 0.9354838709677419,
+  "cars": 1
+ },
+ {
+  "id": "car-7-Level0_1",
+  "level": 0,
+  "ok": true,
+  "width_px": 279.0,
+  "visible_h_px": 281.0,
+  "ratio": 1.007168458781362,
+  "cars": 2
+ },
+ {
+  "id": "car-517-Level1_1",
+  "level": 1,
+  "ok": true,
+  "width_px": 562.0,
+  "visible_h_px": 176.0,
+  "ratio": 0.31316725978647686,
+  "cars": 2
+ },
+ {
+  "id": "car-1875-Level4_1",
+  "level": 4,
+  "ok": true,
+  "width_px": 487.0,
+  "visible_h_px": 186.0,
+  "ratio": 0.38193018480492813,
+  "cars": 1
+ },
+ {
+  "id": "car-828-Level2_1",
+  "level": 2,
+  "ok": true,
+  "width_px": 429.0,
+  "visible_h_px": 243.0,
+  "ratio": 0.5664335664335665,
+  "cars": 1
+ },
+ {
+  "id": "car-55-Level1_2",
+  "level": 1,
+  "ok": true,
+  "width_px": 459.0,
+  "visible_h_px": 297.0,
+  "ratio": 0.6470588235294118,
+  "cars": 2
+ },
+ {
+  "id": "car-659-Level1_1",
+  "level": 1,
+  "ok": true,
+  "width_px": 230.0,
+  "visible_h_px": 169.0,
+  "ratio": 0.7347826086956522,
+  "cars": 1
+ },
+ {
+  "id": "car-83-Level0_3",
+  "level": 0,
+  "ok": true,
+  "width_px": 253.0,
+  "visible_h_px": 152.0,
+  "ratio": 0.6007905138339921,
+  "cars": 1
+ },
+ {
+  "id": "car-1014-Level3_2",
+  "level": 3,
+  "ok": true,
+  "width_px": 963.0,
+  "visible_h_px": 179.0,
+  "ratio": 0.18587746625129803,
+  "cars": 1
+ },
+ {
+  "id": "car-1071-Level3_2",
+  "level": 3,
+  "ok": true,
+  "width_px": 299.0,
+  "visible_h_px": 178.0,
+  "ratio": 0.5953177257525084,
+  "cars": 1
+ },
+ {
+  "id": "car-210-Level4_1",
+  "level": 4,
+  "ok": true,
+  "width_px": 744.0,
+  "visible_h_px": 167.0,
+  "ratio": 0.22446236559139784,
+  "cars": 1
+ },
+ {
+  "id": "car-907-Level0_7",
+  "level": 0,
+  "ok": true,
+  "width_px": 492.0,
+  "visible_h_px": 522.0,
+  "ratio": 1.0609756097560976,
+  "cars": 6
+ },
+ {
+  "id": "car-916-Level0_6",
+  "level": 0,
+  "ok": true,
+  "width_px": 285.0,
+  "visible_h_px": 191.0,
+  "ratio": 0.6701754385964912,
+  "cars": 1
+ },
+ {
+  "id": "car-2108-Level4_2",
+  "level": 4,
+  "ok": true,
+  "width_px": 232.0,
+  "visible_h_px": 233.0,
+  "ratio": 1.0043103448275863,
+  "cars": 1
+ },
+ {
+  "id": "car-659-Level1_5",
+  "level": 1,
+  "ok": true,
+  "width_px": 198.0,
+  "visible_h_px": 186.0,
+  "ratio": 0.9393939393939394,
+  "cars": 2
+ },
+ {
+  "id": "car-1206-Level3_2",
+  "level": 3,
+  "ok": true,
+  "width_px": 376.0,
+  "visible_h_px": 196.0,
+  "ratio": 0.5212765957446809,
+  "cars": 1
+ },
+ {
+  "id": "car2-66-Level1_1",
+  "level": 1,
+  "ok": true,
+  "width_px": 725.0,
+  "visible_h_px": 228.0,
+  "ratio": 0.31448275862068964,
+  "cars": 1
+ },
+ {
+  "id": "car-2212-Level4_1",
+  "level": 4,
+  "ok": true,
+  "width_px": 667.0,
+  "visible_h_px": 248.0,
+  "ratio": 0.37181409295352325,
+  "cars": 2
+ },
+ {
+  "id": "car-1608-Level3_1",
+  "level": 3,
+  "ok": false
+ },
+ {
+  "id": "car-988-Level0_2",
+  "level": 0,
+  "ok": true,
+  "width_px": 443.0,
+  "visible_h_px": 192.0,
+  "ratio": 0.43340857787810383,
+  "cars": 2
+ },
+ {
+  "id": "car-1146-Level2_1",
+  "level": 2,
+  "ok": true,
+  "width_px": 710.0,
+  "visible_h_px": 294.0,
+  "ratio": 0.4140845070422535,
+  "cars": 1
+ },
+ {
+  "id": "car-2214-Level4_5",
+  "level": 4,
+  "ok": true,
+  "width_px": 652.0,
+  "visible_h_px": 228.0,
+  "ratio": 0.3496932515337423,
+  "cars": 3
+ },
+ {
+  "id": "car2-26-Level0_3",
+  "level": 0,
+  "ok": true,
+  "width_px": 452.0,
+  "visible_h_px": 185.0,
+  "ratio": 0.4092920353982301,
+  "cars": 2
+ },
+ {
+  "id": "car-1665-Level3_33",
+  "level": 3,
+  "ok": true,
+  "width_px": 318.0,
+  "visible_h_px": 212.0,
+  "ratio": 0.6666666666666666,
+  "cars": 3
+ },
+ {
+  "id": "car-1195-Level2_2",
+  "level": 2,
+  "ok": true,
+  "width_px": 407.0,
+  "visible_h_px": 221.0,
+  "ratio": 0.542997542997543,
+  "cars": 1
+ },
+ {
+  "id": "car2-42-Level0_2",
+  "level": 0,
+  "ok": true,
+  "width_px": 341.0,
+  "visible_h_px": 169.0,
+  "ratio": 0.49560117302052786,
+  "cars": 4
+ },
+ {
+  "id": "car-2214-Level4_6",
+  "level": 4,
+  "ok": true,
+  "width_px": 670.0,
+  "visible_h_px": 222.0,
+  "ratio": 0.33134328358208953,
+  "cars": 3
+ },
+ {
+  "id": "car-1665-Level3_59",
+  "level": 3,
+  "ok": true,
+  "width_px": 293.0,
+  "visible_h_px": 241.0,
+  "ratio": 0.8225255972696246,
+  "cars": 3
+ },
+ {
+  "id": "car-1306-Level2_2",
+  "level": 2,
+  "ok": true,
+  "width_px": 440.0,
+  "visible_h_px": 205.0,
+  "ratio": 0.4659090909090909,
+  "cars": 2
+ },
+ {
+  "id": "car-2214-Level4_7",
+  "level": 4,
+  "ok": true,
+  "width_px": 428.0,
+  "visible_h_px": 174.0,
+  "ratio": 0.40654205607476634,
+  "cars": 3
+ },
+ {
+  "id": "car2-54-Level0_2",
+  "level": 0,
+  "ok": true,
+  "width_px": 350.0,
+  "visible_h_px": 175.0,
+  "ratio": 0.5,
+  "cars": 4
+ },
+ {
+  "id": "car-1690-Level3_1",
+  "level": 3,
+  "ok": true,
+  "width_px": 716.0,
+  "visible_h_px": 194.0,
+  "ratio": 0.2709497206703911,
+  "cars": 1
+ },
+ {
+  "id": "car-1845-Level3_1",
+  "level": 3,
+  "ok": true,
+  "width_px": 661.0,
+  "visible_h_px": 159.0,
+  "ratio": 0.2405446293494705,
+  "cars": 1
+ }
+]
