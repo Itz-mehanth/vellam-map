@@ -27,6 +27,5 @@ cd demo/video && npm install && npx remotion render src/index.ts Film out/film.m
 python demo/audio2.py full demo/video/out/film.mp4 demo/audio_out2
 ```
 
-Scenes with a clearly marked "placeholder" (the Tamil voice scene and the field test) are filled with the team's
-own recordings and measurements before publishing. Nothing on screen is invented: if evidence does not exist yet,
-the film says so.
+The Tamil voice scene uses a screen recording of the real app. Nothing on screen is invented: every number comes
+from a recorded run or the benchmark.

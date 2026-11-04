@@ -3,29 +3,46 @@ import bench from '../../public/bench.json'
 import { C, LINEAR, MECH, mono, prog, sans, tamil } from '../theme'
 import { Caption, Contours, Count, Label, Reveal, Slate } from '../ui'
 
-export const Voice = () => (
-  <AbsoluteFill style={{ background: C.paper }}>
-    <Contours color={C.grid} opacity={0.5} draw={30} seed={6} />
-    <div style={{ position: 'absolute', left: 120, top: 100 }}>
-      <Reveal at={4}>
-        <Label>Ask in your language</Label>
-        <div style={{ fontFamily: sans, fontWeight: 600, fontSize: 68, letterSpacing: -1.5, color: C.ink, marginTop: 10 }}>Tamil or English, by voice</div>
-      </Reveal>
+const FlowBox = ({ at, title, text, color }: { at: number; title: string; text: string; color: string }) => (
+  <Reveal at={at} style={{ width: 300 }}>
+    <div style={{ border: `2px solid ${color}`, background: C.white, borderRadius: 6, padding: '22px 24px', minHeight: 150 }}>
+      <div style={{ fontFamily: sans, fontWeight: 600, fontSize: 34, color: C.ink }}>{title}</div>
+      <div style={{ fontFamily: sans, fontSize: 24, color: C.ink2, marginTop: 8, lineHeight: 1.3 }}>{text}</div>
     </div>
-    <Reveal at={20} style={{ position: 'absolute', left: 120, top: 300, width: 1000, height: 560 }}>
-      <Slate title="App capture: the recorded Tamil question and the spoken answer" note="Record with a live API key (replay mode cannot answer). Use the real recording, not a simulated waveform." style={{ position: 'relative', height: 560 }} />
-    </Reveal>
-    <Reveal at={70} style={{ position: 'absolute', left: 1180, top: 320, width: 620 }}>
-      <Label color={C.ink2}>Example question</Label>
-      <div style={{ fontFamily: tamil, fontWeight: 500, fontSize: 40, color: C.ink, marginTop: 14, lineHeight: 1.5 }}>இந்த பகுதியில் வெள்ளத்தின் ஆழம் எவ்வளவு?</div>
-      <div style={{ fontFamily: sans, fontSize: 26, color: C.ink2, marginTop: 10 }}>How deep is the flooding in this area?</div>
-    </Reveal>
-    <Reveal at={130} style={{ position: 'absolute', left: 1180, top: 600, width: 620 }}>
-      <div style={{ fontFamily: mono, fontSize: 20, color: C.amber, letterSpacing: 1.2 }}>[ the answer shown here must be the app&apos;s real answer ]</div>
-    </Reveal>
-    <Caption lines={[{ from: 20, to: 340, text: 'Ask in Tamil or English: Muse Voice Transcribe listens, Muse Spark answers.' }]} />
-  </AbsoluteFill>
+  </Reveal>
 )
+
+export const Voice = () => {
+  const f = useCurrentFrame()
+  const arrow = (at: number) => prog(f, at, 18, LINEAR)
+  return (
+    <AbsoluteFill style={{ background: C.paper }}>
+      <Contours color={C.grid} opacity={0.5} draw={30} seed={6} />
+      <div style={{ position: 'absolute', left: 120, top: 100 }}>
+        <Reveal at={4}>
+          <Label>Ask in your language</Label>
+          <div style={{ fontFamily: sans, fontWeight: 600, fontSize: 68, letterSpacing: -1.5, color: C.ink, marginTop: 10 }}>Tamil or English, by voice</div>
+        </Reveal>
+      </div>
+      <div style={{ position: 'absolute', left: 120, top: 330, display: 'flex', alignItems: 'center', gap: 28 }}>
+        <FlowBox at={24} title="You speak" text="a question about a street or an area" color={C.ink} />
+        <div style={{ width: 60 * arrow(50), height: 3, background: C.teal }} />
+        <FlowBox at={56} title="Muse Voice Transcribe" text="turns Tamil or English speech into text" color={C.teal} />
+        <div style={{ width: 60 * arrow(86), height: 3, background: C.teal }} />
+        <FlowBox at={92} title="Muse Spark" text="answers from the live reports, with their uncertainty" color={C.teal} />
+      </div>
+      <Reveal at={150} style={{ position: 'absolute', left: 120, top: 640, width: 1000 }}>
+        <Label color={C.ink2}>Example question</Label>
+        <div style={{ fontFamily: tamil, fontWeight: 500, fontSize: 44, color: C.ink, marginTop: 14, lineHeight: 1.5 }}>இந்த பகுதியில் வெள்ளத்தின் ஆழம் எவ்வளவு?</div>
+        <div style={{ fontFamily: sans, fontSize: 26, color: C.ink2, marginTop: 6 }}>How deep is the flooding in this area?</div>
+      </Reveal>
+      <Reveal at={220} style={{ position: 'absolute', left: 1180, top: 700, width: 620 }}>
+        <div style={{ fontFamily: mono, fontSize: 19, color: C.ink2, lineHeight: 1.5 }}>Voice and questions need a Meta API key, so they are off in the keyless replay mode.</div>
+      </Reveal>
+      <Caption lines={[{ from: 20, to: 340, text: 'Ask in Tamil or English: Muse Voice Transcribe listens, Muse Spark answers.' }]} />
+    </AbsoluteFill>
+  )
+}
 
 const LEVELS = [0, 1, 2, 3, 4]
 type Bench = {
@@ -279,29 +296,6 @@ export const Limits = () => {
           { from: 260, to: 520, text: 'The price: a third of real floods now show as unconfirmed instead of confirmed.' },
         ]}
       />
-    </AbsoluteFill>
-  )
-}
-
-export const Field = () => {
-  const f = useCurrentFrame()
-  return (
-    <AbsoluteFill style={{ background: C.ink }}>
-      <Slate title="Real Chennai field test: the tape measure in the water, next to the wheel" note="Same place, same time as the photo Vellam measured. Hold on the tape reading." style={{ width: 1000, height: 1080 }} />
-      <div style={{ position: 'absolute', left: 1060, top: 150, width: 740 }}>
-        <Reveal at={10}>
-          <Label color={C.tealLight}>Field validation</Label>
-          <div style={{ fontFamily: sans, fontWeight: 600, fontSize: 52, letterSpacing: -1.2, color: C.paper, marginTop: 10 }}>Tape measure vs Vellam</div>
-        </Reveal>
-        {['TAPE MEASURE', 'VELLAM MAP', 'DIFFERENCE'].map((k, i) => (
-          <Reveal key={k} at={60 + i * 45} style={{ marginTop: 44 }}>
-            <div style={{ fontFamily: mono, fontSize: 20, color: C.ink2, letterSpacing: 1.5 }}>{k}</div>
-            <div style={{ fontFamily: mono, fontWeight: 500, fontSize: 84, color: C.amber, letterSpacing: -2 }}>[ ?? ] cm</div>
-          </Reveal>
-        ))}
-        <div style={{ fontFamily: mono, fontSize: 18, color: C.ink2, marginTop: 50, opacity: prog(f, 220, 20) }}>Placeholders. Fill from eval/accuracy.py after the field test. Never show a number that was not measured.</div>
-      </div>
-      <Caption lines={[{ from: 20, to: 400, text: 'We also compared the system against a tape measure in the real world, because an estimate only matters if it matches the water.' }]} />
     </AbsoluteFill>
   )
 }

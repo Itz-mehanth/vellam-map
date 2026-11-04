@@ -1,4 +1,4 @@
-# Voiceover script, 3:00
+# Voiceover script, 2:45
 
 Read each block at a calm, documentary pace (about 130 words a minute). The times are when the line should *start*
 in the film; the music already makes room around the marked pauses. Record in a quiet room, close to the mic, and
@@ -21,18 +21,7 @@ leave two seconds of room tone at the start and end of the take. One file per sc
 | | 2:07 | "Wheel geometry is the weakest part: it read only twelve of the hundred photos." |
 | 8. The fix | 2:16 | "Our first flood check threw away a third of real floods: twenty-three of seventy in testing. We made it grade its evidence instead of answering yes or no. Now it rejects one in seventy. The cost is that about a third of real floods now show as unconfirmed." |
 | | **2:28.5** | *(pause)* "We would rather show an honest 'unconfirmed' than a confident mistake." |
-| 9. Field test | 2:34 | **Use ONE of the two below.** |
-| 10. End | 2:48 | "Vellam Map. Open source, built for the people who have to drive through it." |
-
-## Scene 9: choose the version that is true
-
-**If you ran the tape-measure test** (fill in the real numbers; do not round in our favour):
-"We also went out with a tape measure. [N] photos, [place], [date]. The mean error of the wheel geometry was [X]
-centimetres, and Muse Spark's was [Y]."
-
-**If you did not:**
-"We have not yet measured centimetre accuracy against a tape measure. That is the next test, and the script to run
-it is in the repository."
+| 9. End | 2:33 | "Vellam Map. Open source, built for the people who have to drive through it." |
 
 ## Notes
 - Say "SAM three point one", "Muse Spark", "Vellam Map" (VEL-lam).

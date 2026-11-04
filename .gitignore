@@ -34,3 +34,6 @@ demo/ambience/*.wav
 demo/audio_out2/
 demo/video/out/
 demo/video/node_modules/
+demo/*.mp3
+demo/*.aup3
+demo/*.wav

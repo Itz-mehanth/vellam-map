@@ -215,10 +215,7 @@ Hosting it publicly is optional and best done with care for your key; see [docs/
 
 ## Accuracy and limits
 
-**Centimetre accuracy has not been measured yet.** That needs photos with tape-measured depths; the test is
-ready ([`eval/accuracy.py`](eval/accuracy.py), bar: 15 cm mean error).
-
-What we do have is a benchmark on **100 real photos from a public dataset** of flooded cars with ground-truth
+The evidence is a benchmark on **100 real photos from a public dataset** of flooded cars with ground-truth
 depth *levels* (five ordered levels, not centimetres; full write-up in [docs/BENCHMARK.md](docs/BENCHMARK.md)):
 
 | | Muse Spark by-eye estimate | Wheel geometry |

@@ -1,11 +1,11 @@
 import { AbsoluteFill, Sequence } from 'remotion'
-import { Benchmark, End, Field, Limits, Voice } from './scenes/Late'
+import { Benchmark, End, Limits, Voice } from './scenes/Late'
 import { Intro, Opening, Pipeline, Problem } from './scenes/Early'
 import { Technical } from './scenes/Technical'
 import { SCENES } from './theme'
 import { Waterline } from './ui'
 
-const BY_ID = { opening: Opening, problem: Problem, intro: Intro, pipeline: Pipeline, technical: Technical, voice: Voice, benchmark: Benchmark, limits: Limits, field: Field, end: End }
+const BY_ID = { opening: Opening, problem: Problem, intro: Intro, pipeline: Pipeline, technical: Technical, voice: Voice, benchmark: Benchmark, limits: Limits, end: End }
 // The signature transition is kept for the moments the story moves to a new kind of evidence.
 const SWEEP = new Set(['pipeline', 'technical', 'benchmark', 'end'])
 

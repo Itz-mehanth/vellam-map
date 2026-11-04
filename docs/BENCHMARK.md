@@ -99,8 +99,8 @@ unconfirmed is a wheel throwing spray on a wet road, which is genuinely ambiguou
 ## Limits of this evidence
 
 - **100 photos, one seed.** Enough for a first read, not for a published claim.
-- **Ordered levels, not centimetres.** Nothing here measures centimetre error. That needs photos with
-  tape-measured depths (`eval/accuracy.py`).
+- **Ordered levels, not centimetres.** The dataset labels depth as five ordered levels, so the results above show how
+  well depth is ranked, not a centimetre error.
 - **Tight, upscaled crops.** The dataset crops each photo around the car, which leaves wheel geometry less of
   the scene than a phone photo would. Its coverage here is probably a floor; we have not tested it on full
   scenes with known depth.

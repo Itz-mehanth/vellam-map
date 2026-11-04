@@ -39,7 +39,6 @@ export const SCENES = [
   { id: 'voice', from: 2850, dur: 360 },
   { id: 'benchmark', from: 3210, dur: 840 },
   { id: 'limits', from: 4050, dur: 540 },
-  { id: 'field', from: 4590, dur: 420 },
-  { id: 'end', from: 5010, dur: 390 },
+  { id: 'end', from: 4590, dur: 390 },
 ] as const
-export const TOTAL = 5400
+export const TOTAL = 4980

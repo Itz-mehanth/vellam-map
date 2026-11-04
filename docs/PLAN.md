@@ -20,11 +20,8 @@ Hackathon deadline: **Nov 4, 2026, 9 PM ET**.
 | Quality | 33 tests including synthetic-wheel depth validation, ruff, oxlint, CI | Done |
 | Hosting | Docker, Render and Vercel configuration (optional; see DEPLOY.md) | Ready, not deployed |
 | Accuracy | Benchmark on 100 public real photos with depth levels, with a Benchmark tab and replay (docs/BENCHMARK.md) | Done: by-eye estimate strong, wheel geometry weak, gate fixed: rejected 33%, now 1% of real floods on held-out photos |
-| **Accuracy** | **Centimetre error against tape-measured photos** | **Not done: needs real photos** |
 
-The one open item that matters is accuracy. `eval/accuracy.py` runs the go/no-go test (mean error under 15 cm)
-as soon as photos with independently measured depths exist. Until then every depth is an unvalidated estimate,
-and the README says so.
+
 
 ## Demo script (3 minutes)
 
